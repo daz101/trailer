@@ -1,0 +1,114 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Movie Trailer</title>
+  <link href="css/bootstrap.css" rel="stylesheet">
+  <link href="css/intro-stylesheet.css" rel="stylesheet" type="text/css" />
+  <link href="css/introjs.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.js"></script>
+  <script type="text/javascript" src="js/intro-global.js"></script>
+  <script type="text/javascript" src="js/intro.js" ></script>
+</head>
+
+<body id="introBackground" onload="introJs().start()">
+
+<header>
+</header>
+<div class="container-fluid parent_container">
+
+	<div class="movie-progress">           
+        <ul id="progress_circles">
+		<li class="step"></li>
+		<li class="done"></li>
+		<li class="done"></li>
+		<li class="step"></li>
+		<li class="done"></li>
+		<li class="active"></li>
+		<li class="stepDisabled"></li>
+		<li></li>
+		<li></li>
+        <li></li>
+        <li class="stepDisabled"></li>
+        <li></li>
+        <li></li>
+        <li class="stepDisabled"></li>
+		</ul>            
+  </div>
+  
+  
+  <div id="pageno">
+	<span>1</span>
+  </div>
+  
+  <div class="info_holder">
+		<a href="" data-toggle="modal" data-target="#helpInfo"> 
+			<img data-toggle="tooltip" title="Help" class="info_holder" src="img/info.png" alt="info"> 
+		</a>
+		
+		<div id="helpInfo" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">			
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Instructions</h4>
+				</div>
+				
+				<div class="modal-body">
+					<p>
+					This help section will contain instructions for the current page. This will help you if you want to recollect the instructions.
+					</p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>	
+		    </div>
+		</div>
+	</div>
+	</div>
+  
+  
+	<div id="survey_display_block">
+		
+				<div class="intro">
+                <span><strong><h2 data-intro="On this page you will <b>rate the movie recommendations</b> that were presented on the previous page." data-step="1" class="introjs-showElement introjs-relativePosition headelem">INSTRUCTIONS FOR SCREENS 11</h2></strong>
+                <hr>
+				</span>
+                  
+                </div>
+                
+                <div class="movie_ribbon"> 
+                    <div class="block_holder">
+                        <div class="movie-block" id="img1" data-intro="Review each movie poster by clicking on it and <b>rate</b> each movie." data-step="2">
+                            <div class="wrapper-block">
+                                <div class="img-block">
+                                    <img src="img/ins3_1.png">
+                                </div>
+                            </div> 
+                        </div>
+                       
+                        <div class="movie-block" id="img2" data-intro="After you have rated all of the movies you can proceed to the next page by clicking the 'Next' button." data-step="3">
+                            <div class="wrapper-block">
+                                <div class="img-block">
+                                    <img src="img/ins3_2.png">
+                                </div>
+                            </div> 
+                        </div>
+                 
+		</div>
+		
+	</div> 
+        </div>
+	<!end of display_block>
+	
+
+<div class="survey-next-button">
+	<button id="survey_nextInstructions3" type="button">Next</button>
+	</div>
+       
+</div>
+</body>
+        
+</html>

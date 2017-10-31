@@ -1,0 +1,613 @@
+#introBackground{
+    background-color: #eaeaea;
+}
+
+.parent_container
+{
+  width: auto;  
+}
+
+.parent_container input[type="radio"]
+{
+	cursor:pointer;
+}
+
+.parent_container .movie-progress
+{
+	width:50%;
+	margin:auto;
+	margin-top:20px;
+}
+
+/* info pop-up */
+ #info_holder {
+   width: 50px;
+   height: 50px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-align-content: right;
+    align-content: right;
+    padding-left: 85%;
+}
+
+.parent_container .info_holder .popuptext {
+    visibility: hidden;
+    width: 160px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -80px;
+}
+
+.parent_container .info_holder .popuptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.parent_container .info_holder .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+
+/*end of info pop-up */
+
+#progress_circles {
+        display: table;
+		padding:0;
+		margin:auto;
+}
+
+
+#progress_circles li{
+	list-style: none;
+	display: inline-block;
+        align-content: center;
+        alignment-adjust: inherit;
+        content: '';
+	background: #ccc;
+	width: 15px;
+	height: 15px;
+	border-radius: 50%;
+	margin: auto;
+        margin-right: 10px;
+}
+#progress_circles li.active{
+	background: #18a6f4;
+        border: 2px solid #104aa8;
+        width: 16px;
+        height: 16px;
+        margin-top: 5px;   
+}
+#progress_circles li.activeStep{
+	background: #18a6f4;
+        border: 2px solid #104aa8;
+        width: 18px;
+        height: 18px;
+         
+}
+#progress_circles li.done{
+	background: #87ba51;
+        border: 1px solid #2e3033;
+        width: 16px;
+        height: 16px;
+        margin-top: 5px;
+         
+}
+#progress_circles li.step{
+	background:  #87ba51;
+        border: 2px solid #0e7c16;
+        width: 18px;
+        height: 18px;
+         
+}
+#progress_circles li.stepDisabled{
+	background:  #ccc;
+        border: 2px solid #2e3033;
+        width: 18px;
+        height: 18px;
+         
+}
+
+#pageno
+{
+	float:left;
+	width:24px;
+	height:24px;
+	background-color:#104aa8;
+	margin-left: 15.7%;
+    margin-top: 10px;
+	text-align:center;
+}
+
+#pageno span
+{
+	color:#FFFFFF;
+}
+
+.parent_container .info_holder
+{
+	float:right;
+	margin-right: 15.7%;
+    margin-top: 5px;
+}
+
+.parent_container .info_holder img
+{
+	float:left;
+	width:24px;
+	height:24px;
+}
+
+#survey_display_block
+{
+	width:65%;
+	margin:auto;
+	height:400px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	box-shadow: 1px 1px 10px #888888;
+    background-color: #ffffff;
+}
+
+#survey_display_block_central
+{
+	width:65%;
+	margin:auto;
+	height:510px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	box-shadow: 1px 1px 10px #888888;
+    background-color: #ffffff;
+}
+
+.headelem
+{
+	margin:auto;
+	width:55%;
+}
+
+.parent_container .intro
+{
+	width:100%;
+	padding: 10px;
+	float: left;
+}
+
+.parent_container .intro span
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 2em;
+	float: left;
+	text-align: center;
+}
+
+.parent_container .intro span:last-child
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 1.3em;
+	float: left;
+	text-align: left;
+	padding:10px 10px 10px 10px;
+}
+.parent_container .intro mainQuestion
+{
+   width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 2em;
+	float: left;
+	text-align: left;
+	padding:20px 10px 10px 10px; 
+}
+#survey_section
+{
+	float:left;
+	width:100%;
+	padding: 15px;
+}
+
+#survey_section table
+{	
+	float:left;
+	width:100%;
+	border-top:1px dotted #000000;
+	border-left:3px solid #bfbfbf;
+	margin: 0px 0px 25px 0px;
+}
+
+#survey_section table tr
+{
+}
+
+#survey_section table tr:first-child td
+{
+	text-align:left;
+	font-weight:bold;
+}
+
+
+#survey_section table tr:first-child td span
+{
+	margin-left:25px;
+}
+
+#survey_section table tr:last-child td
+{
+	cursor:pointer;
+}
+
+#survey_section table tr:last-child td:hover
+{
+	background-color:#F8F2F2;
+}
+
+
+#survey_section table tr td
+{
+	width:20%;
+	height:30px;
+	text-align: center;
+}
+
+
+
+.parent_container .survey-next-button
+{
+	float:right;
+	width:23%;
+	margin-top: 7px;	
+}
+
+.parent_container .survey-next-button button
+{
+	width: 80px;
+	border-radius: 8px;
+	background-color: #5cb85c;
+	cursor:pointer;
+	color: #FFFFFF;
+	height: 30px;
+}
+
+
+.parent_container .consent-next
+{
+	float:right;
+	width:23%;
+	margin-top: 7px;
+}
+
+.parent_container .consent-next button
+{
+	width: 80px;
+	border-radius: 8px;
+	background-color: #5cb85c;
+	cursor:pointer;
+	color: #FFFFFF;
+	height: 30px;
+	opacity:0.6;
+	cursor:not-allowed;
+}
+
+.parent_container .instructionButton 
+{
+    display: inline-block;
+    margin-left: 38%;
+    margin-right: 38%;
+    width:23%;
+}
+
+.parent_container .instructionButton button {
+    width: 80px;
+	border-radius: 8px;
+	background-color: #33C3F0;
+	cursor:pointer;
+	color: #FFFFFF;
+	height: 40px;
+}
+
+hr { 
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+} 
+
+#resize_display_block
+{
+	width: 72.6%;
+    margin: auto;
+    height: 543px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    box-shadow: 1px 1px 10px #888888;
+    background-color: #FFFFFF;
+}
+
+.parent_container #resize_display_block .intro
+{
+	width:100%;
+	padding: 10px;
+	float: left;
+}
+
+.parent_container #resize_display_block .intro span
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 2em;
+	float: left;
+	text-align: center;
+}
+
+.parent_container #resize_display_block .intro span:last-child
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 1.3em;
+	float: left;
+	text-align: left;
+	padding:10px 10px 10px 10px;
+}
+
+.parent_container #resize_display_block .intro span:last-child p
+{
+	margin-left:18%;
+}
+
+.parent_container #resize_display_block .intro span:last-child p:nth-child(2)
+{
+	margin-left:22%;
+}
+
+.parent_container #resize_display_block .intro span:last-child p:last-child
+{
+	margin-left:22%;
+}
+
+.parent_container .resize-next-button
+{
+	float:right;
+	width:19.5%;
+	margin-top: 7px;
+}
+
+.parent_container .resize-next-button button
+{
+	width: 80px;
+	border-radius: 8px;
+	background-color: #5cb85c;
+	cursor:pointer;
+	color: #FFFFFF;
+	height: 30px;
+}
+
+#survey_display_block3
+{
+	width:65%;
+	margin:auto;
+	height:880px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	box-shadow: 1px 1px 10px #888888;
+}
+.parent_container #survey_display_block3 .intro3
+{
+	width:100%;
+	padding: 10px;
+	float: left;
+        background-color: #ffffff;
+}
+
+.parent_container #survey_display_block3 .intro3 span
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 2em;
+	float: left;
+	text-align: center;
+}
+
+.parent_container #survey_display_block3 .intro3 span:last-child
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 1.3em;
+	float: left;
+	text-align: left;
+	padding:10px 10px 10px 10px;
+}
+
+#instruction_ribbon
+{
+	width:837.34px;
+	margin:auto;
+}
+
+.parent_container .block_holder
+{
+	float:left;
+	width:100%;
+	padding:0px 7px 7px 7px;
+}
+
+
+.parent_container .movie-block:first-child
+{	
+	width: 45%;
+	float: left;
+	margin-left: 1.5%;
+	margin-right: 3.5%;
+	cursor: pointer;
+}
+
+.parent_container .movie-block:last-child
+{	
+	width: 45%;
+	float: left;
+	margin-right: 1.5%;
+	margin-left: 3.5%;
+	cursor: pointer;
+}
+
+
+.parent_container .movie-block .wrapper-block
+{
+	float:left;
+	width:100%;
+}
+
+.parent_container .movie-block .img-block
+{
+	float:left;
+	width:100%;
+}
+
+.parent_container .movie-block .img-block img
+{
+	width:100%;
+	height: 240px;
+}
+
+/*Overview Block */
+.parent_container .block_holder2
+{
+	float:left;
+	width:100%;
+	padding:0px 7px 7px 7px;
+}
+.parent_container .overview-block
+{	
+	width: 95%;
+	float: left;
+	margin-left: 2.5%;
+	margin-right: 0.5%;
+	cursor: pointer;
+}
+
+.parent_container .overview-block .wrapper-block2
+{
+	float:left;
+	width:100%;
+}
+
+.parent_container .overview-block .img-block2
+{
+	float:left;
+	width:100%;
+}
+
+.parent_container .overview-block .img-block2 img
+{
+	width:100%;
+	height: 240px;
+}
+
+
+
+
+
+
+#survey_display_block4
+{
+	width:65%;
+	margin:auto;
+	height:550px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	box-shadow: 1px 1px 10px #888888;
+}
+.parent_container #survey_display_block4 .intro4
+{
+	width:100%;
+	padding: 10px;
+	float: left;
+}
+
+.parent_container #survey_display_block4 .intro4 span
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 2em;
+	float: left;
+	text-align: center;
+}
+
+.parent_container #survey_display_block4 .intro4 span:last-child
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 1.3em;
+	float: left;
+	text-align: left;
+	padding:10px 10px 10px 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: fixed;
+    left: 45%;
+    right: 45%;
+    top: 30%;
+    
+}
+
+#surveyOv_display_block
+{
+	width:65%;
+	margin:auto;
+	height:500px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	box-shadow: 1px 1px 10px #888888;
+    background-color: #ffffff;
+}
+
+#surveyOv_display_block .overview-block .img-block2 img
+{
+	width: 100%;
+    height: 340px;
+}
+
+/*Second design of progress bar */

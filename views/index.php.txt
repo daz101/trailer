@@ -1,0 +1,8 @@
+<?php
+$servername = "mysql1.cs.clemson.edu";
+$username = "trailer_jp4o";
+$password = "trailer_1691";
+$db ="trailer_1691"'
+// Create connection
+$conn = new mysqli($servername, $username, $password, $db)or die('Error connecting to MySQL server.');
+?>
