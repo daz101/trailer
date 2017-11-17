@@ -31,7 +31,7 @@ $(document).ready(function() {
 	
 	// Make sure client wants leave
   $(window).on('beforeunload', function() {
-    
+    if(confirmUnload)
       return 'We would really appreciate it if you could complete this survey for our course project.'
             + ' You can also come back to complete it later on from where you left.';
   });
@@ -54,7 +54,8 @@ function start() {
     },
     dataType: 'json',
     success: function() {
-      
+    confirmUnload = false;
+    location.reload(true); 	
     },
     error: function(err) {
       console.log(err.responseText);

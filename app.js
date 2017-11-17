@@ -50,7 +50,15 @@ app.use(function(req, res, next) {
 app.use('/', routes);
 app.use('/api', api);
 
-
+app.use(ignoreFavicon);
+//ignore favicon 
+function ignoreFavicon(req, res, next) {
+  if (req.originalUrl === '/favicon.ico') {
+    res.status(204).json({nope: true});
+  } else {
+    next();
+  }
+}
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
