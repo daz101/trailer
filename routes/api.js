@@ -156,17 +156,33 @@ router.post('/update/choices', function(req, res, next) {
   });
 });
 
-/* POST update survey answers. */
-router.post('/update/answers', function(req, res, next) {
+/* POST update visual verbal survey answers. */
+router.post('/update/firstanswers', function(req, res, next) {
   // Get the user id from the request
-  if (!(req.body.userid && req.body.answers)) return utils.sendErr(res, 'Missing parameter(s)');
+  if (!(req.body.userid && req.body.firstanswers)) return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
-  var answers = JSON.parse(req.body.answers);
+  var answers = JSON.parse(req.body.firstanswers);
   var db = req.db;
   var users = db.get('users');
 
   // Update survey answers in user session data
-  users.updateById(userid, {$set:{answers: answers}}, function(err) {
+  users.updateById(userid, {$set:{firstanswers: firstanswers}}, function(err) {
+  	if (err) return utils.sendErr(res, 'Failed to update survey answers.');
+  	res.json({'success': true});
+  });
+});
+
+/* POST update second survey answers. */
+router.post('/update/secondanswers', function(req, res, next) {
+  // Get the user id from the request
+  if (!(req.body.userid && req.body.secondanswers)) return utils.sendErr(res, 'Missing parameter(s)');
+  var userid = utils.pad(req.body.userid, 12);
+  var answers = JSON.parse(req.body.secondanswers);
+  var db = req.db;
+  var users = db.get('users');
+
+  // Update survey answers in user session data
+  users.updateById(userid, {$set:{secondanswers: secondanswers}}, function(err) {
   	if (err) return utils.sendErr(res, 'Failed to update survey answers.');
   	res.json({'success': true});
   });
