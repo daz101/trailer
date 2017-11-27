@@ -5,11 +5,12 @@ console.log(window.location.pathname);
 var userFromUrl = window.location.pathname;
 var userid = userFromUrl.replace('/', '');
 var consent_check=0; 
-var nrOfQns = $('.question .rad_row').length;
+//var nrOfQns = $('.question .rad_row').length;
 
 $(document).ready(function() {
 	//welcome
   $('#consentBody, #consentbutton, #resizeBody, #resizebutton').hide();
+   
    $('#welcomebutton').click(function() {
     postEvent('Clicked "Start Welcome"', null);
 	$('#welcomeBody, #welcomebutton').fadeOut("slow", function() {
