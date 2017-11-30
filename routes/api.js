@@ -161,7 +161,7 @@ router.post('/update/firstanswers', function(req, res, next) {
   // Get the user id from the request
   if (!(req.body.userid && req.body.firstanswers)) return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
-  var answers = JSON.parse(req.body.firstanswers);
+  var firstanswers = JSON.parse(req.body.firstanswers);
   var db = req.db;
   var users = db.get('users');
 
@@ -177,7 +177,7 @@ router.post('/update/secondanswers', function(req, res, next) {
   // Get the user id from the request
   if (!(req.body.userid && req.body.secondanswers)) return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
-  var answers = JSON.parse(req.body.secondanswers);
+  var secondanswers = JSON.parse(req.body.secondanswers);
   var db = req.db;
   var users = db.get('users');
 
