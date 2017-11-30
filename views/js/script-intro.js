@@ -75,7 +75,8 @@ $( "#Q3 .rad_row td" ).click(function() {
 	$('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpage4, #resize_nextOverview').hide();
 	
 	$('#verbalpage1button').click(function() {
-		if(isSurveyComplete()){
+		var hookpage = $('#verbalpage1');
+		if(isSurveyComplete(hookpage)){
     postEvent('Clicked "Started Verbal Visual Survey"', null);
 	//page 2
 	$('#verbalpage1, #verbalpage1button').fadeOut("slow", function() {
@@ -90,21 +91,31 @@ $( "#Q3 .rad_row td" ).click(function() {
 	
 	//page 3
 	$('#verbalpage2button').click(function() {
+		var hookpage = $('#verbalpage2');
+		if(isSurveyComplete(hookpage)){
 	$('#verbalpage2, #verbalpage2button').fadeOut("slow", function() {
       $('#verbalpage2, #verbalpage2button').hide();
       $('#verbalpage3, #verbalpage3button').show().fadeIn("slow");
 	   });
+		}
 	});
 	
 	//page 4
 	$('#verbalpage3button').click(function() {
+		var hookpage = $('#verbalpage3');
+		if(isSurveyComplete(hookpage)){
 	$('#verbalpage3, #verbalpage3button').fadeOut("slow", function() {
       $('#verbalpage3, #verbalpage3button').hide();
       $('#verbalpage4, #resize_nextOverview').show().fadeIn("slow");
 	   });
+		}
 	});
 	
-	
+	//proceed to next page 
+	$('#resize_nextOverview').click(function() {
+		postEvent('Finished First Survey', null);
+		finish(); 
+	}
 
 	
 	//end of first survey 
@@ -125,29 +136,46 @@ $( "#Q3 .rad_row td" ).click(function() {
 /**
  * Check if all questions have been answered.
  */
-function isSurveyComplete() {
-	/*for(var i=1; i<=nrOfQns; i++) {
-		if (!$('input[name=rad_row'+i+']:checked').length) {
-			return false;
-		}
-		return true;
-	}*/
-	var isAllQuestionAnswered = true;
-	$( ".question .rad_row" ).each(function() {
-		var isQuestionAnswered = false;
-		$(this).find('input[type="radio"]').each(function() {
-			if($(this).is(":checked")) 
+function isSurveyComplete(hookpage) {
+	var counter=0;
+		for(var i=1; i<=hookpage.find('.question .rad_row').length; i++) 
+		{
+			if (!hookpage.find('input[name=radOpt_'+i+']:checked').length) 
 			{
-			isQuestionAnswered = true;
-			return true;
-		    }
-			else{
-				return false; 
+				hookpage.find('input[name=radOpt_'+i+']').parent().parent().parent().css("border-left","3px solid #ff3300");
+				counter=1;
 			}
-	    });
-	   
-});
+        };
+		if(counter==1)return false;
+		return true;
 }
+
+/**
+ * Update answers to database 
+ */
+
+function finish() {
+	var firstanswers = [];
+	
+
+	$.ajax({
+    type: 'POST',
+    url: '/api/update/firstanswers',
+    data: {
+      userid: userid,
+      firstanswers: JSON.stringify(firstanswers)
+    },
+    dataType: 'json',
+    success: function() {
+      confirmUnload = false;
+    	location.reload(true);
+    },
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}
+
 
 /**
  * Update choice number and reload to start.

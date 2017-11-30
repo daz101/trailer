@@ -71,7 +71,7 @@ router.get('/:id', function(req, res, next) {
         });
         break;
 		
-		case:-1
+		case -1:
 		res.render('firstsurvey.html', {
           //Verbal Visual Survey,
           data: {

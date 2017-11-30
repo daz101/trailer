@@ -42,7 +42,7 @@ $( "#Q3 .rad_row td" ).click(function() {
 	$('#surveypage1button').click(function() {
 		var hookpage = $('#surveypage1');
 		if(isSurveyComplete(hookpage)){
-    postEvent('Clicked "Started Verbal Visual Survey"', null);
+    postEvent('Started Final Survey', null);
 	//go to page 2
 	$('#surveypage1, #surveypage1button').fadeOut("slow", function() {
       $('#surveypage1, #surveypage1button').hide();

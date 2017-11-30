@@ -2,14 +2,13 @@
 var express = require('express');
 var router = express.Router();
 var utils = require('./utils.js');
-var title = ' | MRS';
+//var title = ' | MRS';
 var useTrailerProbability = 0.5;
 
-/* GET error if no user id specified in URL. */
+/* GET error if no user id specified in URL.*/
 router.get('/', function(req, res, next) {
-  //res.render('welcome'); 
   next(new Error("Please type in some unique user ID at the end of the URL after the '/'"));
-});
+}); 
 
 /* GET N interceptor */
 router.get('/N', function (req, res) {
@@ -35,17 +34,18 @@ router.get('/:id', function(req, res, next) {
       return users.insert({
         _id: userid,
         userid: userid,
-        choice_number: -1,
+        choice_number: -2,
         choice_set: [],
         use_trailers: Math.random() < useTrailerProbability,
         watched_trailers: [],
         hovered_movies: [],
         choices: [],
-        answers: null
+        firstanswers: null,
+		secondanswers: null
       }, function(err) {
         if (err) return next(err);
         res.render('welcome.html', {
-          title: 'Introduction' + title,
+          //title: 'Introduction' + title,
           data: {
             userid: userid
           }
@@ -58,10 +58,10 @@ router.get('/:id', function(req, res, next) {
 
     // If user is found,
     switch(doc.choice_number) {
-      case -1:
+      case -2:
         // Introduction page
         res.render('welcome.html', {
-          title: 'Introduction' + title,
+          //title: 'Introduction' + title,
           data: {
             userid: userid
           }
@@ -70,12 +70,24 @@ router.get('/:id', function(req, res, next) {
           utils.updateEvent(db, 'Loaded Introduction page', null, userid, res);
         });
         break;
-
+		
+		case -1:
+		res.render('firstsurvey.html', {
+          //Verbal Visual Survey,
+          data: {
+            userid: userid
+          }
+        }, function(err, html) {
+          res.send(html);
+          utils.updateEvent(db, 'Loaded Verbal Visual Survey', null, userid, res);
+        });
+        break;
+		
       case 10:
         var finish = typeof doc.answers != 'undefined' && doc.answers !== null;
         if(finish) {
           // Finish page
-          res.render('thankyou', { 
+          res.render('finish', { 
             title: 'Finished' + title,
             data: { userid: userid }
           }, function(err, html) {
@@ -84,7 +96,7 @@ router.get('/:id', function(req, res, next) {
           });
         } else {
           // Survey page
-          res.render('Survey_page1', {
+          res.render('survey', {
             title: 'Final survey' + title,
             data: { userid: userid }
           }, function(err, html) {
@@ -112,7 +124,7 @@ router.get('/:id', function(req, res, next) {
   });
 
   // Save the user agent from which the user is connecting
-  utils.updateEvent(db, 'New connection', req.useragent, userid, res);
+  utils.updateEvent(db, 'New connection Made', req.useragent, userid, res);
 });
 
 module.exports = router;

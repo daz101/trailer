@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var monk = require('monk');
 var app = express();
 var useragent = require('express-useragent');
-var routes = require('./public/js/index');
+var routes = require('./routes/index');
 var api = require('./public/js/api');
 if (app.get('env') === 'development') env = require('./env.js');
 
