@@ -10,7 +10,6 @@ var consent_check=0;
 $(document).ready(function() {
 	//welcome
   $('#consentBody, #consentbutton, #resizeBody, #resizebutton').hide();
-   
    $('#welcomebutton').click(function() {
     postEvent('Clicked "Start Welcome"', null);
 	$('#welcomeBody, #welcomebutton').fadeOut("slow", function() {
@@ -51,7 +50,8 @@ $( "#consent_Q tr td" ).click(function() {
     }); 
 	//end of welcome 
 	
-	//first survey 
+// ------------------------FIRST SURVEY PAGES START-------------------------------------------------------
+	//INTERACTIONS ON RADIO BUTTON CLICK
 	$( "#Q1 .rad_row td" ).click(function() { 
 	$(this).find('input[type="radio"]').each(function() {
 	$(this).prop('checked',true);
@@ -74,67 +74,60 @@ $( "#Q3 .rad_row td" ).click(function() {
 });
 	$('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpage4, #resize_nextOverview').hide();
 	
+	
+//INTERACTIONS ON NEXT BUTTON CLICK
+	//Survey page 1
 	$('#verbalpage1button').click(function() {
-		var hookpage = $('#verbalpage1');
-		if(isSurveyComplete(hookpage)){
-    postEvent('Clicked "Started Verbal Visual Survey"', null);
-	//page 2
-	$('#verbalpage1, #verbalpage1button').fadeOut("slow", function() {
-      $('#verbalpage1, #verbalpage1button').hide();
-      $('#verbalpage2, #verbalpage2button').show().fadeIn("slow");
-	   });
-	}
-	else{
-		$(".question").css("border-left","3px solid #ff3300");
-	}
+		var hookpage = $("#verbalpage1");
+		if(isSurveyComplete(hookpage))
+		{
+			postEvent('Clicked "Started Verbal Visual Survey"', null);
+			//Loading page 2
+			$('#verbalpage1, #verbalpage1button').fadeOut("slow", function() {
+			  $('#verbalpage1, #verbalpage1button').hide();
+			  $('#verbalpage2, #verbalpage2button').show().fadeIn("slow");
+			   });
+	   }
 	});
 	
-	//page 3
+	//Survey page 2
 	$('#verbalpage2button').click(function() {
-		var hookpage = $('#verbalpage2');
-		if(isSurveyComplete(hookpage)){
-	$('#verbalpage2, #verbalpage2button').fadeOut("slow", function() {
-      $('#verbalpage2, #verbalpage2button').hide();
-      $('#verbalpage3, #verbalpage3button').show().fadeIn("slow");
-	   });
+		var hookpage = $("#verbalpage2");
+		if(isSurveyComplete(hookpage))
+		{
+		  $('#verbalpage2, #verbalpage2button').fadeOut("slow", function() {
+		  $('#verbalpage2, #verbalpage2button').hide();
+		  $('#verbalpage3, #verbalpage3button').show().fadeIn("slow");
+		   });
 		}
 	});
 	
-	//page 4
+	// Survey page 3
 	$('#verbalpage3button').click(function() {
-		var hookpage = $('#verbalpage3');
-		if(isSurveyComplete(hookpage)){
-	$('#verbalpage3, #verbalpage3button').fadeOut("slow", function() {
-      $('#verbalpage3, #verbalpage3button').hide();
-      $('#verbalpage4, #resize_nextOverview').show().fadeIn("slow");
-	   });
+		var hookpage = $("#verbalpage3");
+		if(isSurveyComplete(hookpage))
+		{
+		  $('#verbalpage3, #verbalpage3button').fadeOut("slow", function() {
+		  $('#verbalpage3, #verbalpage3button').hide();
+		  $('#verbalpage4, #resize_nextOverview').show().fadeIn("slow");
+		   });
 		}
 	});
 	
-	//proceed to next page 
+	//Survey page 4
 	$('#resize_nextOverview').click(function() {
-		postEvent('Finished First Survey', null);
-		finish(); 
-	}
-
+		var hookpage = $("#verbalpage4");
+		if(isSurveyComplete(hookpage))
+		{
+		  $('#verbalpage3, #verbalpage3button').fadeOut("slow", function() {
+		  $('#verbalpage3, #verbalpage3button').hide();
+		  $('#verbalpage4, #resize_nextOverview').show().fadeIn("slow");
+		   });
+		}
+	});
 	
-	//end of first survey 
-	
-	// Make sure client wants leave
-  $(window).on('beforeunload', function() {
-    if(confirmUnload)
-      return 'We would really appreciate it if you could complete this survey for our course project.'
-            + ' You can also come back to complete it later on from where you left.';
-  });
-
-  $(window).on('unload', function() {
-    postEvent('Closed connection', null);
-  });
-
-});
-
-/**
- * Check if all questions have been answered.
+/*
+ FUNCTION TO CHECK IF ALL QUESTIONS HAVE BEEN ANSWERED.
  */
 function isSurveyComplete(hookpage) {
 	var counter=0;
@@ -149,32 +142,21 @@ function isSurveyComplete(hookpage) {
 		if(counter==1)return false;
 		return true;
 }
-
-/**
- * Update answers to database 
- */
-
-function finish() {
-	var firstanswers = [];
+// ------------------------FIRST SURVEY PAGES END-------------------------------------------------------
 	
-
-	$.ajax({
-    type: 'POST',
-    url: '/api/update/firstanswers',
-    data: {
-      userid: userid,
-      firstanswers: JSON.stringify(firstanswers)
-    },
-    dataType: 'json',
-    success: function() {
-      confirmUnload = false;
-    	location.reload(true);
-    },
-    error: function(err) {
-      console.log(err.responseText);
-    }
+	// Make sure client wants leave
+  $(window).on('beforeunload', function() {
+    if(confirmUnload)
+      return 'We would really appreciate it if you could complete this survey for our course project.'
+            + ' You can also come back to complete it later on from where you left.';
   });
-}
+
+  $(window).on('unload', function() {
+    postEvent('Closed connection', null);
+  });
+
+});
+
 
 
 /**
