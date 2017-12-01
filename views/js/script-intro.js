@@ -152,6 +152,47 @@ function isSurveyComplete(hookpage) {
 }
 // ------------------------FIRST SURVEY PAGES END-------------------------------------------------------
 	
+	//----------------OVERVIEW PAGE----------------
+	$('#begin, #beginbutton, #instructions1, #instructions1button, #instructions2, #instructions2button, #instructions3, #instructions3button').hide();
+	
+	$('#overviewbutton').click(function() {
+    postEvent('Clicked "Start Overview"', null);
+	$('#overviewbutton, #overview').fadeOut("slow", function() {
+      $('#overviewbutton, #overview').hide();
+      $('#instructions1, #instructions1button').show().fadeIn("slow");
+	  introJs().start(); 
+	   });
+	});
+	
+	
+	$('#instructions1button').click(function() {
+	$('#instructions1, #instructions1button').fadeOut("slow", function() {
+      $('#instructions1, #instructions1button').hide();
+      $('#instructions2, #instructions2button').show().fadeIn("slow");
+	   introJs().start(); 
+	   });
+	});
+	
+	$('#instructions2button').click(function() {
+	$('#instructions2, #instructions2button').fadeOut("slow", function() {
+      $('#instructions2, #instructions2button').hide();
+      $('#instructions3, #instructions3button').show().fadeIn("slow");
+	   introJs().start(); 
+	   });
+	});
+	
+	$('#instructions3button').click(function() {
+	$('#instructions3, #instructions3button').fadeOut("slow", function() {
+      $('#instructions3, #instructions3button').hide();
+      $('#begin, #beginbutton').show().fadeIn("slow");
+	   
+	   });
+	});
+	
+	$('#beginbutton').click(function() {
+	start(); 
+	});
+	
 	// Make sure client wants leave
   $(window).on('beforeunload', function() {
     if(confirmUnload)

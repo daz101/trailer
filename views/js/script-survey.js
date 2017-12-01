@@ -194,6 +194,10 @@ $( "#Q3 .rad_row td" ).click(function() {
 		}
 	});
 	
+	//last survey page
+	$('#surveypage15button').click(function() {
+		finish(); 
+	});
 	// Make sure client wants leave
   $(window).on('beforeunload', function() {
     if(confirmUnload)
@@ -228,10 +232,12 @@ function isSurveyComplete(hookpage) {
  */
 function finish() {
 	var secondanswers = [];
+	
 	for(var i=1; i<=nrOfQns; i++) {
-		answers.push($('input[name=qn'+i+']:checked').val());
+		answers.push($('input[name=radOpt_'+i+']:checked').val());
 	}
 
+	
 	$.ajax({
     type: 'POST',
     url: '/api/update/secondanswers',

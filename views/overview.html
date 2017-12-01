@@ -9,7 +9,7 @@
   <link href="css/progress-wizard.min.css" rel="stylesheet">
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/intro-global.js"></script>
+  <script type="text/javascript" src="js/script-intro.js"></script>
   <script type="text/javascript" src="js/intro.js" ></script>
 </head>
 
@@ -42,9 +42,40 @@
 		</ul>            
   </div>
 
+  <div id="pageno">
+	<span>1</span>
+  </div>
+  
+  <div class="info_holder">
+		<a href="" data-toggle="modal" data-target="#helpInfo"> 
+			<img data-toggle="tooltip" title="Help" class="info_holder" src="img/info.png" alt="info"> 
+		</a>
+		
+		<div id="helpInfo" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">			
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Instructions</h4>
+				</div>
+				
+				<div class="modal-body">
+					<p>
+					This help section will contain instructions for the current page. This will help you if you want to recollect the instructions.
+					</p>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>	
+		    </div>
+		</div>
+	</div>
+	</div>
   
 	<div id="survey_display_block">
 		
+		<div id="overview">
 		<div class="intro">
                 <span><strong><h2>STUDY OVERVIEW</h2></strong>
 		<hr>
@@ -65,17 +96,134 @@
                        
                        
 		</div>
-		<!end of display_block>
+		
+		
 	</div>
+	</div>
+	<!--end of overview-->
+	<div id="instructions1" onload="introJs().start()">
+	<div class="intro">
+                    <span><strong><h2 data-intro="These pages will collect information about your movie preferences" data-step="1" class="introjs-showElement introjs-relativePosition headelem">
+                            INSTRUCTIONS FOR SCREENS 1-9</h2></strong>
+							<hr>
+                </span>
+                    
+                </div> 
+                <!--end of intro-->
+                <div class="movie_ribbon"> 
+                    <div class="block_holder">
+                        
+                        <div class="movie-block" id="img1" data-intro="First we will ask for your <b>preferences</b>. Click on a movie poster to see more information about that movie.<br><br> Among the ten presented movies choose one which you like the best." data-step="3">
+                            <div class="wrapper-block">
+                                <div class="img-block">
+                                    <img src="img/ins1_1.png">
+                                </div>
+                            </div> 
+                        </div>
+                       
+                        <div class="movie-block" id="img2" data-intro="Next, you can <b>select the movie</b> which you like best by clicking on the 'Choose' button below the movie. <br><br>Once you have selected a movie then you could proceed to the next page by clicking the 'Next' button" data-step="4">
+                            <div class="wrapper-block">
+                                <div class="img-block">
+                                    <img src="img/ins1_2.png">
+                                </div>
+                            </div> 
+                        </div>
+                 
+		</div>
+	</div>
+	</div>
+	<!--end of instructions 1-->
 	
+	<div id="instructions2"> 
+	<div class="intro">
+                <span><strong><h2 data-intro="This page will look different because it will contain ten <b>movie recommendations</b> tailored to your preference from the previous pages." data-step="1" class="introjs-showElement introjs-relativePosition headelem">INSTRUCTIONS FOR SCREEN 10</h2></strong>
+                <hr>
+				</span>
+                 
+                </div>
+              
+                <div class="movie_ribbon"> 
+                    <div class="block_holder">
+                        <div class="movie-block" id="img1" data-intro="Review the movie posters and decide which movie you would <b>most</b> want to watch now if you could.<br><br> Among the ten presented movies choose one which you would <b>most</b> want to watch right now." data-step="2">
+                            <div class="wrapper-block">
+                                <div class="img-block">
+                                    <img src="img/ins2_1.png">
+                                </div>
+                            </div> 
+                        </div>
+                       
+                        <div class="movie-block" id="img2" data-intro="<b>Select the movie</b> by clicking on the 'Choose' button below the movie. <br><br>Once you have selected a movie then you could proceed to the next page by clicking the 'Next' button" data-step="3">
+                            <div class="wrapper-block">
+                                <div class="img-block">
+                                    <img src="img/ins2_2.png">
+                                </div>
+                            </div> 
+                        </div>
+                 
+		</div>
+	</div> 
+	</div><!--end of instructions 2-->
+	
+	<div id="instructions3"> 
+	<div class="intro">
+                <span><strong><h2 data-intro="On this page you will <b>rate the movie recommendations</b> that were presented on the previous page." data-step="1" class="introjs-showElement introjs-relativePosition headelem">INSTRUCTIONS FOR SCREENS 11</h2></strong>
+                <hr>
+				</span>
+                  
+                </div>
+                
+                <div class="movie_ribbon"> 
+                    <div class="block_holder">
+                        <div class="movie-block" id="img1" data-intro="Review each movie poster by clicking on it and <b>rate</b> each movie." data-step="2">
+                            <div class="wrapper-block">
+                                <div class="img-block">
+                                    <img src="img/ins3_1.png">
+                                </div>
+                            </div> 
+                        </div>
+                       
+                        <div class="movie-block" id="img2" data-intro="After you have rated all of the movies you can proceed to the next page by clicking the 'Next' button." data-step="3">
+                            <div class="wrapper-block">
+                                <div class="img-block">
+                                    <img src="img/ins3_2.png">
+                                </div>
+                            </div> 
+                        </div>
+                 
+		</div>
+		
+	</div>
 	
 </div>
 
+<div id="begin">
+<div class="intro" >
+		<span></span>
+                </br>
+                </br>
+                </br>
+                 <br>
+                    <br>
+                <span><h3><strong>Are you ready?</h3></strong></span>
+                   
+                    <br>
+                    <br>
+                    <span><center>If you are ready to begin the study you can press the next button below. The first section of the study will start. 
+                        </center></span>
+		</div>
+</div>
+
+
+</div> 
 <div class="survey-next-button">
-	<button id="overview_nextInstructions" type="button">Next</button>
+	<button id="overviewbutton" type="button">Next</button>
+	<button id="instructions1button" type="button">Next</button>
+	<button id="instructions2button" type="button">Next</button>
+	<button id="instructions3button" type="button">Next</button>
+	<button id="beginbutton" type="button">Next</button>
 	</div>
     <!--end of container for page-->
- </div>   
+  
     
 </body>
 

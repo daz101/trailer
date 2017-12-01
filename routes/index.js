@@ -84,11 +84,10 @@ router.get('/:id', function(req, res, next) {
         break;
 		
       case 10:
-        var finish = typeof doc.answers != 'undefined' && doc.answers !== null;
+        var finish = typeof doc.secondanswers != 'undefined' && doc.secondanswers !== null;
         if(finish) {
           // Finish page
-          res.render('finish', { 
-            title: 'Finished' + title,
+          res.render('thankyou.html', {
             data: { userid: userid }
           }, function(err, html) {
             res.send(html);
@@ -96,8 +95,7 @@ router.get('/:id', function(req, res, next) {
           });
         } else {
           // Survey page
-          res.render('survey', {
-            title: 'Final survey' + title,
+          res.render('secondsurvey.html', {
             data: { userid: userid }
           }, function(err, html) {
             res.send(html);
