@@ -215,6 +215,7 @@
 
 
 </div> 
+
 <div class="survey-next-button">
 	<button id="overviewbutton" type="button">Next</button>
 	<button id="instructions1button" type="button">Next</button>
@@ -224,7 +225,13 @@
 	</div>
     <!--end of container for page-->
   
-    
+  <script type="text/javascript">
+      confirmUnload = true;
+      $('#beginbutton').click(function() { 
+      	confirmUnload = false;
+      	console.log("beginbutton is clicked");
+      });
+    </script>  
 </body>
 
 </html>
