@@ -38,6 +38,7 @@ $( ".wrapper-block" ).mouseout(function(event) {
 	}
 });
 
+/*
     $("#movie_1,#cb1").click(function() {
 	$(".intro").hide();
 	$("#fillMovie").attr('src', 'img/m_1.jpg');
@@ -137,7 +138,7 @@ $( ".wrapper-block" ).mouseout(function(event) {
 	$(".movie-plot").find("span:nth-child(2)").text("Three buddies wake up from a bachelor party in Las Vegas, with no memory of the previous night and the bachelor missing. They make their way around the city in order to find their friend before his wedding.");
 	$(".movie_info").show();
 	});
-	
+*/	
 	
     
 $( ".hover-block" ).click(function() {
