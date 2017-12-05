@@ -190,6 +190,7 @@ function isSurveyComplete(hookpage) {
 	});
 	
 	$('#beginbutton').click(function() {
+	postEvent('Clicked "Start Begin"', null);
 	start(); 
 	});
 	

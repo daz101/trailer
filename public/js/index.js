@@ -34,7 +34,7 @@ router.get('/:id', function(req, res, next) {
       return users.insert({
         _id: userid,
         userid: userid,
-        choice_number: -2,
+        choice_number: -3,
         choice_set: [],
         use_trailers: Math.random() < useTrailerProbability,
         watched_trailers: [],
@@ -58,7 +58,7 @@ router.get('/:id', function(req, res, next) {
 
     // If user is found,
     switch(doc.choice_number) {
-      case -2:
+      case -3:
         // Introduction page
         res.render('welcome.html', {
           //title: 'Introduction' + title,
@@ -71,8 +71,20 @@ router.get('/:id', function(req, res, next) {
         });
         break;
 		
-		case -1:
+		case -2:
 		res.render('firstsurvey.html', {
+          //Verbal Visual Survey,
+          data: {
+            userid: userid
+          }
+        }, function(err, html) {
+          res.send(html);
+          utils.updateEvent(db, 'Loaded Verbal Visual Survey', null, userid, res);
+        });
+        break;
+		
+		case -1:
+		res.render('overview.html', {
           //Verbal Visual Survey,
           data: {
             userid: userid
