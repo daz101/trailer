@@ -1,4 +1,8 @@
 "use strict";
+data="";
+confirmUnload = true;
+$('a').click(function() { confirmUnload = false});
+
 var nrOfMovies = $('.movieslist li').length;
 var learnRate = "0,7";
 var discardRate = "0,5";

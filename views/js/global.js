@@ -13,11 +13,11 @@ $( "#confirmYes" ).click(function() {
   $( ".wrapper-block" ).mouseover(function(event) {
   if($(this).parent().find(".choose button").text()=="I like this best") // when choose button is selected
   {
-	  $(this).find(".img-block").css("outline","2px solid #5cb85c");
+	  $(this).find(".cover").css("outline","2px solid #5cb85c");
   }
 	else
 	{
-	  $(this).find(".img-block").css("outline","2px solid #8c8c8c"); // when choose button is not selected //change
+	  $(this).find(".cover").css("outline","2px solid #8c8c8c"); // when choose button is not selected //change
 	}
 	$(this).find(".hover-block").show();
 });
@@ -28,13 +28,13 @@ $( ".wrapper-block" ).mouseout(function(event) {
 	else
 	if($(this).parent().find(".choose button").text()=="I like this best") // when choose button is selected
 	{
-		$(this).find(".img-block").css("outline","2px solid #5cb85c");
+		$(this).find(".cover").css("outline","2px solid #5cb85c");
 		$(this).find(".hover-block").hide();
 	}
 	else
 	{
 		$(this).find(".hover-block").hide();        // when choose button is not selected and img is not clicked
-	    $(this).find(".img-block").css("outline","none");
+	    $(this).find(".cover").css("outline","none");
 	}
 });
 //testing 
@@ -161,7 +161,7 @@ $( ".hover-block" ).click(function() {
 		
 		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="Choose")
 		{
-			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".img-block").css("outline","none");
+			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".cover").css("outline","none");
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").hide();
 			$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#ffffff");
 		}
@@ -215,7 +215,7 @@ $( ".hover-block" ).click(function() {
 	{		
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").css("background-color", "#8c8c8c"); 
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").text("Choose");
-		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".img-block").css("outline","none");
+		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".cover").css("outline","none");
 		$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#ffffff");
 		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text()=="Now showing info")
 		{
@@ -228,7 +228,7 @@ $( ".hover-block" ).click(function() {
 	{
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").css("background-color", "#8c8c8c"); 
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").text("Choose");
-		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".img-block").css("outline","none");
+		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".cover").css("outline","none");
 		$(".highlight:nth-of-type("+parseInt(item_choose+1)+")").css("background-color","#ffffff");
 		if($(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").text()=="Now showing info")
 		{
@@ -247,7 +247,7 @@ $( ".hover-block" ).click(function() {
 	$(this).children("button").text("I like this best");
 	$(".next-button").children("button").css({"cursor":"pointer","opacity":"1","background-color":"#5cb85c"});
 	$(".next-button").children("button").removeAttr('disabled');
-	$(this).parent().find(".img-block").css("outline","2px solid #5cb85c");
+	$(this).parent().find(".cover").css("outline","2px solid #5cb85c");
 	$(this).parent().find(".hover-block").text("Now showing info");  // change
 	$(this).parent().find(".hover-block").hide();	 
     clicked=1; 
