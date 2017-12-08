@@ -6,11 +6,11 @@
   <link href="css/bootstrap.css" rel="stylesheet">
   <link href="css/intro-stylesheet.css" rel="stylesheet" type="text/css" />
   <link href="css/introjs.css" rel="stylesheet" type="text/css" />
-  <link href="css/progress-wizard.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/intro.js" ></script>
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/script-intro.js"></script>
-  <script type="text/javascript" src="js/intro.js" ></script>
+
 </head>
 
 <body id="introBackground">
@@ -134,7 +134,7 @@
 	</div>
 	<!--end of instructions 1-->
 	
-	<div id="instructions2"> 
+	<div id="instructions2" onload="introJs().start()"> 
 	<div class="intro">
                 <span><strong><h2 data-intro="This page will look different because it will contain ten <b>movie recommendations</b> tailored to your preference from the previous pages." data-step="1" class="introjs-showElement introjs-relativePosition headelem">INSTRUCTIONS FOR SCREEN 10</h2></strong>
                 <hr>
@@ -164,7 +164,7 @@
 	</div> 
 	</div><!--end of instructions 2-->
 	
-	<div id="instructions3"> 
+	<div id="instructions3" onload="introJs().start()"> 
 	<div class="intro">
                 <span><strong><h2 data-intro="On this page you will <b>rate the movie recommendations</b> that were presented on the previous page." data-step="1" class="introjs-showElement introjs-relativePosition headelem">INSTRUCTIONS FOR SCREENS 11</h2></strong>
                 <hr>
@@ -224,14 +224,14 @@
 	<button id="beginbutton" type="button">Next</button>
 	</div>
     <!--end of container for page-->
-  
+  </div> 
   <script type="text/javascript">
       confirmUnload = true;
       $('#beginbutton').click(function() { 
       	confirmUnload = false;
-      	console.log("beginbutton is clicked");
+      	console.log("begin button is clicked");
       });
-    </script>  
+    </script> 
 </body>
 
 </html>

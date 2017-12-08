@@ -4,7 +4,9 @@ var learnRate = "0,7";
 var discardRate = "0,5";
 var maxChoices = 10;
 var diversification = '0,7';
-var userid = data.userid;
+//var userid = data.userid;
+var userFromUrl = window.location.pathname;
+var userid = userFromUrl.replace('/', '');
 var choiceNumber = data.choiceNumber;
 var movies = JSON.parse(data.movies);
 var player, useTrailers = data.useTrailers, currentTrailer = null;
@@ -25,7 +27,7 @@ $(document).ready(function() {
       loadMovieInfo(i, mID, 'id');
     }
   }
-
+//update: handler for conditions 
   // Randomly select if to play trailers or not
   if(useTrailers) {
     // Load the Youtube IFrame API
@@ -41,7 +43,7 @@ $(document).ready(function() {
   }
 
   // Look for trailer when hovering over movie
-  $('.movieslist li .cover').hover(function() {
+  $('.block_holder li .cover').hover(function() {
     // on mouse in, start a timeout
     var that = this;
     timer = setTimeout(function() {
@@ -55,7 +57,7 @@ $(document).ready(function() {
   });
 
   // Look for trailer when hovering over movie
-  $('.movieslist li .cover').click(function() {
+  $('.block_holder li .cover').click(function() {
     // on mouse click, clear timeout
     clearTimeout(timer);
     // Find which movie was clicked
@@ -63,7 +65,7 @@ $(document).ready(function() {
     loadSelectedMovie(moviePos);
   });
 
-  $('.movieslist li .select').click(function() {
+  $('.block_holder li .choose').click(function() {
     // Find which movie was clicked
     var moviePos = $(this).parent().index();
     // Update choice number && Get new recommendations
@@ -72,11 +74,12 @@ $(document).ready(function() {
     else if(choiceNumber < maxChoices) {
       // Change appearance of the infobox
       getFinalRecommendationSet(moviePos);
-      $('#infobox h4').css({
+     /* $('#infobox h4').css({
         "background": "#F3337A",
         "box-shadow": "0 0 0 4px #F3337A, 2px 1px 6px 4px rgba(10, 10, 0, 0.5)"
       });
       $('#infobox h4').html('Final recommendation set');
+	  */
     }
     else {
       var promises = [];
@@ -197,9 +200,9 @@ function loadMovieInfo(itemNr, mID, mType) {
     else
       pictureURL = 'http://marvelmoviemarathon.com/posters/placeholder.png';
 
-    $('.movieslist li:nth-child(' + itemNr + ') .cover').css('background-image', 'url(' + pictureURL + ')');
-    $('.movieslist li:nth-child(' + itemNr + ') .movietitle').text(movieInfo.title);
-    $('.movieslist li:nth-child(' + itemNr + ') .movieyear').text(movieInfo.year);
+    $('.block_holder li:nth-child(' + itemNr + ') .img-block').css('background-image', 'url(' + pictureURL + ')');
+    //$('.block_holder li:nth-child(' + itemNr + ') .movietitle').text(movieInfo.title);
+    //$('.block_holder li:nth-child(' + itemNr + ') .movieyear').text(movieInfo.year);
   });
 }
 
@@ -296,6 +299,7 @@ function loadMovieDescription(pos) {
   $('#moviegenres').text(movies[pos].Genres);
   $('#moviedirector').text(movies[pos].director);
   $('#moviecast').text(movies[pos].cast);
+  $('#movietitle').text(movieInfo.title);
 }
 
 /**

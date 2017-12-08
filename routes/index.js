@@ -91,7 +91,7 @@ router.get('/:id', function(req, res, next) {
           }
         }, function(err, html) {
           res.send(html);
-          utils.updateEvent(db, 'Loaded Verbal Visual Survey', null, userid, res);
+          utils.updateEvent(db, 'Loaded Overview', null, userid, res);
         });
         break;
 		

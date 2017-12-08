@@ -177,7 +177,7 @@ function isSurveyComplete(hookpage) {
 	$('#instructions2, #instructions2button').fadeOut("slow", function() {
       $('#instructions2, #instructions2button').hide();
       $('#instructions3, #instructions3button').show().fadeIn("slow");
-	   introJs().start(); 
+	   
 	   });
 	});
 	
@@ -230,6 +230,27 @@ function start() {
     }
   });
 }
+
+function launchnow() {
+  $.ajax({
+    type: 'POST',
+    url: '/api/update/choicenumber',
+    // url: 'http://localhost:3000/mrs/events',
+    data: {
+      userid: userid
+    },
+    dataType: 'json',
+    success: function() {
+    confirmUnload = false;
+    location.reload(true); 	
+    },
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}
+
+
 
 function finish() {
 

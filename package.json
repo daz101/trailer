@@ -7,7 +7,7 @@
     "postinstall": "cd ./node_modules/monk/ && npm install mongodb@1.4.40 --save"
   },
   "engines": {
-    "node": "8.9.1"
+    "node": "4.1.0"
   },
   "repository": {
     "type": "git",
