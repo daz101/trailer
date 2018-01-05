@@ -153,18 +153,18 @@ function isSurveyComplete(hookpage) {
 // ------------------------FIRST SURVEY PAGES END-------------------------------------------------------
 	
 	//----------------OVERVIEW PAGE----------------
-	$('#begin, #beginbutton, #instructions1, #instructions1button, #instructions2, #instructions2button, #instructions3, #instructions3button').hide();
+	$('#begin, #beginbutton, #instructions3button').hide();
 	
 	$('#overviewbutton').click(function() {
     postEvent('Clicked "Start Overview"', null);
 	$('#overviewbutton, #overview').fadeOut("slow", function() {
       $('#overviewbutton, #overview').hide();
-      $('#instructions1, #instructions1button').show().fadeIn("slow");
-	  introJs().start(); 
+      $('#begin, #beginbutton').show().fadeIn("slow");
+	  
 	   });
 	});
 	
-	
+	/*
 	$('#instructions1button').click(function() {
 	$('#instructions1, #instructions1button').fadeOut("slow", function() {
       $('#instructions1, #instructions1button').hide();
@@ -187,7 +187,7 @@ function isSurveyComplete(hookpage) {
       $('#begin, #beginbutton').show().fadeIn("slow");
 	   
 	   });
-	});
+	});*/
 	
 	$('#beginbutton').click(function() {
 	postEvent('Clicked "Start Begin"', null);
