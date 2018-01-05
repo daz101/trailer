@@ -12,7 +12,7 @@ var api = require('./routes/api');
 if (app.get('env') === 'development') env = require('./env.js');
 
 // connect to database
-var db = monk(process.env.MONGO_URL);
+var db = monk(process.env.MONGOLAB_URL);
 app.db = db;
 
 // view engine setup
