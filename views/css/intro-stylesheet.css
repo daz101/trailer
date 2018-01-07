@@ -525,10 +525,23 @@ hr {
 	width:100%;
 }
 
-.parent_container .overview-block .img-block2 img
+.parent_container #survey_display_block_overview
+{
+	width: 65%;
+    margin: auto;
+    height: 500px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    box-shadow: 1px 1px 10px #888888;
+    background-color: #ffffff;
+}
+
+
+.parent_container #survey_display_block_overview .overview-block .img-block2 img
 {
 	width:100%;
-	height: 240px;
+	height: 320px;
+	object-fit: contain;
 }
 
 
