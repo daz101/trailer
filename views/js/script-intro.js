@@ -52,28 +52,15 @@ $( "#consent_Q tr td" ).click(function() {
 	//end of welcome 
 	
 // ------------------------FIRST SURVEY PAGES START-------------------------------------------------------
-	//INTERACTIONS ON RADIO BUTTON CLICK
-	$( "#Q1 .rad_row td" ).click(function() { 
+//INTERACTIONS ON RADIO BUTTON CLICK
+$( ".question .rad_row td" ).click(function() { 
 	$(this).find('input[type="radio"]').each(function() {
 	$(this).prop('checked',true);
 	});
-	$("#Q1").css("border-left","3px solid #00cc00");
+	$(this).parent().parent().css("border-left","3px solid #00cc00");
 });
 
-$( "#Q2 .rad_row td" ).click(function() { 
-	$(this).find('input[type="radio"]').each(function() {
-	$(this).prop('checked',true);
-	});
-	$("#Q2").css("border-left","3px solid #00cc00");
-});
-
-$( "#Q3 .rad_row td" ).click(function() { 
-	$(this).find('input[type="radio"]').each(function() {
-	$(this).prop('checked',true);
-	});
-	$("#Q3").css("border-left","3px solid #00cc00");
-});
-	$('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpage4, #resize_nextOverview').hide();
+$('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpage4, #resize_nextOverview').hide();
 	
 	
 //INTERACTIONS ON NEXT BUTTON CLICK
