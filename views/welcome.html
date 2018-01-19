@@ -8,7 +8,6 @@
    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
- <!-- <script type="text/javascript" src="js/intro-global.js"></script>--> 
   <script type="text/javascript" src="js/script-intro.js"></script>
 </head>
 
@@ -39,85 +38,62 @@
 	</ul>
   </div>
   
-	<div id="survey_display_block">
+	<div id="welcome_display_block">
 		
+		<!--Welcome Page-->
 		<div class="intro" id="welcomeBody">
-		<span><h1><strong>Welcome</strong></h1></span>
-		<span><h3>Welcome to the study on movie recommenders conducted by Clemson University</h3></span>
-		<hr>
-
-		<span>Dr. Knijnenburg invites you to take part in a research study. Dr. Knijnenburg is a professor at Clemson University.
-                    This is a study that aims to test a new recommender system for movies. Your participation in this study will be valued.
-<br/><br/>
-<strong>It will take you about 15-20 minutes to complete the four steps of the study:
-    <br>
-<ol>	
-    <li> Introduction and personality test </li>
-   
-    <li> Instructions for the study </li>
-   
-    <li> Rate movies </li>
-  
-    <li> Complete survey </li>
-	
-	</ol>
-</strong>
-</span>
-
+			<span><h1><strong>Welcome</strong></h1></span>
+			<span><h3>Welcome to the study on movie recommenders conducted by Clemson University</h3></span>
+			<hr>
+			<span>Dr. Knijnenburg invites you to take part in a research study. Dr. Knijnenburg is a professor at Clemson University. This is a study that aims to test a new recommender system for movies. Your participation in this study will be valued.
+			<br/><br/>
+			<strong>It will take you about 15-20 minutes to complete the four steps of the study:
+			</br>
+			<ol>	
+				<li> Introduction and personality test </li>
+				<li> Instructions for the study </li>
+				<li> Rate movies </li>
+				<li> Complete survey </li>				
+			</ol>
+			</strong>
+			</span>
 		</div>
 		
-		<!--<Consent Page>-->
+		<!--Consent Page-->
 		<div class="intro" id="consentBody">
-		<span></span>
-		<span><h3>About being in this study</h3>
-		<hr>
-		
-		<h4><strong>Risks and Discomforts</strong></h4>
-		<p>We do not know of any risks or discomforts to you in this research study. 
-                    However, if you feel that you need a break, then you may take one at any time. 
-                    You may also opt out of the study at any time if you are not comfortable.</p>
-                <h4><strong>Incentives</strong></h4>
-                <p>As a result of your completion of this study, you will be compensated $X.XX through Amazon Mechanical Turk. We appreciate your participation and feedback from this study.</p>
-		<h4><strong>Protection of Privacy and Confidentiality</strong></h4>
-                
-               
-<div id="survey_section">
-<table class="question" id="consent_Q">
-    
-    <td>
-        <input type="checkbox" name="consent_test" id="consentCheckbox"> I agree to participate in this study
-    </td>
-   
-</table>
-</div>
-
-</span>
-		
-
-		
-
+			<span></span>
+			<span><h3>About being in this study</h3>
+			<hr>
+			<h4><strong>Risks and Discomforts</strong></h4>
+			<p>We do not know of any risks or discomforts to you in this research study. 
+               However, if you feel that you need a break, then you may take one at any time. 
+               You may also opt out of the study at any time if you are not comfortable.</p>
+            <h4><strong>Incentives</strong></h4>
+            <p>As a result of your completion of this study, you will be compensated $X.XX through Amazon Mechanical Turk. We appreciate your participation and feedback from this study.</p>
+			<h4><strong>Protection of Privacy and Confidentiality</strong></h4>                
+			<div id="survey_section">
+				<table class="question" id="consent_Q">
+					<td>
+						<input type="checkbox" name="consent_test" id="consentCheckbox"> I agree to participate in this study
+					</td>
+				</table>
+			</div>
+			</span>
 		</div>
 		
-		<div class="intro" id="resizeBody">
 		
-            <div class="intro">
-                </br>
-                </br>
-                </br>
+		<!--Resize Page-->
+		<div class="intro" id="resizeBody">
+                <br><br><br>
                 <span><h3><strong>Can you see this box and the next button without scrolling?</h3></strong></span>
-                    <br>
-                    <span><center>
+                <br>
+                <span><center>
                     <p>If you can't:</p> 
                     <p>- resize your browser window by pressing the keys "ctrl" and "+"</p>
                     <p>- or try adjusting your browser window by pressing the keys "ctrl" and "-"</p>
                       </center>  
-                    </span>
-
-          
-
+                </span>					
 		</div>
-		
-	</div>
 		
 	</div>
 	
@@ -126,6 +102,7 @@
 	<button id="consentbutton" type="button">Next</button>
 	<button id="resizebutton" type="button">Next</button>
 	</div>
+</div>
  <script type="text/javascript">
       data= "";
       confirmUnload = true;

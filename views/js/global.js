@@ -10,7 +10,7 @@ $( "#confirmYes" ).click(function() {
 	$(location).attr('href', 'loading.html')
 });
 	
-  $( ".cover" ).mouseover(function(event) {
+  $( ".wrapper-block" ).mouseover(function(event) {
   if($(this).parent().find(".choose button").text()=="I like this best") // when choose button is selected
   {
 	  $(this).css("outline","2px solid #5cb85c");
@@ -22,7 +22,7 @@ $( "#confirmYes" ).click(function() {
 	$(this).find(".hover-block").show();
 });
 
-$( ".cover" ).mouseout(function(event) {
+$( ".wrapper-block" ).mouseout(function(event) {
 	if(($(this).find(".hover-block").text()=="Now showing info")&&($(this).parent().find(".choose button").text()=="Choose")) // when choose button is not selected and img is clicked
 		$(this).find(".hover-block").show();
 	else
@@ -50,17 +50,18 @@ $( ".cover" ).mouseout(function(event) {
     
 $( ".hover-block" ).click(function() {
   if(clicked==1)
-	{		
-		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text("Click to read info");  // change all items
-		
-		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="Choose")
+	{	
+		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text("Click to read info"); //Change the text of the previously clicked movie
+
+		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="Choose") // If the previously clicked movie was not selected
 		{
-			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".cover").css("outline","none");
+			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".wrapper-block").css("outline","none");
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").hide();
 			$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#ffffff");
+			console.log("Here");
 		}
 		
-		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="I like this best")
+		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="I like this best") // If the previously clicked movie was selected
 		{
 			$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#5cb85c");
 		}
@@ -117,7 +118,7 @@ $( ".hover-block" ).click(function() {
 	{		
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").css("background-color", "#8c8c8c"); 
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").text("Choose");
-		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".cover").css("outline","none");
+		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".wrapper-block").css("outline","none");
 		$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#ffffff");
 		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text()=="Now showing info")
 		{
@@ -130,7 +131,7 @@ $( ".hover-block" ).click(function() {
 	{
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").css("background-color", "#8c8c8c"); 
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").text("Choose");
-		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".cover").css("outline","none");
+		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".wrapper-block").css("outline","none");
 		$(".highlight:nth-of-type("+parseInt(item_choose+1)+")").css("background-color","#ffffff");
 		if($(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").text()=="Now showing info")
 		{
@@ -149,7 +150,7 @@ $( ".hover-block" ).click(function() {
 	$(this).children("button").text("I like this best");
 	$(".next-button").children("button").css({"cursor":"pointer","opacity":"1","background-color":"#5cb85c"});
 	$(".next-button").children("button").removeAttr('disabled');
-	$(this).parent().find(".cover").css("outline","2px solid #5cb85c");
+	$(this).parent().find(".wrapper-block").css("outline","2px solid #5cb85c");
 	$(this).parent().find(".hover-block").text("Now showing info");  // change
 	$(this).parent().find(".hover-block").hide();	 
     clicked=1; 

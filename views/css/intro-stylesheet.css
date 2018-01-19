@@ -163,26 +163,12 @@
 	height:24px;
 }
 
-#survey_display_block
+#welcome_display_block
 {
 	width:65%;
 	margin:auto;
-	height:400px;
 	margin-top: 10px;
 	margin-bottom: 20px;
-	box-shadow: 1px 1px 10px #888888;
-    background-color: #ffffff;
-}
-
-#survey_display_block_central
-{
-	width:65%;
-	margin:auto;
-	height:510px;
-	margin-top: 10px;
-	margin-bottom: 20px;
-	box-shadow: 1px 1px 10px #888888;
-    background-color: #ffffff;
 }
 
 .headelem
@@ -191,14 +177,22 @@
 	width:55%;
 }
 
-.parent_container .intro
+.parent_container #welcome_display_block .intro
 {
 	width:100%;
 	padding: 10px;
 	float: left;
+	height:400px;
+	box-shadow: 1px 1px 10px #888888;
+    background-color: #ffffff;
 }
 
-.parent_container .intro span
+.parent_container #welcome_display_block #resizeBody
+{
+	height:530px;
+}
+
+.parent_container #welcome_display_block .intro span
 {
 	width:100%;
 	font-family: "Calibri", Georgia, Serif;
@@ -207,7 +201,7 @@
 	text-align: center;
 }
 
-.parent_container .intro span:last-child
+.parent_container #welcome_display_block .intro span:last-child
 {
 	width:100%;
 	font-family: "Calibri", Georgia, Serif;
@@ -225,6 +219,35 @@
 	text-align: left;
 	padding:20px 10px 10px 10px; 
 }
+
+#survey_display_block
+{
+	width:65%;
+	margin:auto;
+	height:510px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	box-shadow: 1px 1px 10px #888888;
+    background-color: #ffffff;
+}
+
+.parent_container #survey_display_block .intro
+{
+	width:100%;
+	padding: 10px;
+	float: left;
+}
+
+.parent_container #survey_display_block .intro span
+{
+	width:100%;
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 1.3em;
+	float: left;
+	text-align: left;
+	padding:10px 10px 10px 10px;
+}
+
 #survey_section
 {
 	float:left;
@@ -274,8 +297,6 @@
 	height:30px;
 	text-align: center;
 }
-
-
 
 .parent_container .survey-next-button
 {
@@ -536,6 +557,33 @@ hr {
     background-color: #ffffff;
 }
 
+.parent_container #survey_display_block_overview .intro
+{
+	width:100%;
+	padding: 10px;
+	float: left;
+}
+
+.parent_container #survey_display_block_overview .intro span:first-child{
+    width: 100%;
+    font-family: "Calibri", Georgia, Serif;
+    font-size: 2em;
+    float: left;
+    text-align: center;
+}
+
+.parent_container #survey_display_block_overview .intro span:last-child{
+    width: 100%;
+    font-family: "Calibri", Georgia, Serif;
+    font-size: 1.3em;
+    float: left;
+    text-align: center;
+}
+
+.parent_container #survey_display_block_overview #begin span:first-child{
+	padding-top:150px;
+}
+
 
 .parent_container #survey_display_block_overview .overview-block .img-block2 img
 {
@@ -543,8 +591,6 @@ hr {
 	height: 320px;
 	object-fit: contain;
 }
-
-
 
 
 
