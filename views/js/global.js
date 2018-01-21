@@ -5,10 +5,12 @@ $(document).ready(function(){
 	var item,item_choose;
 	
 $('[data-toggle="tooltip"]').tooltip(); 
-	
+
+/*
 $( "#confirmYes" ).click(function() { 
 	$(location).attr('href', 'loading.html')
 });
+*/
 	
   $( ".wrapper-block" ).mouseover(function(event) {
   if($(this).parent().find(".choose button").text()=="I like this best") // when choose button is selected
@@ -57,13 +59,13 @@ $( ".hover-block" ).click(function() {
 		{
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".wrapper-block").css("outline","none");
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").hide();
-			$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#ffffff");
+			$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#ffffff","opacity":"1"});
 			console.log("Here");
 		}
 		
 		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="I like this best") // If the previously clicked movie was selected
 		{
-			$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#5cb85c");
+			$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#5cb85c","opacity":"1"});
 		}
 	}  	
 	$(".intro").hide();
@@ -85,10 +87,10 @@ $( ".hover-block" ).click(function() {
 	if (current_highlight=="rgb(92, 184, 92)")
 	{
 		$("#movie_display_block").css("outline","5px solid #5cb85c");
-		$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#5cb85c");
+		$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#5cb85c","opacity":"1"});
 	}
 	else
-	$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#8c8c8c"); 
+	$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#8c8c8c","opacity":"1"}); 
 });
 
  $( ".choose" ).mouseover(function() {
@@ -119,25 +121,27 @@ $( ".hover-block" ).click(function() {
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").css("background-color", "#8c8c8c"); 
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").text("Choose");
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".wrapper-block").css("outline","none");
-		$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#ffffff");
+		$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#ffffff","opacity":"1"});
 		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text()=="Now showing info")
 		{
-			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text("Click to read info"); //new change
+			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text("Click to read info"); 
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").hide(); //
 		}
+		$(".movie-block:nth-of-type("+parseInt(item+11)+")").attr("data-movieSelected",false);
 	}
 	
-	if(choose==1)  // change
+	if(choose==1) 
 	{
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").css("background-color", "#8c8c8c"); 
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").text("Choose");
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".wrapper-block").css("outline","none");
-		$(".highlight:nth-of-type("+parseInt(item_choose+1)+")").css("background-color","#ffffff");
+		$(".highlight:nth-of-type("+parseInt(item_choose+1)+")").css({"background-color":"#ffffff","opacity":"1"});
 		if($(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").text()=="Now showing info")
 		{
 			$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").text("Click to read info"); //new change
 			$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").hide(); //
 		}
+		$(".movie-block:nth-of-type("+parseInt(item+11)+")").attr("data-movieSelected",false);
 	}
 	
 	listitem=$(this).parent();
@@ -156,9 +160,10 @@ $( ".hover-block" ).click(function() {
     clicked=1; 
     choose=1;	//change
 	$("#movie_display_block").css("outline","5px solid #5cb85c");
-	$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color","#5cb85c");
+	$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#5cb85c","opacity":"1"});
 	
 	var final_title=$(".movie-title").find("span").text();
 	document.getElementById("mt").innerHTML=final_title;
+	$(this).parent().attr("data-movieSelected",true);
 });
 });

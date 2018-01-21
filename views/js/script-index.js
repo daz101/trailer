@@ -1,9 +1,9 @@
 "use strict";
-data="";
-confirmUnload = true;
-$('a').click(function() { confirmUnload = false});
+//data="";
+//confirmUnload = true;
+//$('a').click(function() { confirmUnload = false});
 
-var nrOfMovies = $('.movieslist li').length;
+var nrOfMovies = $(".movie-block").length;
 var learnRate = "0,7";
 var discardRate = "0,5";
 var maxChoices = 10;
@@ -46,8 +46,10 @@ $(document).ready(function() {
       });
   }
 
+  /*
+  FIXME: Remove the hover block if not needed
   // Look for trailer when hovering over movie
-  $('.block_holder li .cover').hover(function() {
+  $('.movie-block .wrapper-block').hover(function() {
     // on mouse in, start a timeout
     var that = this;
     timer = setTimeout(function() {
@@ -59,19 +61,23 @@ $(document).ready(function() {
     // on mouse out, cancel the timer
     clearTimeout(timer);
   });
+  */
 
   // Look for trailer when hovering over movie
-  $('.block_holder li .cover').click(function() {
+  $('.movie-block .wrapper-block').click(function() {
     // on mouse click, clear timeout
+	//FIXME: Is the time still needed if there is no hover block?
     clearTimeout(timer);
     // Find which movie was clicked
-    var moviePos = $(this).parent().index();
-    loadSelectedMovie(moviePos);
+	var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
+    var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
+    loadSelectedMovie(moviePos); //0
   });
 
-  $('.block_holder li .choose').click(function() {
+  $('#confirmYes').click(function() {
     // Find which movie was clicked
-    var moviePos = $(this).parent().index();
+    var movieSelectedIdArr = $('.movie-block[data-movieSelected=true').prop('id').split("_");
+	var moviePos = movieSelectedIdArr[movieSelectedIdArr.length - 1] - 1;
     // Update choice number && Get new recommendations
     if(choiceNumber+1 < maxChoices)
       getChoiceSet(moviePos);
@@ -106,7 +112,7 @@ $(document).ready(function() {
             + ' You can also come back to complete it later on from where you left.'; 
   });
 
-  $(window).unload(function() {
+  $(window).on("unload", function() {
     postEvent('Closed connection', null);
   });
 });
@@ -150,7 +156,11 @@ function onPlayerStateChange(e) {
  */
 function loadSelectedMovie(pos) {
   loadMovieDescription(pos);
-  if(useTrailers) loadTrailer(pos);
+  try {
+	if(useTrailers) loadTrailer(pos);
+  } catch(e) {
+	  console.warn("Exception in loadTrailer :: " + e);
+  }
   postEvent('Selected movie', movies[pos]._id);
   updateHoveredMovies(movies[pos]._id);
 }
@@ -202,9 +212,10 @@ function loadMovieInfo(itemNr, mID, mType) {
      if(movieInfo.poster.length > 0)
       pictureURL = movieInfo.poster;
     else
-      pictureURL = 'http://marvelmoviemarathon.com/posters/placeholder.png';
+      pictureURL = '/img/placeholder.png';
 
-    $('.block_holder li:nth-child(' + itemNr + ') .img-block').css('background-image', 'url(' + pictureURL + ')');
+	$('#c' + itemNr).prop('src', pictureURL);
+    //$('.block_holder li:nth-child(' + itemNr + ') .img-block').css('background-image', 'url(' + pictureURL + ')');
     //$('.block_holder li:nth-child(' + itemNr + ') .movietitle').text(movieInfo.title);
     //$('.block_holder li:nth-child(' + itemNr + ') .movieyear').text(movieInfo.year);
   });
@@ -299,11 +310,13 @@ function getTrailer(mID, cb) {
  * genre and director on-screen.
  */
 function loadMovieDescription(pos) {
+  //FIXME: Remove the data elements not needed
   $('#moviesummary').text(movies[pos].summary);
   $('#moviegenres').text(movies[pos].Genres);
   $('#moviedirector').text(movies[pos].director);
   $('#moviecast').text(movies[pos].cast);
-  $('#movietitle').text(movieInfo.title);
+  $('#movietitle').text(movies[pos].title);
+  $('#movieposter').prop("src", movies[pos].poster);
 }
 
 /**
@@ -450,10 +463,24 @@ function loadChoiceSet(event, mID, data) {
 function resetMovies() {
   movies = [];
   for(var i=1; i<=nrOfMovies; i++) {
-    var pictureURL = 'http://marvelmoviemarathon.com/posters/placeholder.png';
-    $('.movieslist li:nth-child(' + i + ') .cover').css('background-image', 'url(' + pictureURL + ')');
+    var pictureURL = 'img/placeholder.png';
+	$('#confirmation_modal .close').click(); 
+	$(".movie_img").hide();
+	$(".movie_info").hide();
+	$('#movie_display_block').css("outline","none");
+	var movieSelectedIdArr = $('.movie-block[data-movieSelected=true');
+	$(movieSelectedIdArr).find("button").css("background-color", "#8c8c8c"); 
+	$(movieSelectedIdArr).find("button").text("Choose");
+	$(movieSelectedIdArr).find(".wrapper-block").css("outline","none");
+	$(movieSelectedIdArr).find(".hover-block").text("Click to read info"); 
+	$(movieSelectedIdArr).find(".hover-block").hide(); 
+	$(".intro span:first-child").text(9-choiceNumber+" More Choices To Go!");
+	$(".intro").show();
+	$("#pageno span").text(9-choiceNumber);
+	$(".highlight").css({"background-color":"#FFFFFF","opacity":"0"}); 
+    /*$('.movieslist li:nth-child(' + i + ') .cover').css('background-image', 'url(' + pictureURL + ')');
     $('.movieslist li:nth-child(' + i + ') .movietitle').text('{title}');
-    $('.movieslist li:nth-child(' + i + ') .movieyear').text('{year}');
+    $('.movieslist li:nth-child(' + i + ') .movieyear').text('{year}');*/
   }
 }
 

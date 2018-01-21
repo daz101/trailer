@@ -10,7 +10,6 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/global.js"></script>
   <script type="text/javascript" src="js/intro.js" ></script>
- <script type="text/javascript" rel="javascript" src="js/script-index.js"></script>
 	
 </head>
 
@@ -40,8 +39,8 @@
 		
   </div>
   
-  <div id="pageno" data-intro="This indicates the page number" data-step="2">
-	<span>1</span>
+  <div id="pageno" data-intro="This indicates the number of choices left" data-step="2">
+	<span>10</span>
   </div>
   
  <div class="info_holder">
@@ -306,10 +305,11 @@
 </div>
 
 <script type="text/javascript">
-      data="";
+      data=<%- JSON.stringify(data) %>;
       confirmUnload = true;
       $('a').click(function() { confirmUnload = false});
 </script>
+<script type="text/javascript" rel="javascript" src="js/script-index.js"></script>
 </body>
 
 </html>
