@@ -6,6 +6,9 @@ $(document).ready(function(){
 	
 $('[data-toggle="tooltip"]').tooltip(); 
 
+if(choiceNumber==9) /*For page no. 10*/
+$(".parent_container").css({"background-color":"#69A9DA","opacity":"1"})
+
 /*
 $( "#confirmYes" ).click(function() { 
 	$(location).attr('href', 'loading.html')
@@ -13,33 +16,34 @@ $( "#confirmYes" ).click(function() {
 */
 	
   $( ".wrapper-block" ).mouseover(function(event) {
-  if($(this).parent().find(".choose button").text()=="I like this best") // when choose button is selected
-  {
-	  $(this).css("outline","2px solid #5cb85c");
-  }
-	else
-	{
-	  $(this).css("outline","2px solid #8c8c8c"); // when choose button is not selected
-	}
-	$(this).find(".hover-block").show();
-});
+	    if($(this).parent().find(".choose button").text()=="I like this best"||$(this).parent().find(".choose button").text()=="I would watch this movie now") // when choose button is selected
+	    {
+		  $(this).css("outline","2px solid #5cb85c");
+	    }
+	    else
+	    {
+		  $(this).css("outline","2px solid #8c8c8c"); // when choose button is not selected
+	    }
+	    $(this).find(".hover-block").show();
+ });
+
 
 $( ".wrapper-block" ).mouseout(function(event) {
-	if(($(this).find(".hover-block").text()=="Now showing info")&&($(this).parent().find(".choose button").text()=="Choose")) // when choose button is not selected and img is clicked
-		$(this).find(".hover-block").show();
-	else
-	if($(this).parent().find(".choose button").text()=="I like this best") // when choose button is selected
-	{
-		$(this).css("outline","2px solid #5cb85c");
-		$(this).find(".hover-block").hide();
-	}
-	else
-	{
-		$(this).find(".hover-block").hide();        // when choose button is not selected and img is not clicked
-	    $(this).css("outline","none");
-	}
-});
-//testing 
+		if(($(this).find(".hover-block").text()=="Now showing info")&&($(this).parent().find(".choose button").text()=="Choose")) // when choose button is not selected and img is clicked
+			$(this).find(".hover-block").show();
+		else
+		if($(this).parent().find(".choose button").text()=="I like this best"||$(this).parent().find(".choose button").text()=="I would watch this movie now") // when choose button is selected
+		{
+			$(this).css("outline","2px solid #5cb85c");
+			$(this).find(".hover-block").hide();
+		}
+		else
+		{
+			$(this).find(".hover-block").hide();        // when choose button is not selected and img is not clicked
+			$(this).css("outline","none");
+		}  
+ });
+
 // Look for trailer when hovering over movie
  /* $('.block_holder li .movie-block').click(function() {
     // on mouse click, clear timeout
@@ -59,32 +63,33 @@ $( ".hover-block" ).click(function() {
 		{
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".wrapper-block").css("outline","none");
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").hide();
-			$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#ffffff","opacity":"1"});
-			console.log("Here");
+			if(choiceNumber==9) /*For page no. 10*/
+				$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#69A9DA","opacity":"1"});
+			else /*For page nos. 1 to 9*/
+				$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#ffffff","opacity":"1"});
 		}
 		
-		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="I like this best") // If the previously clicked movie was selected
+		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="I like this best"||$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".choose button").text()=="I would watch this movie now") // If the previously clicked movie was selected
 		{
 			$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#5cb85c","opacity":"1"});
 		}
 	}  	
 	$(".intro").hide();
-	$("#movieposter").attr('src', '');
 	$(".movie_img").show();
-	$(".movie-title").find("span").text("XYZ");
-	$(".movie-cast").find("span:nth-child(2)").text(" ");
-	$(".movie-plot").find("span:nth-child(2)").text("");
 	$(".movie_info").show();
-	
+	//$("#movieposter").attr('src', '');
+	//$(".movie-title").find("span").text("XYZ");
+	//$(".movie-cast").find("span:nth-child(2)").text(" ");
+	//$(".movie-plot").find("span:nth-child(2)").text("");
+
 	listitem=$(this).parents(".movie-block");
 	item=listitem.index(".movie-block"); 
 	$(this).text("Now showing info");
 	clicked=1; 
 	$("#movie_display_block").css("outline","5px solid #8c8c8c"); 
 	
-	
-	var current_highlight=$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color"); // new changes if-else block
-	if (current_highlight=="rgb(92, 184, 92)")
+	var current_highlight=$(".highlight:nth-of-type("+parseInt(item+1)+")").css("background-color"); // Check current highlight
+	if (current_highlight=="rgb(92, 184, 92)") //If highlight is green or the movie was choosen
 	{
 		$("#movie_display_block").css("outline","5px solid #5cb85c");
 		$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#5cb85c","opacity":"1"});
@@ -121,7 +126,12 @@ $( ".hover-block" ).click(function() {
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").css("background-color", "#8c8c8c"); 
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").text("Choose");
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".wrapper-block").css("outline","none");
+		
+		if(choiceNumber==9) /*For page no. 10*/
+		$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#69A9DA","opacity":"1"});
+		else /*For page nos. 1 to 9*/
 		$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#ffffff","opacity":"1"});
+		
 		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text()=="Now showing info")
 		{
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text("Click to read info"); 
@@ -135,10 +145,15 @@ $( ".hover-block" ).click(function() {
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").css("background-color", "#8c8c8c"); 
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").text("Choose");
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".wrapper-block").css("outline","none");
+		
+		if(choiceNumber==9) /*For page no. 10*/
+		$(".highlight:nth-of-type("+parseInt(item_choose+1)+")").css({"background-color":"#69A9DA","opacity":"1"});
+		else /*For page nos. 1 to 9*/
 		$(".highlight:nth-of-type("+parseInt(item_choose+1)+")").css({"background-color":"#ffffff","opacity":"1"});
+		
 		if($(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").text()=="Now showing info")
 		{
-			$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").text("Click to read info"); //new change
+			$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").text("Click to read info");
 			$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").hide(); //
 		}
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").attr("data-movieSelected",false);
@@ -147,18 +162,23 @@ $( ".hover-block" ).click(function() {
 	listitem=$(this).parent();
 	item=listitem.index(".movie-block");
 	
-	listitem_choose=$(this).parent();  // change
-	item_choose=listitem_choose.index(".movie-block"); // change
+	listitem_choose=$(this).parent(); 
+	item_choose=listitem_choose.index(".movie-block");
 	
 	$(this).children("button").css("background-color", "#5cb85c");
+	
+	if(choiceNumber==9) /*For page no. 10*/
+	$(this).children("button").text("I would watch this movie now");
+	else /*For page nos. 1 to 9*/
 	$(this).children("button").text("I like this best");
+
 	$(".next-button").children("button").css({"cursor":"pointer","opacity":"1","background-color":"#5cb85c"});
 	$(".next-button").children("button").removeAttr('disabled');
 	$(this).parent().find(".wrapper-block").css("outline","2px solid #5cb85c");
-	$(this).parent().find(".hover-block").text("Now showing info");  // change
+	$(this).parent().find(".hover-block").text("Now showing info");  
 	$(this).parent().find(".hover-block").hide();	 
     clicked=1; 
-    choose=1;	//change
+    choose=1;
 	$("#movie_display_block").css("outline","5px solid #5cb85c");
 	$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#5cb85c","opacity":"1"});
 	
