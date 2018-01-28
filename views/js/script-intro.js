@@ -139,7 +139,8 @@ function isSurveyComplete(hookpage) {
 }
 // ------------------------FIRST SURVEY PAGES END-------------------------------------------------------
 	
-	//----------------OVERVIEW PAGE----------------
+
+//-------------------------OVERVIEW PAGE STARTS---------------------------------------------------------
 	$('#begin, #beginbutton, #instructions3button').hide();
 	
 	$('#overviewbutton').click(function() {
@@ -151,36 +152,13 @@ function isSurveyComplete(hookpage) {
 	   });
 	});
 	
-	/*
-	$('#instructions1button').click(function() {
-	$('#instructions1, #instructions1button').fadeOut("slow", function() {
-      $('#instructions1, #instructions1button').hide();
-      $('#instructions2, #instructions2button').show().fadeIn("slow");
-	   introJs().start(); 
-	   });
-	});
-	
-	$('#instructions2button').click(function() {
-	$('#instructions2, #instructions2button').fadeOut("slow", function() {
-      $('#instructions2, #instructions2button').hide();
-      $('#instructions3, #instructions3button').show().fadeIn("slow");
-	   
-	   });
-	});
-	
-	$('#instructions3button').click(function() {
-	$('#instructions3, #instructions3button').fadeOut("slow", function() {
-      $('#instructions3, #instructions3button').hide();
-      $('#begin, #beginbutton').show().fadeIn("slow");
-	   
-	   });
-	});*/
-	
 	$('#beginbutton').click(function() {
 	postEvent('Clicked "Start Begin"', null);
 	start(); 
 	});
 	
+//-------------------------OVERVIEW PAGE ENDS---------------------------------------------------------
+
 	// Make sure client wants leave
   $(window).on('beforeunload', function() {
     if(confirmUnload)

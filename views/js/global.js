@@ -6,9 +6,6 @@ $(document).ready(function(){
 	
 $('[data-toggle="tooltip"]').tooltip(); 
 
-if(choiceNumber==9) /*For page no. 10*/
-$(".parent_container").css({"background-color":"#69A9DA","opacity":"1"})
-
 /*
 $( "#confirmYes" ).click(function() { 
 	$(location).attr('href', 'loading.html')
@@ -77,10 +74,6 @@ $( ".hover-block" ).click(function() {
 	$(".intro").hide();
 	$(".movie_img").show();
 	$(".movie_info").show();
-	//$("#movieposter").attr('src', '');
-	//$(".movie-title").find("span").text("XYZ");
-	//$(".movie-cast").find("span:nth-child(2)").text(" ");
-	//$(".movie-plot").find("span:nth-child(2)").text("");
 
 	listitem=$(this).parents(".movie-block");
 	item=listitem.index(".movie-block"); 
@@ -161,10 +154,12 @@ $( ".hover-block" ).click(function() {
 	
 	listitem=$(this).parent();
 	item=listitem.index(".movie-block");
-	
 	listitem_choose=$(this).parent(); 
 	item_choose=listitem_choose.index(".movie-block");
 	
+	$(".intro").hide();
+	$(".movie_img").show();
+	$(".movie_info").show();
 	$(this).children("button").css("background-color", "#5cb85c");
 	
 	if(choiceNumber==9) /*For page no. 10*/

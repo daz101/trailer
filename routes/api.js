@@ -12,7 +12,10 @@ router.get('/movies', function(req, res) {
 
   // Find movie in database
   var query = {};
-  var id = Number(req.query.id);
+  var id = req.query.id;
+  if(!isNaN(Number(req.query.id))) {
+	  id = Number(req.query.id);
+  }
   console.log("This ID is:"+ id);
   
   var type = req.query.type;

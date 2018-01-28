@@ -73,6 +73,16 @@ $(document).ready(function() {
     var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
     loadSelectedMovie(moviePos); //0
   });
+  
+  $('.movie-block .choose').click(function() {
+    // on mouse click, clear timeout
+	//FIXME: Is the time still needed if there is no hover block?
+    clearTimeout(timer);
+    // Find which movie was clicked
+	var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
+    var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
+    loadSelectedMovie(moviePos); //0
+  });
 
   $('#confirmYes').click(function() {
     // Find which movie was clicked
@@ -190,7 +200,7 @@ function loadRandomMovies() {
     for (var i = 0; i < nrOfMovies; i++) {
       var mID = 1 + Math.floor(Math.random() * count);
 	  //match randomly selected movie to movieID 
-      loadMovieInfo(i, mID, 'id');
+      loadMovieInfo(i, mID, 'num');
     }
   });
 }
@@ -233,8 +243,11 @@ function getMovieInfo(mID, mType, cb) {
     case 'movieid': 
       mType = 'movieID';
       break;
-    default:
+	case 'num': 
       mType = 'id_number';
+      break;
+    default:
+      mType = '_id';
   }
 
   return $.ajax({
@@ -395,6 +408,8 @@ function postChoiceNumber(cb) {
  */
 function refreshChoicesCount() {
   $('#remNrOfChoices strong').text(maxChoices-choiceNumber);
+  if(choiceNumber==9) /*For page no. 10*/
+	$(".parent_container").css({"background-color":"#69A9DA","opacity":"1"})
 }
 
 /**
@@ -474,6 +489,8 @@ function resetMovies() {
 	$(movieSelectedIdArr).find(".wrapper-block").css("outline","none");
 	$(movieSelectedIdArr).find(".hover-block").text("Click to read info"); 
 	$(movieSelectedIdArr).find(".hover-block").hide(); 
+	$(".next-button").children("button").css({"cursor":"not-allowed","opacity":"0.6","background-color":"#8c8c8c"});
+	$(".next-button").children("button").prop("disabled",true);
 	$(".intro span:first-child").text(9-choiceNumber+" More Choices To Go!");
 	$(".intro").show();
 	$("#pageno span").text(9-choiceNumber);
