@@ -520,6 +520,26 @@ function postChoices(mID) {
 }
 
 /**
+ * POST update the selected ratings.
+ */
+function postRatings(mID) {
+  return $.ajax({
+    type: 'POST',
+    url: '/api/update/ratings',
+    data: {
+      userid: userid,
+      movie: mID,
+	  ratings: stars,
+	  known: known
+    },
+    dataType: 'json',
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}
+
+/**
  * Update the movies that are on-screen to the backend
  * to reload the same movies next time.
  */
