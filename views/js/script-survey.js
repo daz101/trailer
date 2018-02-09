@@ -234,7 +234,7 @@ function finish() {
 	var secondanswers = [];
 	
 	for(var i=1; i<=nrOfQns; i++) {
-		answers.push($('input[name=radOpt_'+i+']:checked').val());
+		secondanswers.push($('input[name=radOpt_'+i+']:checked').val());
 	}
 
 	
@@ -243,7 +243,7 @@ function finish() {
     url: '/api/update/secondanswers',
     data: {
       userid: userid,
-      secondanswers: JSON.stringify(answers)
+      secondanswers: JSON.stringify(secondanswers)
     },
     dataType: 'json',
     success: function() {
