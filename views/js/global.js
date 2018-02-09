@@ -60,9 +60,9 @@ $( ".hover-block" ).click(function() {
 		{
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".wrapper-block").css("outline","none");
 			$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").hide();
-			if(choiceNumber==9) /*For page no. 10*/
+			if(choiceNumber==maxChoices) /*For page no. 11*/
 				$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#69A9DA","opacity":"1"});
-			else /*For page nos. 1 to 9*/
+			else /*For page nos. 1 to 10*/
 				$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#ffffff","opacity":"1"});
 		}
 		
@@ -120,9 +120,9 @@ $( ".hover-block" ).click(function() {
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find("button").text("Choose");
 		$(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".wrapper-block").css("outline","none");
 		
-		if(choiceNumber==9) /*For page no. 10*/
+		if(choiceNumber==maxChoices) /*For page no. 11*/
 		$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#69A9DA","opacity":"1"});
-		else /*For page nos. 1 to 9*/
+		else /*For page nos. 1 to 10*/
 		$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#ffffff","opacity":"1"});
 		
 		if($(".movie-block:nth-of-type("+parseInt(item+11)+")").find(".hover-block").text()=="Now showing info")
@@ -139,9 +139,9 @@ $( ".hover-block" ).click(function() {
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find("button").text("Choose");
 		$(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".wrapper-block").css("outline","none");
 		
-		if(choiceNumber==9) /*For page no. 10*/
+		if(choiceNumber==maxChoices) /*For page no. 11*/
 		$(".highlight:nth-of-type("+parseInt(item_choose+1)+")").css({"background-color":"#69A9DA","opacity":"1"});
-		else /*For page nos. 1 to 9*/
+		else /*For page nos. 1 to 10*/
 		$(".highlight:nth-of-type("+parseInt(item_choose+1)+")").css({"background-color":"#ffffff","opacity":"1"});
 		
 		if($(".movie-block:nth-of-type("+parseInt(item_choose+11)+")").find(".hover-block").text()=="Now showing info")
@@ -162,9 +162,9 @@ $( ".hover-block" ).click(function() {
 	$(".movie_info").show();
 	$(this).children("button").css("background-color", "#5cb85c");
 	
-	if(choiceNumber==9) /*For page no. 10*/
+	if(choiceNumber==maxChoices) /*For page no. 11*/
 	$(this).children("button").text("I would watch this movie now");
-	else /*For page nos. 1 to 9*/
+	else /*For page nos. 1 to 10*/
 	$(this).children("button").text("I like this best");
 
 	$(".next-button").children("button").css({"cursor":"pointer","opacity":"1","background-color":"#5cb85c"});
