@@ -421,8 +421,11 @@ function postChoiceNumber(cb) {
  * be made on-screen.
  */
 function refreshChoicesCount() {
-  $('#remNrOfChoices strong').text(maxChoices-choiceNumber);
-  if(choiceNumber==9) /*For page no. 10*/
+  //$('#remNrOfChoices strong').text(maxChoices-choiceNumber);
+  $(".intro span:first-child").text(9-choiceNumber+" More Choices To Go!");
+  $(".intro").show();
+  $("#pageno span").text(9-choiceNumber);
+  if(choiceNumber==maxChoices) /*For page no. 11*/
 	$(".parent_container").css({"background-color":"#69A9DA","opacity":"1"})
 }
 
