@@ -96,7 +96,7 @@ router.get('/:id', function(req, res, next) {
 				  utils.updateEvent(db, 'Loaded Overview', null, userid, res);
 				});
 				break;
-				/*
+				
 				case 10:
 				res.render('ratings.html', {
 				  //Verbal Visual Survey,
@@ -107,9 +107,9 @@ router.get('/:id', function(req, res, next) {
 				  res.send(html);
 				  utils.updateEvent(db, 'Loaded Ratings Page', null, userid, res);
 				});
-				break;*/
+				break;
 				
-			  case 10:
+			  case 11:
 				var finish = typeof doc.secondanswers != 'undefined' && doc.secondanswers !== null;
 				if(finish) {
 				  // Finish page
@@ -120,18 +120,6 @@ router.get('/:id', function(req, res, next) {
 					utils.updateEvent(db, 'Loaded Finish page', null, userid, res);
 				  });
 				} else {
-					res.render('ratings.html', {
-				  //Verbal Visual Survey,
-				  data: {
-					userid: userid
-				  }
-				}, function(err, html) {
-				  res.send(html);
-				  utils.updateEvent(db, 'Loaded Ratings Page', null, userid, res);
-				});
-				}
-				else{
-					
 				  // Survey page
 				  res.render('secondsurvey.html', {
 					data: { userid: userid }
