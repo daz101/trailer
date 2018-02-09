@@ -84,6 +84,20 @@ $(document).ready(function() {
     loadSelectedMovie(moviePos); //0
   });
 
+  //When ratings is selected 
+   $('.movie-block .icon-holder').click(function() {
+    // on mouse click, clear timeout
+	//FIXME: Is the time still needed if there is no hover block?
+    clearTimeout(timer);
+    // Find which movie was clicked
+	var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
+    var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
+    
+	//if clicked then send value and movie id to array 
+  });
+  
+  
+  
   $('#confirmYes').click(function() {
     // Find which movie was clicked
     var movieSelectedIdArr = $('.movie-block[data-movieSelected=true').prop('id').split("_");
@@ -502,7 +516,7 @@ function resetMovies() {
 }
 
 /**
- * POST update the selected movie choice.
+ * POST update the final set of movie choices.
  */
 function postChoices(mID) {
   return $.ajax({
