@@ -103,8 +103,8 @@ $(document).ready(function() {
     }
     else {
       var promises = [];
-      promises.push(postChoices(movies[moviePos]._id));
-      promises.push(postEvent('Final movie selected', movies[moviePos]._id));
+      promises.push(postChoices(movies[moviePos].id_number));
+      promises.push(postEvent('Final movie selected', movies[moviePos].id_number));
 
       // When the final movie selected has been saved and the event logged,
       $.when.apply($, promises).done(function() {
@@ -171,8 +171,8 @@ function loadSelectedMovie(pos) {
   } catch(e) {
 	  console.warn("Exception in loadTrailer :: " + e);
   }
-  postEvent('Selected movie', movies[pos]._id);
-  updateHoveredMovies(movies[pos]._id);
+  postEvent('Selected movie', movies[pos].id_number);
+  updateHoveredMovies(movies[pos].id_number);
 }
 
 /**
@@ -244,10 +244,10 @@ function getMovieInfo(mID, mType, cb) {
       mType = 'movieID';
       break;
 	case 'num': 
-      mType = 'id_number';
+      mType = '_id';
       break;
     default:
-      mType = '_id';
+      mType = 'id_number';
   }
 
   return $.ajax({
@@ -369,7 +369,7 @@ function getChoiceSet(pos, cb) {
     success: function(data) {
       // Load the new choice set
       setTimeout(function() {
-        loadChoiceSet('Loaded choice set', movies[pos]._id, data);
+        loadChoiceSet('Loaded choice set', movies[pos].id_number, data);
       }, delay);
     },
     error: function(err) {
@@ -430,7 +430,7 @@ function getFinalRecommendationSet(pos, cb) {
     success: function(data) {
       // Load the new choice set
       setTimeout(function() {
-        loadChoiceSet('Loaded final recommendation set', movies[pos]._id, data);
+        loadChoiceSet('Loaded final recommendation set', movies[pos].id_number, data);
       }, delay);
     },
     error: function(err) {
@@ -523,12 +523,32 @@ function postChoices(mID) {
 }
 
 /**
+ * POST update the selected ratings.
+ */
+function postRatings(mID) {
+  return $.ajax({
+    type: 'POST',
+    url: '/api/update/ratings',
+    data: {
+      userid: userid,
+      movie: mID,
+	  ratings: stars,
+	  known: known
+    },
+    dataType: 'json',
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}
+
+/**
  * Update the movies that are on-screen to the backend
  * to reload the same movies next time.
  */
 function postMovies() {
   var movieIds = movies.map(function(movie) {
-    return movie._id;
+    return movie.id_number;
   });
   return $.ajax({
     type: 'POST',

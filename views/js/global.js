@@ -181,4 +181,12 @@ $( ".hover-block" ).click(function() {
 	document.getElementById("mt").innerHTML=final_title;
 	$(this).parent().attr("data-movieSelected",true);
 });
+
+$('input[type=radio][name^=rating_],input[type=radio][name^=known]').change(function() {
+	if(($('input[type=radio][name^=rating_]:checked').length === 10)&&($('input[type=radio][name^=known]:checked').length === 10))
+	{
+		$(".next-button").children("button").css({"cursor":"pointer","opacity":"1","background-color":"#b4d98c"});
+		$(".next-button").children("button").removeAttr('disabled');
+	}
+});
 });

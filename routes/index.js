@@ -41,6 +41,7 @@ router.get('/:id', function(req, res, next) {
 				watched_trailers: [],
 				hovered_movies: [],
 				choices: [],
+				ratings: [],
 				firstanswers: null,
 				secondanswers: null
 			  }, function(err) {
@@ -96,7 +97,19 @@ router.get('/:id', function(req, res, next) {
 				});
 				break;
 				
-			  case 10:
+				case 10:
+				res.render('ratings.html', {
+				  //Verbal Visual Survey,
+				  data: {
+					userid: userid
+				  }
+				}, function(err, html) {
+				  res.send(html);
+				  utils.updateEvent(db, 'Loaded Ratings Page', null, userid, res);
+				});
+				break;
+				
+			  case 11:
 				var finish = typeof doc.secondanswers != 'undefined' && doc.secondanswers !== null;
 				if(finish) {
 				  // Finish page
