@@ -42,13 +42,19 @@
 		
 		<div id="surveyintro">
 		<div class="intro">
+		<h2><b>Thank You for completing the study so far!</b></h2><br>
 		<span>
-		<h2><b>Thank You for completing the study!</b></h2><br>
-		Welcome to the Final Survey
+		<h3>Welcome to the Final Survey</h3>
 		</span>
-		<br><br><br><br><br><br>
+		
 		<span>This is the last survey and it will take about 10 minutes. This information will help us to get feedback about your experience with our recommender system. Clicking on the next button will start the survey.</span>
-		</div></div><!--End of Survey Intro-->
+		<br><br><br>
+		<span>Before you proceed, did you have anything go wrong? <strong>If not, type no below.</strong></span>
+		<textarea id="textbox" rows="5" cols="50" name="comment" form="usrform">
+</textarea>
+		
+		</div>
+		</div><!--End of Survey Intro-->
 		
 		<!--Begin Survey-->
 		
@@ -1022,7 +1028,7 @@ from the system to make a choice.
       $('a').click(function() { confirmUnload = false});
     </script>
 	<div class="survey-next-button">
-	<button id="beginbutton" type="button">Next</button>
+	<button id="beginbutton" type="button">Begin</button>
 	<button id="surveypage1button" type="button">Next</button>
 	<button id="surveypage2button" type="button">Next</button>
 	<button id="surveypage3button" type="button">Next</button>

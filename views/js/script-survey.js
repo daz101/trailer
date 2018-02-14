@@ -29,9 +29,26 @@ $( "#Q3 .rad_row td" ).click(function() {
 	});
 	$("#Q3").css("border-left","3px solid #00cc00");
 });
+
+//disable begin button if comment field is not submitted 
+$('#beginbutton').attr('disabled', true);
+$('#textbox').on('keyup',function() {
+    if($(this).val() != '') {
+    $('#beginbutton').attr('disabled' , false);
+    }else{
+    $('.survey-next-button').children('button').css({"cursor":"pointer","opacity":"1","background-color":"#5cb85c"});
+	$('#beginbutton').attr('disabled', true);
+    }
+});
+
 	//go to page 1
 	$('#beginbutton').click(function() {
-		
+	 //send comment from comment box
+	 var text = $('#textbox').val();
+	 var feedback = []; 
+	 feedback.push(postFeedback(text));
+     feedback.push(postEvent('Feedback sent'));
+	 
 	$('#surveyintro, #beginbutton').fadeOut("slow", function() {
       $('#surveyintro, #beginbutton').hide();
       $('#surveypage1, #surveypage1button').show().fadeIn("slow");
@@ -226,6 +243,32 @@ function isSurveyComplete(hookpage) {
 }
 	
 
+	
+	
+
+/**
+ * Save feedback on whether or not something went wrong
+ */
+function postFeedback() {
+	//var feedback = [];
+	
+	$.ajax({
+    type: 'POST',
+    url: '/api/update/feedback',
+    data: {
+      userid: userid,
+      feedback: JSON.stringify(feedback)
+    },
+    dataType: 'json',
+    success: function() {
+      confirmUnload = false;
+    	location.reload(true);
+    },
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}	
 
 /**
  * Save survey answers online and finish.

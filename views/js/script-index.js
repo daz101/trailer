@@ -258,10 +258,10 @@ function getMovieInfo(mID, mType, cb) {
       mType = 'movieID';
       break;
 	case 'num': 
-      mType = '_id';
+      mType = 'id_number';
       break;
     default:
-      mType = 'id_number';
+      mType = '_id';
   }
 
   return $.ajax({

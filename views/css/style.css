@@ -1,6 +1,6 @@
 .parent_container
 {
-	width: auto;
+width: 1000px; 
 }
 
 #page11
@@ -437,11 +437,11 @@ list-style-type: none;
 .rating:not(:checked) > label {
     float:right;
     width:1em;
-    padding:0 .1em;
+    padding:0 .01em;
     overflow:hidden;
     white-space:nowrap;
     cursor:pointer;
-    font-size:125%;
+    font-size:90%;
     line-height:1.2;
     color:#ddd;
     text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);

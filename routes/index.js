@@ -42,6 +42,7 @@ router.get('/:id', function(req, res, next) {
 				hovered_movies: [],
 				choices: [],
 				ratings: [],
+				feedback: null, 
 				firstanswers: null,
 				secondanswers: null
 			  }, function(err) {

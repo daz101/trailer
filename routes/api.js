@@ -211,6 +211,25 @@ router.post('/update/secondanswers', function(req, res, next) {
   });
 });
 
+
+/* POST update check if anything went wrong (before start of final survey). */
+router.post('/update/feedback', function(req, res, next) {
+  // Get the user id from the request
+  if (!(req.body.userid && req.body.feedback)) return utils.sendErr(res, 'Missing parameter(s)');
+  var userid = utils.pad(req.body.userid, 12);
+  var feddback = JSON.parse(req.body.feedback);
+  var db = req.db;
+  var users = db.get('users');
+
+  // Update survey answers in user session data
+  users.updateById(userid, {$set:{feedback: feedback}}, function(err) {
+  	if (err) return utils.sendErr(res, 'Failed to update survey answers.');
+  	res.json({'success': true});
+  });
+});
+
+
+
 /**
  * Get TheMovieDB movie id using ImDB id.
  */
