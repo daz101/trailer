@@ -470,7 +470,7 @@ function loadChoiceSet(event, mID, data) {
   var promises = [];
   for(var i in data) {
     var mID = data[i];
-    promises.push(loadMovieInfo(i, mID, 'movieid'));
+    promises.push(loadMovieInfo(i, mID, 'num'));
   }
 
   // Save the movie selected
