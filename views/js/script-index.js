@@ -28,7 +28,7 @@ $(document).ready(function() {
     // Load movies from last session
     for(var i in movies) {
       var mID = movies[i];
-      loadMovieInfo(i, mID, 'num');
+      loadMovieInfo(i, mID, 'id');
     }
   }
 //update: handler for conditions 
@@ -470,7 +470,7 @@ function loadChoiceSet(event, mID, data) {
   var promises = [];
   for(var i in data) {
     var mID = data[i];
-    promises.push(loadMovieInfo(i, mID, 'num'));
+    promises.push(loadMovieInfo(i, mID, 'movieID'));
   }
 
   // Save the movie selected
