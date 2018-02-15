@@ -117,8 +117,8 @@ $(document).ready(function() {
     }
     else {
       var promises = [];
-      promises.push(postChoices(movies[moviePos].id_number));
-      promises.push(postEvent('Final movie selected', movies[moviePos].id_number));
+      promises.push(postChoices(movies[moviePos]._id));
+      promises.push(postEvent('Final movie selected', movies[moviePos]._id));
 
       // When the final movie selected has been saved and the event logged,
       $.when.apply($, promises).done(function() {
