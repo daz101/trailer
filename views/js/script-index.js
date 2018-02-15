@@ -383,7 +383,7 @@ function getChoiceSet(pos, cb) {
     success: function(data) {
       // Load the new choice set
       setTimeout(function() {
-        loadChoiceSet('Loaded choice set', movies[pos].id_number, data);
+        loadChoiceSet('Loaded choice set', movies[pos]._id, data);
       }, delay);
     },
     error: function(err) {
@@ -444,7 +444,7 @@ function getFinalRecommendationSet(pos, cb) {
     success: function(data) {
       // Load the new choice set
       setTimeout(function() {
-        loadChoiceSet('Loaded final recommendation set', movies[pos].id_number, data);
+        loadChoiceSet('Loaded final recommendation set', movies[pos]._id, data);
       }, delay);
     },
     error: function(err) {
