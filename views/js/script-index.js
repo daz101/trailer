@@ -185,8 +185,8 @@ function loadSelectedMovie(pos) {
   } catch(e) {
 	  console.warn("Exception in loadTrailer :: " + e);
   }
-  postEvent('Selected movie', movies[pos].id_number);
-  updateHoveredMovies(movies[pos].id_number);
+  postEvent('Selected movie', movies[pos]._id);
+  updateHoveredMovies(movies[pos]._id);
 }
 
 /**
@@ -562,7 +562,7 @@ function postRatings(mID) {
  */
 function postMovies() {
   var movieIds = movies.map(function(movie) {
-    return movie.id_number;
+    return movie._id;
   });
   return $.ajax({
     type: 'POST',
