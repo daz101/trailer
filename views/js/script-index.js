@@ -28,7 +28,7 @@ $(document).ready(function() {
     // Load movies from last session
     for(var i in movies) {
       var mID = movies[i];
-      loadMovieInfo(i, mID, 'id');
+      loadMovieInfo(i, mID, 'num');
     }
   }
 //update: handler for conditions 
