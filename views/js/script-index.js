@@ -117,8 +117,13 @@ $(document).ready(function() {
     }
     else {
       var promises = [];
+
       promises.push(postChoices(movies[moviePos].id_number));
       promises.push(postEvent('Final movie selected', movies[moviePos].id_number));
+
+      promises.push(postChoices(movies[moviePos]._id));
+      promises.push(postEvent('Final movie selected', movies[moviePos]._id));
+
       // When the final movie selected has been saved and the event logged,
       $.when.apply($, promises).done(function() {
         // Reload the page to the survey
@@ -184,8 +189,8 @@ function loadSelectedMovie(pos) {
   } catch(e) {
 	  console.warn("Exception in loadTrailer :: " + e);
   }
-  postEvent('Selected movie', movies[pos].id_number);
-  updateHoveredMovies(movies[pos].id_number);
+  postEvent('Selected movie', movies[pos]._id);
+  updateHoveredMovies(movies[pos]._id);
 }
 
 /**
@@ -382,7 +387,7 @@ function getChoiceSet(pos, cb) {
     success: function(data) {
       // Load the new choice set
       setTimeout(function() {
-        loadChoiceSet('Loaded choice set', movies[pos].id_number, data);
+        loadChoiceSet('Loaded choice set', movies[pos]._id, data);
       }, delay);
     },
     error: function(err) {
@@ -443,7 +448,7 @@ function getFinalRecommendationSet(pos, cb) {
     success: function(data) {
       // Load the new choice set
       setTimeout(function() {
-        loadChoiceSet('Loaded final recommendation set', movies[pos].id_number, data);
+        loadChoiceSet('Loaded final recommendation set', movies[pos]._id, data);
       }, delay);
     },
     error: function(err) {
@@ -561,7 +566,7 @@ function postRatings(mID) {
  */
 function postMovies() {
   var movieIds = movies.map(function(movie) {
-    return movie.id_number;
+    return movie._id;
   });
   return $.ajax({
     type: 'POST',
