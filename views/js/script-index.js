@@ -119,7 +119,6 @@ $(document).ready(function() {
       var promises = [];
       promises.push(postChoices(movies[moviePos].id_number));
       promises.push(postEvent('Final movie selected', movies[moviePos].id_number));
-
       // When the final movie selected has been saved and the event logged,
       $.when.apply($, promises).done(function() {
         // Reload the page to the survey
@@ -422,9 +421,9 @@ function postChoiceNumber(cb) {
  */
 function refreshChoicesCount() {
   //$('#remNrOfChoices strong').text(maxChoices-choiceNumber);
-  $(".intro span:first-child").text(9-choiceNumber+" More Choices To Go!");
+  $(".intro span:first-child").text(maxChoices-choiceNumber+" More Choices To Go!");
   $(".intro").show();
-  $("#pageno span").text(9-choiceNumber);
+  $("#pageno span").text(maxChoices-choiceNumber);
   if(choiceNumber==maxChoices) /*For page no. 11*/
 	$(".parent_container").css({"background-color":"#69A9DA","opacity":"1"})
 }

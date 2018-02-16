@@ -3,7 +3,7 @@
 width: 1000px; 
 }
 
-#page11
+#page12
 {
 	background-color:#957ad6;
 }
@@ -347,13 +347,13 @@ list-style-type: none;
 	height:25px;
 }
 
-#page11 .intro img
+#page12 .intro img
 {
 	width: 20px;
 	background-color:#ffffff;
 }
 
-#page11 .info_holder img
+#page12 .info_holder img
 {
 	width: 29px;
     height: 24px;
@@ -361,14 +361,14 @@ list-style-type: none;
 	
 }
 
-#page11 .info_holder #helpInfo .modal-body img
+#page12 .info_holder #helpInfo .modal-body img
 {
 	position:absolute;
 	width: 20px;
     height: 20px;	
 }
 
-#page11 .choose
+#page12 .choose
 {
 	width:100%;
 	float:left;
@@ -376,12 +376,12 @@ list-style-type: none;
 	background-color:#6a5482;
 }
 
-#page11 .next-button button
+#page12 .next-button button
 {
 	background-color:#cbb2e6;
 }
 
-#page11 .icon-holder
+#page12 .icon-holder
 {
 	width: 30%;
     float: left;
@@ -391,14 +391,14 @@ list-style-type: none;
 	
 }
 
-#page11 .choose.firstBlk
+#page12 .choose.firstBlk
 {
 	margin-top: 2px;
     height: 37px;
     padding-top: 5px;
 }
 
-#page11 .choose.firstBlk .icon-holder img
+#page12 .choose.firstBlk .icon-holder img
 {
 	width: 100%;
     float: left;
@@ -408,18 +408,18 @@ list-style-type: none;
 	cursor:pointer;
 }
 
-#page11 .choose.firstBlk .icon-holder img:hover
+#page12 .choose.firstBlk .icon-holder img:hover
 {
 	background-color:#ffffff;
 }
 
-#page11 .choose.firstBlk .input-hidden 
+#page12 .choose.firstBlk .input-hidden 
 {
   position: absolute;
   left: -9999px;
 }
 
-#page11 .choose.firstBlk input[type=radio]:checked + label>img 
+#page12 .choose.firstBlk input[type=radio]:checked + label>img 
 {
 	background-color:#33283e;
 	box-shadow: 0 0 2px 2px #19141f;
