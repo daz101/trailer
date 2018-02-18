@@ -98,11 +98,13 @@ router.get('/:id', function(req, res, next) {
 				});
 				break;
 				
-				case 10:
+				case 11:
 				res.render('ratings.html', {
 				  //Verbal Visual Survey,
 				  data: {
-					userid: userid
+					userid: userid,
+					choiceNumber: doc.choice_number,
+					movies: JSON.stringify(doc.choice_set[9] || [])
 				  }
 				}, function(err, html) {
 				  res.send(html);
@@ -110,7 +112,7 @@ router.get('/:id', function(req, res, next) {
 				});
 				break;
 				
-			  case 11:
+			  case 12:
 				var finish = typeof doc.secondanswers != 'undefined' && doc.secondanswers !== null;
 				if(finish) {
 				  // Finish page

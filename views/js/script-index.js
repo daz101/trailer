@@ -108,21 +108,15 @@ $(document).ready(function() {
     else if(choiceNumber < maxChoices) {
       // Change appearance of the infobox
       getFinalRecommendationSet(moviePos);
-     /* $('#infobox h4').css({
-        "background": "#F3337A",
-        "box-shadow": "0 0 0 4px #F3337A, 2px 1px 6px 4px rgba(10, 10, 0, 0.5)"
-      });
-      $('#infobox h4').html('Final recommendation set');
-	  */
     }
     else {
       var promises = [];
 
-      promises.push(postChoices(movies[moviePos].id_number));
-      promises.push(postEvent('Final movie selected', movies[moviePos].id_number));
-
       promises.push(postChoices(movies[moviePos]._id));
       promises.push(postEvent('Final movie selected', movies[moviePos]._id));
+      
+	  promises.push(postChoiceNumber(function() {
+	  }));
 
       // When the final movie selected has been saved and the event logged,
       $.when.apply($, promises).done(function() {
