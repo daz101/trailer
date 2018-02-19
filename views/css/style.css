@@ -105,7 +105,7 @@ width: 1000px;
 
 #movie_display_block
 {
-	width:72.6%;
+	width:72%;
 	margin:auto;
 	height:320px;
 	margin-top: 10px;
@@ -223,7 +223,7 @@ width: 1000px;
 
 #movie_ribbon
 {
-	width:74.8%;
+	width:73.45%;
 	margin:auto;
 }
 
@@ -231,7 +231,6 @@ width: 1000px;
 {
 	float:left;
 	width:100%;
-	padding:0px 7px 7px 7px;
 }
 
 .parent_container .block_holder >li 
@@ -299,13 +298,13 @@ list-style-type: none;
 	border-radius: 8px;
 	background-color: #8c8c8c;
 	color:#FFFFFF;
-	font-size:13px;
+	font-size:10.8px;
 }
 
 .parent_container .next-button
 {
 	float:right;
-	width:18.5%;
+	width:22%;
 	margin-top: 3px;	
 }
 
@@ -355,10 +354,10 @@ list-style-type: none;
 
 #page12 .info_holder img
 {
-	width: 29px;
+	width: 24px;
     height: 24px;
 	background-color:#ffffff;
-	
+	padding-left:0;	
 }
 
 #page12 .info_holder #helpInfo .modal-body img

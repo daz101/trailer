@@ -120,11 +120,23 @@ $(document).ready(function() {
 
       // When the final movie selected has been saved and the event logged,
       $.when.apply($, promises).done(function() {
-        // Reload the page to the survey
         confirmUnload = false;
         location.reload(true);
       });
     }
+  });
+  
+  $('#nextPage12').click(function() {
+	  var promises = [];
+	  promises.push(postChoiceNumberNoRefresh(function() {
+	  }));
+	  
+	  // When the ratings have been saved and the event logged,
+      $.when.apply($, promises).done(function() {
+        // Reload the page to the survey
+        confirmUnload = false;
+        location.reload(true);
+      });
   });
 
   // Make sure client wants leave
@@ -391,6 +403,30 @@ function getChoiceSet(pos, cb) {
 }
 
 /**
+ * POST update choice number without refreshChoicesCount.
+ */
+function postChoiceNumberNoRefresh(cb) {
+  return $.ajax({
+    type: 'POST',
+    url: '/api/update/choiceNumber',
+    data: {
+      userid: userid
+    },
+    dataType: 'json',
+    success: function(data) {
+      choiceNumber = data.result;
+
+      // Execute callback if any
+      if (typeof cb != 'undefined') cb();
+    },
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}
+
+
+/**
  * POST update choice number.
  */
 function postChoiceNumber(cb) {
@@ -419,12 +455,18 @@ function postChoiceNumber(cb) {
  * be made on-screen.
  */
 function refreshChoicesCount() {
-  //$('#remNrOfChoices strong').text(maxChoices-choiceNumber);
   $(".intro span:first-child").text(maxChoices-choiceNumber+" More Choices To Go!");
-  $(".intro").show();
   $("#pageno span").text(maxChoices-choiceNumber);
   if(choiceNumber==maxChoices) /*For page no. 11*/
-	$(".parent_container").css({"background-color":"#69A9DA","opacity":"1"})
+  {
+	  $("body").css({"background-color":"#69A9DA","opacity":"1"});
+	  $(".intro span:first-child").text("Final Recommendation");
+  } 
+  if(choiceNumber==maxChoices+1) /*For page no. 12*/
+  {
+	  $(".intro span:first-child").text("Now Rate these movies");
+	  $("#pageno span").text("0");
+  }
 }
 
 /**

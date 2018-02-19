@@ -4,14 +4,10 @@ $(document).ready(function(){
 	var item,item_hoverBox;
 	
 $('[data-toggle="tooltip"]').tooltip(); 
-	
-$( "#nextPage11" ).click(function() { 
-	$(location).attr('href', 'Survey_page1.html')
-});
-	
+		
   $( ".wrapper-block" ).mouseover(function(event) {
   
-	$(this).find(".img-block").css("outline","2px solid #463856"); 
+	$(this).css("outline","2px solid #463856"); 
 	$(this).find(".hover-block").show();
 });
 
@@ -21,7 +17,7 @@ $( ".wrapper-block" ).mouseout(function(event) {
 	else
 	{
 		$(this).find(".hover-block").hide();        // when img is not clicked
-	    $(this).find(".img-block").css("outline","none");
+	    $(this).css("outline","none");
 	}
 });
 
@@ -31,10 +27,15 @@ $( ".hover-block" ).click(function() {
   if(clicked_hoverBox==1)
 	{		
 		$(".movie-block:nth-of-type("+parseInt(item_hoverBox+11)+")").find(".hover-block").text("Click to read info");
-		$(".movie-block:nth-of-type("+parseInt(item_hoverBox+11)+")").find(".img-block").css("outline","none");
+		$(".movie-block:nth-of-type("+parseInt(item_hoverBox+11)+")").find(".wrapper-block").css("outline","none");
 		$(".movie-block:nth-of-type("+parseInt(item_hoverBox+11)+")").find(".hover-block").hide();
 		$(".highlight:nth-of-type("+parseInt(item_hoverBox+1)+")").css("background-color","#957ad6");					
 	}  
+	
+	$(".intro").hide();
+	$(".movie_img").show();
+	$(".movie_info").show();
+	
 	listitem_hoverBox=$(this).parents(".movie-block");
 	item_hoverBox=listitem_hoverBox.index(".movie-block");	
 	$(".movie_img").show();

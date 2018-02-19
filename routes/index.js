@@ -100,7 +100,7 @@ router.get('/:id', function(req, res, next) {
 				
 				case 11:
 				res.render('ratings.html', {
-				  //Verbal Visual Survey,
+				  //Rating Page
 				  data: {
 					userid: userid,
 					choiceNumber: doc.choice_number,
