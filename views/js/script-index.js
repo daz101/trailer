@@ -620,7 +620,7 @@ function postRatings() {
     data: {
       userid: userid,
       //movie: mID,
-	  ratings: JSON.stringify(ratings),
+	  ratings: ratings,
 	  //known: JSON.stringify(known)
     },
     dataType: 'json',
