@@ -54,7 +54,10 @@ $(document).ready(function() {
     var that = this;
     timer = setTimeout(function() {
       // Find which movie was hovered
-      var moviePos = $(that).parent().index();
+	var parentIdArr = $(that).parent().prop('id').split('_'); //["movie","1"]
+    var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
+	  
+      //var moviePos = $(that).parent().index();
       //loadSelectedMovie(moviePos);
 	  updateHoveredInfo(moviePos);
     }, delay);
@@ -68,7 +71,8 @@ $(document).ready(function() {
     var that = this;
     timer = setTimeout(function() {
       // Find which movie was hovered
-      var moviePos = $(that).parent().index();
+      var parentIdArr = $(that).parent().prop('id').split('_'); //["movie","1"]
+    var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
       //loadSelectedMovie(moviePos);
 	  //updateHoveredPoster(moviePos);
     }, delay);
@@ -211,7 +215,7 @@ function loadSelectedMovie(pos) {
 	  console.warn("Exception in loadTrailer :: " + e);
   }
   postEvent('Selected movie', movies[pos]._id);
-  updateHoveredMovies(movies[pos]._id);
+  updateHoveredMovies(movies[pos].id_number);
   //need to update and change above to differentiate clicks from hovers 
 }
 
