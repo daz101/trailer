@@ -33,27 +33,21 @@ $(document).ready(function() {
   }
 //update: handler for conditions 
   // Randomly select if to play trailers or not
-  if(useTrailers) {
+ if(useTrailers) {
     // Load the Youtube IFrame API
     $.getScript('https://www.youtube.com/iframe_api');
-	/*
-	$('.mouseCap_video').parent().hide();
-.removeClass('movie_img')
-.removeClass('movie_info')*/ 
-	
   } else {
-    $('.mouseCap_video').parent().hide();
-    $('.movie_info')
-	/*
+    $('.trailer-container').parent().hide();
+    $('.movie-info')
       .removeClass('col-sm-6')
       .css({
         "margin":"0 auto",
         "width":"75%"
-      });*/ 
+      });
   }
 
   
-  FIXME: Remove the hover block if not needed
+  //FIXME: Remove the hover block if not needed
   // Look for trailer when hovering over movie
   $('.movie_info').hover(function() {
     // on mouse in, start a timeout
