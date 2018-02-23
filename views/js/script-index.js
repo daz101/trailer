@@ -607,12 +607,12 @@ function postChoices(mID) {
  */
 function postRatings(mID) {
   var ratings = [];
-  var known= []; 
+  //var known= []; 
   //var stars= ('input[name=rating_'+i+']:checked').val();
  // var known= ('input[name=known_'+i+']:checked').val(); 
 	for(var i=1; i<=nrOfMovies; i++) {
 		ratings.push($('input[name=rating_'+i+']:checked').val());
-		known.push($('input[name=known_'+i+']:checked').val());
+		//known.push($('input[name=known_'+i+']:checked').val());
 	}
   $.ajax({
     type: 'POST',
@@ -621,7 +621,7 @@ function postRatings(mID) {
       userid: userid,
       //movie: mID,
 	  ratings: JSON.stringify(ratings),
-	  known: JSON.stringify(known)
+	  //known: JSON.stringify(known)
     },
     dataType: 'json',
     error: function(err) {
