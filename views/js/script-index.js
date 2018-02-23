@@ -610,8 +610,8 @@ function postRatings(mID) {
   //var stars= ('input[name=rating_'+i+']:checked').val();
  // var known= ('input[name=known_'+i+']:checked').val(); 
 	
-		stars.push($(('input[name=rating_'+i+']:checked').val());
-		known.push($(('input[name=known_'+i+']:checked').val());
+		stars.push($('input[name=rating_'+i+']:checked').val());
+		known.push($('input[name=known_'+i+']:checked').val());
   
   $.ajax({
     type: 'POST',
