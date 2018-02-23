@@ -159,7 +159,7 @@ $(document).ready(function() {
   });
 
   //ratings push 
-  $('#nextPage12').click(function() {
+  $('#ratingsButton').click(function() {
   postRatings(); 
     });
 
@@ -606,7 +606,8 @@ function postChoices(mID) {
  * POST update the selected ratings.
  */
 function postRatings(mID) {
-  var stars,known = [];
+  var stars = [];
+  var known= []; 
   //var stars= ('input[name=rating_'+i+']:checked').val();
  // var known= ('input[name=known_'+i+']:checked').val(); 
 	
