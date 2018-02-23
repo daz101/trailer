@@ -605,7 +605,7 @@ function postChoices(mID) {
 /**
  * POST update the selected ratings.
  */
-function postRatings(mID) {
+function postRatings() {
   var ratings = [];
   //var known= []; 
   //var stars= ('input[name=rating_'+i+']:checked').val();
