@@ -619,7 +619,7 @@ function postRatings(mID) {
     url: '/api/update/ratings',
     data: {
       userid: userid,
-      movie: mID,
+      //movie: mID,
 	  ratings: JSON.stringify(stars),
 	  known: JSON.stringify(known)
     },
