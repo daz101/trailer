@@ -610,10 +610,10 @@ function postRatings(mID) {
   var known= []; 
   //var stars= ('input[name=rating_'+i+']:checked').val();
  // var known= ('input[name=known_'+i+']:checked').val(); 
-	
+	for(var i=1; i<=nrOfMovies; i++) {
 		stars.push($('input[name=rating_'+i+']:checked').val());
 		known.push($('input[name=known_'+i+']:checked').val());
-  
+	}
   $.ajax({
     type: 'POST',
     url: '/api/update/ratings',
