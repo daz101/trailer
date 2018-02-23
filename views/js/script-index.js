@@ -158,6 +158,11 @@ $(document).ready(function() {
       });
   });
 
+  //ratings push 
+  $('#nextPage12').click(function() {
+  postRatings(); 
+    });
+
   // Make sure client wants leave
   $(window).on('beforeunload', function() {
     if(confirmUnload)
@@ -601,14 +606,21 @@ function postChoices(mID) {
  * POST update the selected ratings.
  */
 function postRatings(mID) {
-  return $.ajax({
+  var stars,known = [];
+  //var stars= ('input[name=rating_'+i+']:checked').val();
+ // var known= ('input[name=known_'+i+']:checked').val(); 
+	
+		stars.push($(('input[name=rating_'+i+']:checked').val());
+		known.push($(('input[name=known_'+i+']:checked').val());
+  
+  $.ajax({
     type: 'POST',
     url: '/api/update/ratings',
     data: {
       userid: userid,
       movie: mID,
-	  ratings: stars,
-	  known: known
+	  ratings: JSON.stringify(stars),
+	  known: JSON.stringify(known)
     },
     dataType: 'json',
     error: function(err) {
