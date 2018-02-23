@@ -36,34 +36,55 @@ $(document).ready(function() {
   if(useTrailers) {
     // Load the Youtube IFrame API
     $.getScript('https://www.youtube.com/iframe_api');
+	/*
+	$('.mouseCap_video').parent().hide();
+.removeClass('movie_img')
+.removeClass('movie_info')*/ 
+	
   } else {
-    $('.trailer-container').parent().hide();
-    $('.movie-info')
+    $('.mouseCap_video').parent().hide();
+    $('.movie_info')
+	/*
       .removeClass('col-sm-6')
       .css({
         "margin":"0 auto",
         "width":"75%"
-      });
+      });*/ 
   }
 
-  /*
+  
   FIXME: Remove the hover block if not needed
   // Look for trailer when hovering over movie
-  $('.movie-block .wrapper-block').hover(function() {
+  $('.movie_info').hover(function() {
     // on mouse in, start a timeout
     var that = this;
     timer = setTimeout(function() {
       // Find which movie was hovered
       var moviePos = $(that).parent().index();
-      loadSelectedMovie(moviePos);
+      //loadSelectedMovie(moviePos);
+	  updateHoveredInfo(moviePos);
     }, delay);
   }, function() {
     // on mouse out, cancel the timer
     clearTimeout(timer);
   });
-  */
-
-  // Look for trailer when hovering over movie
+  
+  $('.movie_img').hover(function() {
+    // on mouse in, start a timeout
+    var that = this;
+    timer = setTimeout(function() {
+      // Find which movie was hovered
+      var moviePos = $(that).parent().index();
+      //loadSelectedMovie(moviePos);
+	  //updateHoveredPoster(moviePos);
+    }, delay);
+  }, function() {
+    // on mouse out, cancel the timer
+    clearTimeout(timer);
+  });
+  
+  
+  // Look for trailer/poster when hovering over movie in movieblock
   $('.movie-block .wrapper-block').click(function() {
     // on mouse click, clear timeout
 	//FIXME: Is the time still needed if there is no hover block?
@@ -197,6 +218,7 @@ function loadSelectedMovie(pos) {
   }
   postEvent('Selected movie', movies[pos]._id);
   updateHoveredMovies(movies[pos]._id);
+  //need to update and change above to differentiate clicks from hovers 
 }
 
 /**
@@ -617,6 +639,25 @@ function postMovies() {
     }
   });
 }
+
+/**
+ * POST id of movie that was hovered/clicked on (Movie Info)
+ */
+function updateHoveredInfo(mID) {
+  return $.ajax({
+    type: 'POST',
+    url: '/api/update/hoveredinfo',
+    data: {
+      userid: userid,
+      movie: mID
+    },
+    dataType: 'json',
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}
+
 
 /**
  * POST id of movie that was hovered/clicked on.

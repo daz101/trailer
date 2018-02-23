@@ -40,6 +40,7 @@ router.get('/:id', function(req, res, next) {
 				use_trailers: Math.random() < useTrailerProbability,
 				watched_trailers: [],
 				hovered_movies: [],
+				hovered_info: [],
 				choices: [],
 				ratings: [],
 				feedback: null, 

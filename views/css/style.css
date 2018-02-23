@@ -499,3 +499,27 @@ list-style-type: none;
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
+
+.parent_container  .video_goes_here
+{
+	width: 80%;
+	cursor:pointer;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 35px;
+    margin-bottom: 35px;
+	float:left;
+	display:none;
+	filter:blur(3px);
+}
+
+.parent_container  .video_goes_here img
+{
+	width:100%;
+	height:250px;
+}
+#blurred_content
+{
+	float:left;
+	filter:blur(5px);
+}
