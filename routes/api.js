@@ -192,7 +192,7 @@ router.post('/update/ratings', function(req, res, next) {
 
   // Update ratings chosen in user session data
   users.updateById(userid, {$push:{ratings: ratings}}, function(err) {
-  	if (err) return nextutils.sendErr(res, 'Failed to update ratings.');
+  	if (err) return utils.sendErr(res, 'Failed to update ratings.');
   	res.json({'success': true});
   });
 });
