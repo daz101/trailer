@@ -43,6 +43,7 @@ router.get('/:id', function(req, res, next) {
 				hovered_info: [],
 				choices: [],
 				ratings: [],
+				known: [],
 				feedback: null, 
 				firstanswers: null,
 				secondanswers: null

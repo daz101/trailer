@@ -182,21 +182,38 @@ router.post('/update/choices', function(req, res, next) {
 /* POST update ratings chosen by user. */
 router.post('/update/ratings', function(req, res, next) {
   // Get the user id from the request
-  if (!(req.body.userid && req.body.ratings && req.body.known)) return utils.sendErr(res, 'Missing parameter(s)');
+  if (!(req.body.userid && req.body.ratings)) return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
   var ratings = JSON.parse(req.body.ratings);
-  var ratings.known = JSON.parse(req.body.known);
+  //var ratings.known = JSON.parse(req.body.known);
  // var movie = req.body.movie;
   var db = req.db;
   var users = db.get('users');
 
   // Update ratings chosen in user session data
-  users.updateById(userid, {$set:{ratings: ratings, ratings.known: known}}, function(err) {
+  users.updateById(userid, {$set:{ratings: ratings}}, function(err) {
   	if (err) return utils.sendErr(res, 'Failed to update ratings.');
   	res.json({'success': true});
   });
 });
 
+
+/* POST update known items chosen by user. */
+router.post('/update/known', function(req, res, next) {
+  // Get the user id from the request
+  if (!(req.body.userid && req.body.known)) return utils.sendErr(res, 'Missing parameter(s)');
+  var userid = utils.pad(req.body.userid, 12);
+  var known = JSON.parse(req.body.known);
+ // var movie = req.body.movie;
+  var db = req.db;
+  var users = db.get('users');
+
+  // Update known items chosen in user session data
+  users.updateById(userid, {$set:{known: known}}, function(err) {
+  	if (err) return utils.sendErr(res, 'Failed to update known items.');
+  	res.json({'success': true});
+  });
+});
 
 /* POST update visual verbal survey answers. */
 router.post('/update/firstanswers', function(req, res, next) {
