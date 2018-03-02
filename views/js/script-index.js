@@ -458,7 +458,7 @@ function getChoiceSet(pos, cb) {
 function postChoiceNumberNoRefresh(cb) {
   return $.ajax({
     type: 'POST',
-    url: '/api/update/choicenumber',
+    url: '/api/update/choiceNumber',
     data: {
       userid: userid
     },
@@ -482,7 +482,7 @@ function postChoiceNumberNoRefresh(cb) {
 function postChoiceNumber(cb) {
   return $.ajax({
     type: 'POST',
-    url: '/api/update/choicenumber',
+    url: '/api/update/choiceNumber',
     data: {
       userid: userid
     },
