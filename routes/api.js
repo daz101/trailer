@@ -185,13 +185,13 @@ router.post('/update/ratings', function(req, res, next) {
   if (!(req.body.userid && req.body.ratings)) return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
   var ratings = JSON.parse(req.body.ratings);
-   var known = JSON.parse(req.body.known);
-  var movie = req.body.movie;
+  //var known = JSON.parse(req.body.known);
+ // var movie = req.body.movie;
   var db = req.db;
   var users = db.get('users');
 
   // Update ratings chosen in user session data
-  users.updateById(userid, {$push:{ratings: ratings}}, function(err) {
+  users.updateById(userid, {$set:{ratings: ratings}}, function(err) {
   	if (err) return utils.sendErr(res, 'Failed to update ratings.');
   	res.json({'success': true});
   });
