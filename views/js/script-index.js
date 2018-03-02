@@ -68,14 +68,14 @@ $(document).ready(function() {
     clearTimeout(timer);
   });
   
-  $('#movieposter').hover(function() {
+  $('.movie_img').hover(function() {
     // on mouse in, start a timeout
     var that = this;
     timer = setTimeout(function() {
       // Find which movie was hovered
-      var parentIdArr = $(that).parent().prop('id').split('_'); //["movie","1"]
-    var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
-      //loadSelectedMovie(moviePos);
+      var parentIdArr = $('.movie-block[data-movieSelected=true').prop('id').split("_");; //["movie","1"]
+    var moviePos = parentIdArr[parentIdArr.length - 1] - 1; 
+    
 	  updateHoveredPoster(moviePos);
     }, delay);
   }, function() {
