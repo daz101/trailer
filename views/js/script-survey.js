@@ -31,7 +31,7 @@ $( "#Q3 .rad_row td" ).click(function() {
 });
 
 //disable begin button if comment field is not submitted 
-$('#beginbutton').attr('disabled', true);
+//$('#beginbutton').attr('disabled', true);
 $('#textbox').on('keyup',function() {
     if($(this).val() != '') {
     $('#beginbutton').attr('disabled' , false);
