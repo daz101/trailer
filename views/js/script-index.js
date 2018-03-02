@@ -162,9 +162,9 @@ $(document).ready(function() {
   //ratings push 
   $('#ratingsButton').click(function() {
   postRatings();
-var promises = [];
-	  promises.push(postChoiceNumber(function() {
-	  }));  
+ nextPage(); 
+	  //postChoiceNumber(function() {
+	  //});  
     });
 
   // Make sure client wants leave
@@ -178,7 +178,27 @@ var promises = [];
     postEvent('Closed connection', null);
   });
 });
+//end of document 
 
+
+function nextPage() {
+  $.ajax({
+    type: 'POST',
+    url: '/api/update/choicenumber',
+    // url: 'http://localhost:3000/mrs/events',
+    data: {
+      userid: userid
+    },
+    dataType: 'json',
+    success: function() {
+    confirmUnload = false;
+    location.reload(true); 	
+    },
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}
 /**
  * Callback for when youtube IFrame script loads.
  * Load the youtube player.
