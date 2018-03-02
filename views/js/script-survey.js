@@ -149,7 +149,7 @@ $('#textbox').keyup(function(){
 	
 	//go to page 9
 	$('#surveypage8button').click(function() {
-		var hookpage = $('#surveypage4');
+		var hookpage = $('#surveypage8');
 		if(isSurveyComplete(hookpage)){
 	$('#surveypage8, #surveypage8button').fadeOut("slow", function() {
       $('#surveypage8, #surveypage8button').hide();
@@ -160,7 +160,7 @@ $('#textbox').keyup(function(){
 	
 	//go to page 10
 	$('#surveypage9button').click(function() {
-		var hookpage = $('#surveypage4');
+		var hookpage = $('#surveypage9');
 		if(isSurveyComplete(hookpage)){
 	$('#surveypage9, #surveypage9button').fadeOut("slow", function() {
       $('#surveypage9, #surveypage9button').hide();
@@ -171,7 +171,7 @@ $('#textbox').keyup(function(){
 	
 	//go to page 11
 	$('#surveypage10button').click(function() {
-		var hookpage = $('#surveypage4');
+		var hookpage = $('#surveypage10');
 		if(isSurveyComplete(hookpage)){
 	$('#surveypage10, #surveypage10button').fadeOut("slow", function() {
       $('#surveypage10, #surveypage10button').hide();
@@ -182,7 +182,7 @@ $('#textbox').keyup(function(){
 	
 	//go to page 12
 	$('#surveypage11button').click(function() {
-		var hookpage = $('#surveypage4');
+		var hookpage = $('#surveypage11');
 		if(isSurveyComplete(hookpage)){
 	$('#surveypage11, #surveypage11button').fadeOut("slow", function() {
       $('#surveypage11, #surveypage11button').hide();
@@ -193,7 +193,7 @@ $('#textbox').keyup(function(){
 	
 	//go to page 13
 	$('#surveypage12button').click(function() {
-		var hookpage = $('#surveypage4');
+		var hookpage = $('#surveypage12');
 		if(isSurveyComplete(hookpage)){
 	$('#surveypage12, #surveypage12button').fadeOut("slow", function() {
       $('#surveypage12, #surveypage12button').hide();
@@ -204,7 +204,7 @@ $('#textbox').keyup(function(){
 	
 	//go to page 14
 	$('#surveypage13button').click(function() {
-		var hookpage = $('#surveypage4');
+		var hookpage = $('#surveypage13');
 		if(isSurveyComplete(hookpage)){
 	$('#surveypage13, #surveypage13button').fadeOut("slow", function() {
       $('#surveypage13, #surveypage13button').hide();
@@ -215,7 +215,7 @@ $('#textbox').keyup(function(){
 	
 	//go to page 15
 	$('#surveypage14button').click(function() {
-		var hookpage = $('#surveypage4');
+		var hookpage = $('#surveypage14');
 		if(isSurveyComplete(hookpage)){
 	$('#surveypage14, #surveypage14button').fadeOut("slow", function() {
       $('#surveypage14, #surveypage14button').hide();
