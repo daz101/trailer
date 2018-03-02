@@ -15,8 +15,9 @@ var choiceNumber = data.choiceNumber;
 var movies = JSON.parse(data.movies);
 var player, useTrailers = data.useTrailers, currentTrailer = null;
 var timer, delay = 1000;
- var ratings = [];
- 
+var ratings = [];
+var known= [];  
+
 $(document).ready(function() {
   // Update the remaining number of choices to make
   refreshChoicesCount();
@@ -162,9 +163,8 @@ $(document).ready(function() {
   //ratings push 
   $('#ratingsButton').click(function() {
   postRatings();
- nextPage(); 
-	  //postChoiceNumber(function() {
-	  //});  
+  nextPage(); 
+	   
     });
 
   // Make sure client wants leave
@@ -631,12 +631,12 @@ function postChoices(mID) {
  */
 function postRatings() {
  
-  //var known= []; 
+  
   //var stars= ('input[name=rating_'+i+']:checked').val();
- // var known= ('input[name=known_'+i+']:checked').val(); 
+ var known= ('input[name=known_'+i+']:checked').val(); 
 	for(var i=1; i<=nrOfMovies; i++) {
 		ratings.push($('input[name=rating_'+i+']:checked').val());
-		//known.push($('input[name=known_'+i+']:checked').val());
+		known.push($('input[name=known_'+i+']:checked').val());
 	}
  
   $.ajax({
@@ -646,7 +646,7 @@ function postRatings() {
       userid: userid,
       //movie: mID,
 	  ratings: JSON.stringify(ratings)
-	  //known: JSON.stringify(known)
+	  known: JSON.stringify(known)
     },
     dataType: 'json',
     error: function(err) {
