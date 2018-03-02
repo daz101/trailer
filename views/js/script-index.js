@@ -76,7 +76,7 @@ $(document).ready(function() {
       var parentIdArr = $(that).parent().prop('id').split('_'); //["movie","1"]
     var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
       //loadSelectedMovie(moviePos);
-	  //updateHoveredPoster(moviePos);
+	  updateHoveredPoster(moviePos);
     }, delay);
   }, function() {
     // on mouse out, cancel the timer
@@ -725,6 +725,23 @@ function updateHoveredInfo(mID) {
   });
 }
 
+/**
+ * POST id of movie that was hovered/clicked on (Movie Poster)
+ */
+function updateHoveredPoster(mID) {
+  return $.ajax({
+    type: 'POST',
+    url: '/api/update/hoveredposter',
+    data: {
+      userid: userid,
+      movie: mID
+    },
+    dataType: 'json',
+    error: function(err) {
+      console.log(err.responseText);
+    }
+  });
+}
 
 /**
  * POST id of movie that was hovered/clicked on.

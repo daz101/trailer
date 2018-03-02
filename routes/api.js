@@ -161,6 +161,22 @@ router.post('/update/hoveredinfo', function(req, res, next) {
   });
 });
 
+/* POST update movies info hovered on. */
+router.post('/update/hoveredposter', function(req, res, next) {
+  // Get the user id from the request
+  if (!(req.body.userid && req.body.movie)) return utils.sendErr(res, 'Missing parameter(s)');
+  var userid = utils.pad(req.body.userid, 12);
+  var movie = req.body.movie;
+  var db = req.db;  
+  var users = db.get('users');
+
+  // Update movie id whose info was loaded
+  users.updateById(userid, {$addToSet:{hovered_poster: movie}}, function(err) {
+    if (err) return utils.sendErr(res, 'Failed to update hovered movies.');
+    res.json({'success': true});
+  });
+});
+
 
 /* POST update movies chosen by user. */
 router.post('/update/choices', function(req, res, next) {

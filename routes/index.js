@@ -41,6 +41,7 @@ router.get('/:id', function(req, res, next) {
 				watched_trailers: [],
 				hovered_movies: [],
 				hovered_info: [],
+				hovered_poster: [],
 				choices: [],
 				ratings: [],
 				known: [],
