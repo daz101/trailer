@@ -169,7 +169,10 @@ $(document).ready(function() {
 		ratings.push($('input[name=rating_'+i+']:checked').val());
 		//known.push($('input[name=known_'+i+']:checked').val());
 	}
-  postRatings(); 
+  postRatings();
+var promises = [];
+	  promises.push(postChoiceNumberNoRefresh(function() {
+	  }));  
     });
 
   // Make sure client wants leave
