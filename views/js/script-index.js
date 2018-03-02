@@ -15,7 +15,8 @@ var choiceNumber = data.choiceNumber;
 var movies = JSON.parse(data.movies);
 var player, useTrailers = data.useTrailers, currentTrailer = null;
 var timer, delay = 1000;
-
+ var ratings = [];
+ 
 $(document).ready(function() {
   // Update the remaining number of choices to make
   refreshChoicesCount();
@@ -160,6 +161,14 @@ $(document).ready(function() {
 
   //ratings push 
   $('#ratingsButton').click(function() {
+	  
+  //var known= []; 
+  //var stars= ('input[name=rating_'+i+']:checked').val();
+ // var known= ('input[name=known_'+i+']:checked').val(); 
+	for(var i=1; i<=nrOfMovies; i++) {
+		ratings.push($('input[name=rating_'+i+']:checked').val());
+		//known.push($('input[name=known_'+i+']:checked').val());
+	}
   postRatings(); 
     });
 
@@ -606,14 +615,7 @@ function postChoices(mID) {
  * POST update the selected ratings.
  */
 function postRatings() {
-  var ratings = [];
-  //var known= []; 
-  //var stars= ('input[name=rating_'+i+']:checked').val();
- // var known= ('input[name=known_'+i+']:checked').val(); 
-	for(var i=1; i<=nrOfMovies; i++) {
-		ratings.push($('input[name=rating_'+i+']:checked').val());
-		//known.push($('input[name=known_'+i+']:checked').val());
-	}
+ 
   $.ajax({
     type: 'POST',
     url: '/api/update/ratings',
