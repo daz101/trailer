@@ -4,6 +4,7 @@ console.log(window.location.pathname);
 var userFromUrl = window.location.pathname;
 var userid = userFromUrl.replace('/', '');
 var feedback = []; 
+var secondanswers = [];
 
 $(document).ready(function() {
 	$('#surveypage1, #surveypage1button,#surveypage2, #surveypage2button, #surveypage3, #surveypage3button, #surveypage4, #surveypage4button').hide(); 
@@ -287,7 +288,7 @@ function postFeedback() {
  * Save survey answers online and finish.
  */
 function finish() {
-	var secondanswers = [];
+
 	
 	for(var i=1; i<=nrOfQns; i++) {
 		secondanswers.push($('input[name=radOpt_'+i+']:checked').val());
@@ -303,7 +304,7 @@ function finish() {
     },
     dataType: 'json',
     success: function() {
-      confirmUnload = false;
+      //confirmUnload = false;
     	location.reload(true);
     },
     error: function(err) {
