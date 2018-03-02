@@ -253,7 +253,7 @@ router.post('/update/feedback', function(req, res, next) {
   // Get the user id from the request
   if (!(req.body.userid && req.body.feedback)) return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
-  var feddback = JSON.parse(req.body.feedback);
+  var feedback = JSON.parse(req.body.feedback);
   var db = req.db;
   var users = db.get('users');
 
