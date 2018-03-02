@@ -635,7 +635,10 @@ function postRatings() {
   //var stars= ('input[name=rating_'+i+']:checked').val();
  //var known= ('input[name=known_'+i+']:checked').val(); 
 	for(var i=1; i<=nrOfMovies; i++) {
-		ratings.push($('input[name=rating_'+i+']:checked').val());
+		ratings = 
+		 ratings : {
+			 ratings: $(ratings.push($('input[name=rating_'+i+']:checked')).val()),
+			 known: (known.push($('input[name=known_'+i+']:checked')).val())
 		//known.push($('input[name=known_'+i+']:checked').val());
 	}
  
@@ -646,7 +649,7 @@ function postRatings() {
       userid: userid,
       //movie: mID,
 	  ratings: JSON.stringify(ratings)
-	  //known: JSON.stringify(known)
+	  //ratings.known: JSON.stringify(known)
     },
     dataType: 'json',
     error: function(err) {
