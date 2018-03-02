@@ -68,7 +68,7 @@ $(document).ready(function() {
     clearTimeout(timer);
   });
   
-  $('.movie_img').hover(function() {
+  $('#movieposter').hover(function() {
     // on mouse in, start a timeout
     var that = this;
     timer = setTimeout(function() {
