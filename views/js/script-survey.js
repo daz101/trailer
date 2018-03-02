@@ -3,6 +3,7 @@ var nrOfQns = $('.qn').length;
 console.log(window.location.pathname);
 var userFromUrl = window.location.pathname;
 var userid = userFromUrl.replace('/', '');
+var feedback = []; 
 
 $(document).ready(function() {
 	$('#surveypage1, #surveypage1button,#surveypage2, #surveypage2button, #surveypage3, #surveypage3button, #surveypage4, #surveypage4button').hide(); 
@@ -57,7 +58,7 @@ $('#textbox').keyup(function(){
 	$('#beginbutton').click(function() {
 	 //send comment from comment box
 	 var text = $('#textbox').val();
-	 var feedback = []; 
+
 	 feedback.push(postFeedback(text));
      feedback.push(postEvent('Feedback sent'));
 	 
