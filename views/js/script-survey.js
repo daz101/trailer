@@ -31,7 +31,9 @@ $( "#Q3 .rad_row td" ).click(function() {
 });
 
 //disable begin button if comment field is not submitted 
-//$('#beginbutton').attr('disabled', true);
+$('#beginbutton').attr('disabled', true);
+
+/*
 $('#textbox').on('keyup',function() {
     if($(this).val() != '') {
     $('#beginbutton').attr('disabled' , false);
@@ -39,7 +41,17 @@ $('#textbox').on('keyup',function() {
     $('.survey-next-button').children('button').css({"cursor":"pointer","opacity":"1","background-color":"#5cb85c"});
 	$('#beginbutton').attr('disabled', true);
     }
-});
+});*/ 
+
+$('#textbox').keyup(function(){
+	 if($(this).val().length !=0) {
+    $('#beginbutton').attr('disabled' , false);
+    }else{
+    $('.survey-next-button').children('button').css({"cursor":"pointer","opacity":"1","background-color":"#5cb85c"});
+	$('#beginbutton').attr('disabled', true);
+    }
+	
+}); 
 
 	//go to page 1
 	$('#beginbutton').click(function() {
