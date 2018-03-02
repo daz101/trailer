@@ -161,17 +161,9 @@ $(document).ready(function() {
 
   //ratings push 
   $('#ratingsButton').click(function() {
-	  
-  //var known= []; 
-  //var stars= ('input[name=rating_'+i+']:checked').val();
- // var known= ('input[name=known_'+i+']:checked').val(); 
-	for(var i=1; i<=nrOfMovies; i++) {
-		ratings.push($('input[name=rating_'+i+']:checked').val());
-		//known.push($('input[name=known_'+i+']:checked').val());
-	}
   postRatings();
 var promises = [];
-	  promises.push(postChoiceNumberNoRefresh(function() {
+	  promises.push(postChoiceNumber(function() {
 	  }));  
     });
 
@@ -446,7 +438,7 @@ function getChoiceSet(pos, cb) {
 function postChoiceNumberNoRefresh(cb) {
   return $.ajax({
     type: 'POST',
-    url: '/api/update/choiceNumber',
+    url: '/api/update/choicenumber',
     data: {
       userid: userid
     },
@@ -470,7 +462,7 @@ function postChoiceNumberNoRefresh(cb) {
 function postChoiceNumber(cb) {
   return $.ajax({
     type: 'POST',
-    url: '/api/update/choiceNumber',
+    url: '/api/update/choicenumber',
     data: {
       userid: userid
     },
@@ -618,6 +610,14 @@ function postChoices(mID) {
  * POST update the selected ratings.
  */
 function postRatings() {
+ 
+  //var known= []; 
+  //var stars= ('input[name=rating_'+i+']:checked').val();
+ // var known= ('input[name=known_'+i+']:checked').val(); 
+	for(var i=1; i<=nrOfMovies; i++) {
+		ratings.push($('input[name=rating_'+i+']:checked').val());
+		//known.push($('input[name=known_'+i+']:checked').val());
+	}
  
   $.ajax({
     type: 'POST',
