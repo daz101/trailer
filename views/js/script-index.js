@@ -126,10 +126,10 @@ $(document).ready(function() {
     // Update choice number && Get new recommendations
     
 	
-	if(choiceNumber == 3 (function(){
-	var element = document.getElementById("#pb_8");
+	if(choiceNumber == 3){
+	var element = document.getElementById("pb_8");
 	element.classList.add("done");
-	}));
+	} else{} 
 		
 	
 		
