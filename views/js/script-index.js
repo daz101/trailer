@@ -125,10 +125,13 @@ $(document).ready(function() {
 	var moviePos = movieSelectedIdArr[movieSelectedIdArr.length - 1] - 1;
     // Update choice number && Get new recommendations
     
-	if(choiceNumber == 3){
-		var element = document.getElementById("#pb_8");
+	
+	if(choiceNumber == 3 (function(){
+	var element = document.getElementById("#pb_8");
 	element.classList.add("done");
-	}
+	}));
+		
+	
 		
 	
 	if(choiceNumber+1 < maxChoices)
