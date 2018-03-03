@@ -124,7 +124,14 @@ $(document).ready(function() {
     var movieSelectedIdArr = $('.movie-block[data-movieSelected=true').prop('id').split("_");
 	var moviePos = movieSelectedIdArr[movieSelectedIdArr.length - 1] - 1;
     // Update choice number && Get new recommendations
-    if(choiceNumber+1 < maxChoices)
+    
+	if(choiceNumber == 3){
+		var element = document.getElementById("#pb_8");
+	element.classList.add(".done");
+	}
+		
+	
+	if(choiceNumber+1 < maxChoices)
       getChoiceSet(moviePos);
     else if(choiceNumber < maxChoices) {
       // Change appearance of the infobox
