@@ -125,13 +125,17 @@ $(document).ready(function() {
 	var moviePos = movieSelectedIdArr[movieSelectedIdArr.length - 1] - 1;
     // Update choice number && Get new recommendations
     
-	
+	//change state of progress bar according to the choiceNumber 
 	if(choiceNumber == 3){
 	var element = document.getElementById("pb_8");
 	element.classList.add("done");
-	} else{} 
-		
-	
+	} else if (choiceNumber ==7){
+	var element = document.getElementById("pb_9");
+	element.classList.add("done");
+	} else if (choiceNumber ==11){
+	var element = document.getElementById("pb_10");
+	element.classList.add("done");
+	}		
 		
 	
 	if(choiceNumber+1 < maxChoices)
