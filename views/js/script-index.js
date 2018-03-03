@@ -127,7 +127,7 @@ $(document).ready(function() {
     
 	if(choiceNumber == 3){
 		var element = document.getElementById("#pb_8");
-	element.classList.add(".done");
+	element.classList.add("done");
 	}
 		
 	
