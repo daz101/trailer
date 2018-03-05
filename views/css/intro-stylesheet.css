@@ -14,7 +14,7 @@
 
 .parent_container .movie-progress
 {
-	width:50%;
+	width:75%;
 	margin:auto;
 	margin-top:20px;
 }
@@ -185,11 +185,12 @@
 	height:400px;
 	box-shadow: 1px 1px 10px #888888;
     background-color: #ffffff;
+	margin-top: 10px;
 }
 
-.parent_container #welcome_display_block #resizeBody
+.parent_container #welcome_display_block .resizeThis
 {
-	height:530px;
+	height:520px;
 }
 
 .parent_container #welcome_display_block .intro span
@@ -227,14 +228,13 @@
 	height:510px;
 	margin-top: 10px;
 	margin-bottom: 20px;
-	box-shadow: 1px 1px 10px #888888;
     background-color: #ffffff;
 }
 
 .parent_container #survey_display_block .intro
 {
 	width:100%;
-	padding: 10px;
+	padding: 10px 0px 10px 0px;
 	float: left;
 }
 
@@ -253,6 +253,13 @@
 	float:left;
 	width:100%;
 	padding: 15px;
+}
+
+.addBox
+{
+	box-shadow: 1px 1px 10px #888888;
+	margin-top:10px;
+	float:left;
 }
 
 #survey_section table
@@ -412,6 +419,11 @@ hr {
 .parent_container #resize_display_block .intro span:last-child p:last-child
 {
 	margin-left:22%;
+}
+
+.intro textarea
+{
+	margin:10px;
 }
 
 .parent_container .resize-next-button
