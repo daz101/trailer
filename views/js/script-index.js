@@ -39,9 +39,10 @@ $(document).ready(function() {
     // Load the Youtube IFrame API
     $.getScript('https://www.youtube.com/iframe_api');
 	  $('#mouseCap_video').addClass(); 
-	  $('.movie_img').removeClass();
+	  $('.movie_img').hide(); 
   } else {
   $('.movie_img').addClass();
+  $('#mouseCap_video').hide(); 
     
   }
 
