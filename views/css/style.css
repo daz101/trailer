@@ -542,6 +542,40 @@ list-style-type: none;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
 }
 
+
+#mouseCap_video
+{
+
+	float:right;
+	width:54%;
+	background-color:#f2f2f2;
+	box-shadow: 0px 1px 5px #888888;
+}
+
+.parent_container  .video_goes_here
+{
+	width: 80%;
+	cursor:pointer;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 35px;
+    margin-bottom: 35px;
+	float:right;
+	display:none;
+	filter:blur(3px);
+}
+
+.parent_container  .video_goes_here img
+{
+	width:100%;
+	height:250px;
+}
+#blurred_content
+{
+	float:left;
+	filter:blur(5px);
+}
+
 .parent_container  .video_goes_here
 {
 	width: 80%;

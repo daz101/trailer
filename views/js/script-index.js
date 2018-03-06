@@ -38,14 +38,11 @@ $(document).ready(function() {
  if(useTrailers) {
     // Load the Youtube IFrame API
     $.getScript('https://www.youtube.com/iframe_api');
+	  $('#mouseCap_video').addClass(); 
+	  $('.movie_img').removeClass();
   } else {
-    $('.trailer-container').parent().hide();
-    $('.movie-info')
-      .removeClass('col-sm-6')
-      .css({
-        "margin":"0 auto",
-        "width":"75%"
-      });
+  $('.movie_img').addClass();
+    
   }
 
   

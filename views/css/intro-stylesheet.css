@@ -305,6 +305,24 @@
 	text-align: center;
 }
 
+.parent_container .next-button
+{
+	float:right;
+	width:22%;
+	margin-top: 3px;	
+}
+
+.parent_container .next-button button
+{
+	width: 80px;
+	border-radius: 8px;
+	background-color: #8c8c8c;
+	opacity:0.6;
+	cursor:not-allowed;
+	color: #FFFFFF;
+	height: 30px;
+}
+
 .parent_container .survey-next-button
 {
 	float:right;
