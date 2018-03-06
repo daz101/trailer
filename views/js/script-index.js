@@ -775,6 +775,13 @@ function updateHoveredMovies(mID) {
   });
 }
 
+function timerFunction(){
+ setTimeout(function(){
+document.getElementById('ratingsPage').classList.remove('hide');
+document.getElementById('loading').classList.add('hide');
+ }, 2000);
+ }
+
 /**
  * Log any events on the backend.
  */

@@ -10,28 +10,46 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
 </head>
 
-<body id="page12">
+<body id="page12" onload="timerFunction()">
 
 <header>
 </header>
 <div class="container-fluid parent_container">
 
+       <div class="loadingBlock" id="loading">
+	  
+                </br>
+               
+                 
+            <div class="loader"></div>
+			
+			 <span><h3><strong><center>Loading Recommendations</center></h3></strong></span>
+                <span></span> 
+                    <br>
+                    <br>
+		
+            </div>
+
+<div class="holding_container hide" id="ratingsPage">
 	<div class="movie-progress">           
         <ul id="progress_circles">
-		<li class="step"></li>
-		<li class="done"></li>
-		<li class="done"></li>
-		<li class="step"></li>
-		<li class="done"></li>
-		<li class="done"></li>
-		<li class="step"></li>
-		<li class="done"></li>
-		<li class="done"></li>
-        <li class="active"></li>
-        <li class="stepDisabled"></li>
-        <li></li>
-        <li></li>
-        <li class="stepDisabled"></li>
+		<li class="step" id="pb_1"></li>
+		<li class="done" id="pb_2"></li>
+		<li class="done"id="pb_3"></li>
+		<li class="step" id="pb_4"></li>
+		<li class="done" id="pb_5"></li>
+		<li class="done" id="pb_6"></li>
+		<li class="step" id="pb_7"></li>
+		<li class="done" id="pb_8"></li>
+		<li class="done" id="pb_9"></li>
+        <li class="activeStep" id="pb_10"></li>
+        <li class="stepDisabled" id="pb_11"></li>
+        <li id="pb_12"></li>
+        <li id="pb_13"></li>
+		<li id="pb_14"></li>
+		<li id="pb_15"></li>
+		<li id="pb_16"></li>
+        <li class="stepDisabled" id="pb_17"></li>
 		</ul>            
   </div>
   
@@ -77,7 +95,7 @@
 		<span><b>Rate Your Movie Recommendations</b><br> Instructions</span>
 		<span>1. Click on the movie posters to read more information about the movie. 
 		<br><b>2. Rate all the ten movies. If you haven't seen the movie please rate based on the information given </b>
-	<br>3. Click on the Next button to go to the next page. This button won't be activated untill you rate all the movies.</span>
+	<br>3. Click on the Next button to go to the next page. This button won't be activated until you rate all the movies.</span>
 		</div>
 		
 		<div class="movie_img">
@@ -463,6 +481,8 @@
 	<div class="next-button">
 	<button id="ratingsButton" type="button">Next</button>
 	</div>
+	</div><!--end of ratings--> 
+    	
 </div>
 <script type="text/javascript">
       data=<%- JSON.stringify(data) %>;
