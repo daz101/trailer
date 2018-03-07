@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var clicked=0,choose=0;  // change all vars
 	var listitem,listitem_choose;  
 	var item,item_choose;
-	
+		var useTrailers = data.useTrailers; 
 $('[data-toggle="tooltip"]').tooltip(); 
 
 /*
@@ -72,8 +72,15 @@ $( ".hover-block" ).click(function() {
 		}
 	}  	
 	$(".intro").hide();
-	$(".movie_img").show();
 	$(".movie_info").show();
+	
+	if(useTrailers){
+		$("#mouseCap_video").hide();
+		$(".movie_img").show();
+	}else{
+		$(".movie_img").hide();
+		$("#mouseCap_video").show();
+	}
 
 	listitem=$(this).parents(".movie-block");
 	item=listitem.index(".movie-block"); 
