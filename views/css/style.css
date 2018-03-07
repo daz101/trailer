@@ -545,7 +545,7 @@ list-style-type: none;
 
 #mouseCap_video
 {
-
+    display: none; 
 	float:right;
 	width:54%;
 	background-color:#f2f2f2;
