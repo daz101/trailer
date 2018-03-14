@@ -11,25 +11,11 @@ $(document).ready(function() {
 	$('#surveypage5, #surveypage5button,#surveypage6, #surveypage6button, #surveypage7, #surveypage7button,#surveypage8, #surveypage8button').hide();
 	$('#surveypage9, #surveypage9button, #surveypage10, #surveypage10button, #surveypage11, #surveypage11button, #surveypage12, #surveypage12button, #surveypage13, #surveypage13button, #surveypage14, #surveypage14button, #surveypage15, #surveypage15button').hide();
 	
-	$( "#Q1 .rad_row td" ).click(function() { 
+$( ".question .rad_row td" ).click(function() { 
 	$(this).find('input[type="radio"]').each(function() {
 	$(this).prop('checked',true);
 	});
-	$("#Q1").css("border-left","3px solid #00cc00");
-});
-
-$( "#Q2 .rad_row td" ).click(function() { 
-	$(this).find('input[type="radio"]').each(function() {
-	$(this).prop('checked',true);
-	});
-	$("#Q2").css("border-left","3px solid #00cc00");
-});
-
-$( "#Q3 .rad_row td" ).click(function() { 
-	$(this).find('input[type="radio"]').each(function() {
-	$(this).prop('checked',true);
-	});
-	$("#Q3").css("border-left","3px solid #00cc00");
+	$(this).parent().parent().css("border-left","3px solid #00cc00");
 });
 
 //disable begin button if comment field is not submitted 

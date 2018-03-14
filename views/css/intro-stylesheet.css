@@ -330,6 +330,11 @@
 	margin-top: 7px;	
 }
 
+.parent_container .last-button
+{
+	width:3%;
+}
+
 .parent_container .survey-next-button button
 {
 	width: 80px;
