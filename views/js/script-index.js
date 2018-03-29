@@ -35,16 +35,13 @@ $(document).ready(function() {
   }
 //update: handler for conditions 
   // Randomly select if to play trailers or not
+  
  if(useTrailers) {
-    // Load the Youtube IFrame API
-    $.getScript('https://www.youtube.com/iframe_api');
-	  $('#mouseCap_video').addClass(); 
-	  $('.movie_img').hide(); 
-  } else {
-  $('.movie_img').addClass();
-  $('#mouseCap_video').hide(); 
-    
-  }
+    $('#blurred_content').css("filter","blur(10px)");
+  } else 
+  {
+	$('#blurred_content').css("filter","blur(0px)");  
+  } 
 
   
   //FIXME: Remove the hover block if not needed
@@ -84,8 +81,7 @@ $(document).ready(function() {
   
   // Look for trailer/poster when hovering over movie in movieblock
   $('.movie-block .wrapper-block').click(function() {
-    // on mouse click, clear timeout
-	//FIXME: Is the time still needed if there is no hover block?
+	// on mouse click, clear timeout
     clearTimeout(timer);
     // Find which movie was clicked
 	var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
@@ -95,7 +91,6 @@ $(document).ready(function() {
   
   $('.movie-block .choose').click(function() {
     // on mouse click, clear timeout
-	//FIXME: Is the time still needed if there is no hover block?
     clearTimeout(timer);
     // Find which movie was clicked
 	var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]

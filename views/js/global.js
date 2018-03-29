@@ -50,7 +50,30 @@ $( ".wrapper-block" ).mouseout(function(event) {
     loadSelectedMovie(moviePos);
   }); */
 
-    
+$( "#mouseCap_video" ).mouseover(function(event) {
+	if(useTrailers) {
+	$(this).find(".video_goes_here").css("filter","blur(0)");
+	}
+});
+
+$( "#mouseCap_video" ).mouseout(function(event) {
+	if(useTrailers) {
+	$(this).find(".video_goes_here").css("filter","blur(5px)");
+	}
+});
+ 
+$( "#blurred_content" ).mouseover(function(event) {
+	if(useTrailers) {
+	$(this).css("filter","blur(0)");
+	}
+});
+
+$( "#blurred_content" ).mouseout(function(event) {
+	if(useTrailers) {
+	$(this).css("filter","blur(10px)");
+	}
+});
+ 
 $( ".hover-block" ).click(function() {
   if(clicked==1)
 	{	
@@ -75,11 +98,12 @@ $( ".hover-block" ).click(function() {
 	$(".movie_info").show();
 	
 	if(useTrailers){
-		$("#mouseCap_video").hide();
-		$(".movie_img").show();
-	}else{
+		$.getScript('https://www.youtube.com/iframe_api');
 		$(".movie_img").hide();
 		$("#mouseCap_video").show();
+	}else{
+		$("#mouseCap_video").hide();
+		$(".movie_img").show();
 	}
 
 	listitem=$(this).parents(".movie-block");
@@ -165,8 +189,16 @@ $( ".hover-block" ).click(function() {
 	item_choose=listitem_choose.index(".movie-block");
 	
 	$(".intro").hide();
-	$(".movie_img").show();
 	$(".movie_info").show();
+	
+	if(useTrailers){
+		$.getScript('https://www.youtube.com/iframe_api');
+		$(".movie_img").hide();
+		$("#mouseCap_video").show();
+	}else{
+		$("#mouseCap_video").hide();
+		$(".movie_img").show();
+	}
 	$(this).children("button").css("background-color", "#5cb85c");
 	
 	if(choiceNumber==maxChoices) /*For page no. 11*/
