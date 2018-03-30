@@ -525,6 +525,9 @@ function refreshChoicesCount() {
 	  $(".intro span:first-child").text("Now Rate these movies");
 	  $("#pageno span").text("0");
   }
+  if(useTrailers){
+	  $("#mouseCap_video").hide();
+  }
 }
 
 /**
