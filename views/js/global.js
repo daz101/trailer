@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var clicked=0,choose=0;  // change all vars
 	var listitem,listitem_choose;  
 	var item,item_choose;
-		var useTrailers = data.useTrailers; 
+	var useTrailers = data.useTrailers;	
 $('[data-toggle="tooltip"]').tooltip(); 
 
 /*
@@ -53,12 +53,14 @@ $( ".wrapper-block" ).mouseout(function(event) {
 $( "#mouseCap_video" ).mouseover(function(event) {
 	if(useTrailers) {
 	$(this).find(".video_goes_here").css("filter","blur(0)");
+	player.playVideo();
 	}
 });
 
 $( "#mouseCap_video" ).mouseout(function(event) {
 	if(useTrailers) {
 	$(this).find(".video_goes_here").css("filter","blur(5px)");
+	player.pauseVideo();
 	}
 });
  

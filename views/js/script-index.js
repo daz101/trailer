@@ -373,6 +373,7 @@ function loadTrailer(pos) {
 function embedTrailer(key) {
   // Create and place the embed code on the page
   player.loadVideoById({'videoId': key});
+  player.stopVideo();
   // var embed = '<iframe id="player" src="https://www.youtube.com/embed/' + key +
   //   '" frameborder="0" allowfullscreen class="video"></iframe>';
   // $('.trailer').html(embed);
