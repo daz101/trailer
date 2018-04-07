@@ -38,7 +38,7 @@ router.get('/:id', function(req, res, next) {
 				choice_number: -3,
 				choice_set: [],
 				//use_trailers: Math.random() < useTrailerProbability,
-				use_trailers: true,
+				use_trailers: userid>5000,
 				watched_trailers: [],
 				hovered_movies: [],
 				hovered_info: [],
