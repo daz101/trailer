@@ -412,6 +412,7 @@ function loadMovieDescription(pos) {
   $('#moviedirector').text(movies[pos].director);
   $('#moviecast').text(movies[pos].cast);
   $('#movietitle').text(movies[pos].title);
+  $('#movieyear').text(movies[pos].year);
   $('#movieposter').prop("src", movies[pos].poster);
 }
 
@@ -514,7 +515,7 @@ function postChoiceNumber(cb) {
  * be made on-screen.
  */
 function refreshChoicesCount() {
-  $(".intro span:first-child").text(maxChoices-choiceNumber+" More Choices To Go!");
+  $(".intro span:first-child").text(maxChoices-choiceNumber+" More Choice(s) To Go!");
   $("#pageno span").text(maxChoices-choiceNumber);
   if(choiceNumber==maxChoices) /*For page no. 11*/
   {
