@@ -4,6 +4,7 @@ $(document).ready(function(){
 	var listitem,listitem_choose;  
 	var item,item_choose;
 	var useTrailers = data.useTrailers;	
+	var conditionNum = data.conditionNum;
 $('[data-toggle="tooltip"]').tooltip(); 
 
 /*
@@ -51,27 +52,27 @@ $( ".wrapper-block" ).mouseout(function(event) {
   }); */
 
 $( "#mouseCap_video" ).mouseover(function(event) {
-	if(useTrailers) {
+	if(conditionNum==2||conditionNum==3||conditionNum==4) {
 	$(this).find(".video_goes_here").css("filter","blur(0)");
 	player.playVideo();
 	}
 });
 
 $( "#mouseCap_video" ).mouseout(function(event) {
-	if(useTrailers) {
+	if(conditionNum==2||conditionNum==3||conditionNum==4) {
 	$(this).find(".video_goes_here").css("filter","blur(5px)");
 	player.pauseVideo();
 	}
 });
  
 $( "#blurred_content" ).mouseover(function(event) {
-	if(useTrailers) {
+	if(conditionNum==2||conditionNum==3||conditionNum==4) {
 	$(this).css("filter","blur(0)");
 	}
 });
 
 $( "#blurred_content" ).mouseout(function(event) {
-	if(useTrailers) {
+	if(conditionNum==2||conditionNum==3||conditionNum==4) {
 	$(this).css("filter","blur(10px)");
 	}
 });
@@ -97,9 +98,9 @@ $( ".hover-block" ).click(function() {
 		}
 	}  	
 	$(".intro").hide();
-	$(".movie_info").show();
+	if(conditionNum!=2)$(".movie_info").show();
 	
-	if(useTrailers){
+	if(conditionNum==2||conditionNum==3||conditionNum==4){
 		$.getScript('https://www.youtube.com/iframe_api');
 		$(".movie_img").hide();
 		$("#mouseCap_video").show();
@@ -191,9 +192,9 @@ $( ".hover-block" ).click(function() {
 	item_choose=listitem_choose.index(".movie-block");
 	
 	$(".intro").hide();
-	$(".movie_info").show();
+	if(conditionNum!=2)$(".movie_info").show();
 	
-	if(useTrailers){
+	if(conditionNum==2||conditionNum==3||conditionNum==4){
 		$.getScript('https://www.youtube.com/iframe_api');
 		$(".movie_img").hide();
 		$("#mouseCap_video").show();
@@ -218,7 +219,7 @@ $( ".hover-block" ).click(function() {
 	$("#movie_display_block").css("outline","5px solid #5cb85c");
 	$(".highlight:nth-of-type("+parseInt(item+1)+")").css({"background-color":"#5cb85c","opacity":"1"});
 	
-	var final_title=$(".movie-title").find("span").text();
+	var final_title=$(".movie-title").find(".title").text();
 	document.getElementById("mt").innerHTML=final_title;
 	$(this).parent().attr("data-movieSelected",true);
 });

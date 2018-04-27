@@ -4,6 +4,8 @@ var router = express.Router();
 var utils = require('./utils.js');
 //var title = ' | MRS';
 var useTrailerProbability = 0.5;
+var randomNum;
+var expCondition;
 
 /* GET error if no user id specified in URL.*/
 router.get('/', function(req, res, next) {
@@ -20,6 +22,7 @@ router.get('/favicon.ico', function (req, res) {
   res.end();
 });
 
+/* conditionNum:1=>Info only, conditionNum:2=>Trailer only, conditionNum:3=>Info-left Trailer-right, conditionNum:4=>Info-right Trailer-left */
 /* GET home page. */
 router.get('/:id', function(req, res, next) {
   // Get the user id from the request
@@ -32,13 +35,26 @@ router.get('/:id', function(req, res, next) {
 		try {
 			// If user not found,
 			if (doc === null) {
+				
+				randomNum=Math.random();
+				if(randomNum<0.3)
+					expCondition=1;
+				else 
+				if(randomNum<0.6)
+					expCondition=2;
+				else
+				if(randomNum<0.8)
+					expCondition=3;
+				else
+					expCondition=4;
+				
 			  return users.insert({
 				_id: userid,
 				userid: userid,
 				choice_number: -3,
 				choice_set: [],
 				//use_trailers: Math.random() < useTrailerProbability,
-				use_trailers: userid>5000,
+				conditionNum:expCondition,
 				watched_trailers: [],
 				hovered_movies: [],
 				hovered_info: [],
@@ -146,7 +162,8 @@ router.get('/:id', function(req, res, next) {
 					userid: userid,
 					choiceNumber: doc.choice_number,
 					movies: JSON.stringify(doc.choice_set[doc.choice_number-1] || []),
-					useTrailers: doc.use_trailers
+					conditionNum: doc.conditionNum
+					//useTrailers: doc.use_trailers
 				  }
 				}, function(err, html) {
 				  res.send(html);

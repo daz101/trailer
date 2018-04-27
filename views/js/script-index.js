@@ -13,7 +13,7 @@ var userFromUrl = window.location.pathname;
 var userid = userFromUrl.replace('/', '');
 var choiceNumber = data.choiceNumber;
 var movies = JSON.parse(data.movies);
-var player, useTrailers = data.useTrailers, currentTrailer = null;
+var player, useTrailers = data.useTrailers, conditionNum = data.conditionNum, currentTrailer = null;
 var timer, delay = 1000;
 var ratings = [];
 var known= [];  
@@ -33,16 +33,32 @@ $(document).ready(function() {
       loadMovieInfo(i, mID, 'id');
     }
   }
-//update: handler for conditions 
-  // Randomly select if to play trailers or not
-  
- if(useTrailers) {
+
+// conditionNum:3 => Info:left, Blur: right
+// conditionNum:4 => Info:right, Blur: left 
+// Blur the content when conditionNum is 3 or 4
+if(conditionNum==3||conditionNum==4) {	 
     $('#blurred_content').css("filter","blur(10px)");
-  } else 
+	if(conditionNum==4)
+	{
+		$('#mouseCap_video').css("float","left"); 
+		$('.movie_info').css("float","right"); 
+	}
+	else
+	{
+		$('#mouseCap_video').css("float","right"); 
+		$('.movie_info').css("float","left"); 
+	}
+} else 
   {
 	$('#blurred_content').css("filter","blur(0px)");  
   } 
-
+  
+// For trailer-only condition; when conditionNum is 2 display only trailer  
+if(conditionNum==2) {
+	$('#mouseCap_video').css("width","100%");
+	$('.movie_info').css("display","none"); 	
+}
   
   //FIXME: Remove the hover block if not needed
   // Look for trailer when hovering over movie
@@ -247,7 +263,8 @@ function onPlayerStateChange(e) {
 function loadSelectedMovie(pos) {
   loadMovieDescription(pos);
   try {
-	if(useTrailers) loadTrailer(pos);
+	if(conditionNum==2||conditionNum==3||conditionNum==4)
+		loadTrailer(pos);
   } catch(e) {
 	  console.warn("Exception in loadTrailer :: " + e);
   }
@@ -527,7 +544,7 @@ function refreshChoicesCount() {
 	  $(".intro span:first-child").text("Now Rate these movies");
 	  $("#pageno span").text("0");
   }
-  if(useTrailers){
+  if(conditionNum==2||conditionNum==3||conditionNum==4){
 	  $("#mouseCap_video").hide();
   }
 }
