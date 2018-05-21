@@ -269,14 +269,17 @@ router.post('/update/feedback', function(req, res, next) {
   // Get the user id from the request
   if (!(req.body.userid && req.body.feedback)) return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
-  var feedback = JSON.parse(req.body.feedback);
+  var feedback = req.body.feedback;
   var db = req.db;
   var users = db.get('users');
 
   // Update survey answers in user session data
   users.updateById(userid, {$set:{feedback: feedback}}, function(err) {
-  	if (err) return utils.sendErr(res, 'Failed to update survey answers.');
-  	res.json({'success': true});
+	if (err) {
+		console.error("routes/api :: /update/feedback :: Error in users.updateById :: " + err);
+		return utils.sendErr(res, 'Failed to update survey answers.');
+	}
+	res.json({'success': true});
   });
 });
 

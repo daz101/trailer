@@ -15,6 +15,10 @@ if (app.get('env') === 'development') env = require('./env.js');
 var db = monk(process.env.MONGOLAB_URL);
 app.db = db;
 
+// settings
+var encryptionPassword = process.env.ENCRYPTION_PASSWORD;
+app.set("ENCRYPTION_PASSWORD", encryptionPassword);
+
 // view engine setup
 
 //app.set('views', path.join(__dirname, 'views'));
@@ -33,9 +37,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'views')));
 app.use(useragent.express());
 
-// Make our db accessible to our routes
+// Make our db and settings accessible to our routes
 app.use(function(req,res,next){
   req.db = db;
+  req.settings = {}
+  req.settings.encryptionPassword = encryptionPassword;
   next();
 });
 
