@@ -3,12 +3,11 @@ var express = require('express');
 var router = express.Router();
 var utils = require('./utils.js');
 var useTrailerProbability = 0.5;
-var durationOfStudy = 604800; //7 days
 var initId = 1000;
 
 /* GET error if no user id specified in URL.*/
 router.get('/', function(req, res, next) {
-	var cookieValue = getCookieValue(req, 'userid');
+	var cookieValue = utils.getCookie(req, 'userid');
 	console.log(cookieValue);
 	if(cookieValue == null) {
 		// No userid found in cookie, first time user
@@ -31,7 +30,7 @@ router.get('/favicon.ico', function(req, res) {
 
 /* GET home page. */
 router.get('/:id', function(req, res, next) {
-	if(!isNumeric(req.params.id)) {
+	if(!utils.isNumeric( req.params.id)) {
 		redirectToNewId(req, res);
 	}
 	// Get the user id from the request
@@ -95,7 +94,7 @@ router.get('/:id', function(req, res, next) {
 				console.log(e.stack);
 				console.error("routes/index :: /:id :: Error in handling doc = " + JSON.stringify(
 					doc) + " of id = " + userid);
-				res = deleteCookie(req, res, 'userid');
+				res = utils.deleteCookie(req, res, 'userid');
 				res.end();
 			}
 		});
@@ -105,7 +104,7 @@ router.get('/:id', function(req, res, next) {
 	} catch (e) {
 		console.log(e.stack);
 		console.error("routes/index :: /:id :: Error in handling id = " + userid);
-		res = deleteCookie(req, res, 'userid');
+		res = utils.deleteCookie(req, res, 'userid');
 		res.end();
 	}
 });
@@ -115,8 +114,6 @@ router.get('/:id', function(req, res, next) {
 // Helper Functions
 //
 /////////////////////////////////
-
-//TODO: Move some of these functions to the utils module
 
 function redirect(res, id) {
 	res.redirect('/' + id);
@@ -148,26 +145,12 @@ function redirectToNewId(req, res) {
 }
 
 function createNewUser(req, res, users, userid) {
-	/* conditionNum:1=>Info only, conditionNum:2=>Trailer only, conditionNum:3=>Info-left Trailer-right, conditionNum:4=>Info-right Trailer-left */
-	var randomNum = Math.random();
-	var expCondition = 0;
-	if (randomNum < 0.3)
-		expCondition = 1;
-	else
-	if (randomNum < 0.6)
-		expCondition = 2;
-	else
-	if (randomNum < 0.8)
-		expCondition = 3;
-	else
-		expCondition = 4;
-
+	var expCondition = getExperimentCondition(userid);
 	return users.insert({
 		_id: userid,
 		userid: userid,
 		choice_number: -3,
 		choice_set: [],
-		//use_trailers: Math.random() < useTrailerProbability,
 		conditionNum: expCondition,
 		watched_trailers: [],
 		hovered_movies: [],
@@ -200,64 +183,38 @@ function renderPageResponse(req, res, page, userid, info, eventDesc, setCookie) 
 		data: data
 	}, function(err, html) {
 		if(setCookie) {
-			res = setCookieValue(req, res, 'userid', userid);
+			res = utils.setCookie(req, res, 'userid', userid);
 		} else {
-			res = deleteCookie(req, res, 'userid');
+			res = utils.deleteCookie(req, res, 'userid');
 		}
 		res.send(html);
 		utils.updateEvent(req.db, 'PAGE_LOAD', eventDesc, userid, res);
 	});
 }
 
-function getCookieValue(req, key) {
-	try {
-		var encryptedKey = encrypt(req, key);
-		if(Object.keys(req.cookies).length > 0 && req.cookies.hasOwnProperty(encryptedKey)) {
-			return decrypt(req, req.cookies[encryptedKey]);
-		}
-	} catch(e) {
-		console.log(e.stack);
-		console.error("Exception in getCookieValue :: key = " + key + " : error = " + e);
-	}
-	return null;
-}
-
-function setCookieValue(req, res, key, value) {
-	res.cookie(encrypt(req, key), encrypt(req, value), { maxAge: durationOfStudy, httpOnly: true });
-	return res;
-}
-
-function deleteCookie(req, res, key) {
-	res.clearCookie(encrypt(req, key));
-	return res
-}
-
-function getCryptoObj(req) {
-	return {
-		lib : require('crypto'),
-		algorithm : 'aes-256-ctr',
-		password : req.settings.encryptionPassword
-	}
-}
-
-function encrypt(req, text){
-	var crypto = getCryptoObj(req);
-	var cipher = crypto.lib.createCipher(crypto.algorithm, crypto.password)
-	var crypted = cipher.update(text,'utf8','hex')
-	crypted += cipher.final('hex');
-	return crypted;
-}
-
-function decrypt(req, text){
-	var crypto = getCryptoObj(req);
-	var decipher = crypto.lib.createCipher(crypto.algorithm, crypto.password)
-	var dec = decipher.update(text,'hex','utf8')
-	dec += decipher.final('utf8');
-	return dec;
-}
-
-function isNumeric(n) {
-	return !isNaN(parseFloat(n)) && isFinite(n);
+function getExperimentCondition(userid) {
+	/* conditionNum:1=>Info only, conditionNum:2=>Trailer only, conditionNum:3=>Info-left Trailer-right, conditionNum:4=>Info-right Trailer-left */
+	
+	//TESTING CODE: Remove before study
+	userid = parseInt(userid);
+	if(10000 <= userid && userid <= 19999) return 1
+	if(20000 <= userid && userid <= 29999) return 2
+	if(30000 <= userid && userid <= 39999) return 3
+	if(40000 <= userid && userid <= 49999) return 4
+	
+	var randomNum = Math.random();
+	var expCondition = 0;
+	if (randomNum < 0.3)
+		expCondition = 1;
+	else
+	if (randomNum < 0.6)
+		expCondition = 2;
+	else
+	if (randomNum < 0.8)
+		expCondition = 3;
+	else
+		expCondition = 4;
+	return expCondition;
 }
 
 module.exports = router;

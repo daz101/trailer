@@ -8,6 +8,10 @@ var pad = function(str, max) {
   return str.length < max ? pad("0" + str, max) : str;
 };
 
+var isNumeric = function(n) {
+	return !isNaN(parseFloat(n)) && isFinite(n);
+};
+
 /**
  * Send an error response.
  */
@@ -30,8 +34,79 @@ var updateEvent = function(db, event, eventdesc, userid, res) {
 	});
 };
 
+
+////////////////////
+// Encryption Utils
+////////////////////
+
+function getCryptoObj(req) {
+	return {
+		lib : require('crypto'),
+		algorithm : 'aes-256-ctr',
+		password : req.settings.encryptionPassword
+	}
+}
+
+/**
+* Encrypt string
+*/
+var encrypt = function(req, text){
+	var crypto = getCryptoObj(req);
+	var cipher = crypto.lib.createCipher(crypto.algorithm, crypto.password)
+	var crypted = cipher.update(text,'utf8','hex')
+	crypted += cipher.final('hex');
+	return crypted;
+};
+
+/**
+* Decrypt string
+*/
+var decrypt = function(req, text){
+	var crypto = getCryptoObj(req);
+	var decipher = crypto.lib.createCipher(crypto.algorithm, crypto.password)
+	var dec = decipher.update(text,'hex','utf8')
+	dec += decipher.final('utf8');
+	return dec;
+};
+
+
+////////////////////
+// Cookie Utils
+////////////////////
+
+var durationOfStudy = 604800; //7 days
+
+var getCookie = function(req, key) {
+	try {
+		var encryptedKey = encrypt(req, key);
+		if(Object.keys(req.cookies).length > 0 && req.cookies.hasOwnProperty(encryptedKey)) {
+			return decrypt( req, req.cookies[encryptedKey]);
+		}
+	} catch(e) {
+		console.log(e.stack);
+		console.error("Exception in getCookieValue :: key = " + key + " : error = " + e);
+	}
+	return null;
+}
+
+var setCookie = function(req, res, key, value) {
+	res.cookie(encrypt(req, key), encrypt(req, value), { maxAge: durationOfStudy, httpOnly: true });
+	return res;
+}
+
+var deleteCookie = function(req, res, key) {
+	res.clearCookie(encrypt(req, key));
+	return res
+}
+
 module.exports = {
 	pad: pad,
+	isNumeric: isNumeric,
 	sendErr: sendErr,
-	updateEvent: updateEvent
+	updateEvent: updateEvent,
+	encrypt: encrypt,
+	decrypt: decrypt,
+	getCookie: getCookie,
+	setCookie: setCookie,
+	deleteCookie: deleteCookie
 };
