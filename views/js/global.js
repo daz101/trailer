@@ -4,7 +4,12 @@ $(document).ready(function(){
 	var listitem,listitem_choose;  
 	var item,item_choose;
 <<<<<<< HEAD
+<<<<<<< HEAD
     var useTrailers = data.useTrailers; 
+=======
+	var useTrailers = data.useTrailers;	
+	var conditionNum = data.conditionNum;
+>>>>>>> c2c3986e8f063fabf2303f715d34590d9e9930c5
 =======
 	var useTrailers = data.useTrailers;	
 	var conditionNum = data.conditionNum;
