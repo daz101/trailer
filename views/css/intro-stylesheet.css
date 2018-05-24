@@ -182,7 +182,6 @@
 	width:100%;
 	padding: 10px;
 	float: left;
-	height:400px;
 	box-shadow: 1px 1px 10px #888888;
     background-color: #ffffff;
 	margin-top: 10px;
@@ -260,6 +259,7 @@
 	box-shadow: 1px 1px 10px #888888;
 	margin-top:10px;
 	float:left;
+	height:465px;
 }
 
 #survey_section table
@@ -328,6 +328,11 @@
 	float:right;
 	width:23%;
 	margin-top: 7px;	
+}
+
+.parent_container .last-button
+{
+	width:3%;
 }
 
 .parent_container .survey-next-button button
@@ -580,7 +585,7 @@ hr {
 {
 	width: 65%;
     margin: auto;
-    height: 500px;
+    height: 465px;
     margin-top: 10px;
     margin-bottom: 20px;
     box-shadow: 1px 1px 10px #888888;
