@@ -82,3 +82,7 @@ data/[^.]*
 
 # environment variables
 env.js
+
+# Log Files
+*.log
+scripts/data-sanity-check/data-sanity-errors.csv
