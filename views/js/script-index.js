@@ -12,6 +12,7 @@ var diversification = '0,7';
 var userFromUrl = window.location.pathname;
 var userid = userFromUrl.replace('/', '');
 var choiceNumber = data.choiceNumber;
+var choiceSetNumber = data.choiceSetNumber;
 var movies = JSON.parse(data.movies);
 var player, useTrailers = data.useTrailers,
 	conditionNum = data.conditionNum,
@@ -57,45 +58,40 @@ $(document).ready(function() {
 		$('#mouseCap_video').css("width", "100%");
 		$('.movie_info').css("display", "none");
 	}
-
-	//FIXME: Remove the hover block if not needed
-	// Look for trailer when hovering over movie
-	$('.movie_info').hover(function() {
-		// on mouse in, start a timeout
-		var that = this;
-		timer = setTimeout(function() {
-			// Find which movie was hovered
-			var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
-			var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
-
-			//var moviePos = $(that).parent().index();
-			//loadSelectedMovie(moviePos);
-			updateHoveredInfo(moviePos);
-		}, delay);
-	}, function() {
-		// on mouse out, cancel the timer
-		clearTimeout(timer);
+	
+	$('.movie-block').mouseover(function() {
+		var idArr = $(this).prop('id').split("_");
+		var moviePos = idArr[idArr.length - 1] - 1;
+		updateHoveredMovies(movies[moviePos].id_number);
+		postEvent('MOUSEOVER_MOVIE', {id: movies[moviePos]._id});
+	});
+	
+	$('.movie-block').mouseout(function() {
+		var idArr = $(this).prop('id').split("_");
+		var moviePos = idArr[idArr.length - 1] - 1;
+		postEvent('MOUSEOUT_MOVIE', {id: movies[moviePos]._id});
 	});
 
-	$('.movie_img').hover(function() {
-		// on mouse in, start a timeout
-		var that = this;
-		timer = setTimeout(function() {
-			// Find which movie was hovered
-			var parentIdArr = $('.movie-block[data-movieSelected=true').prop('id').split("_");; //["movie","1"]
-			var moviePos = parentIdArr[parentIdArr.length - 1] - 1;
+	$('.movie_info').mouseover(function() {
+		updateHoveredInfo($(this).attr('data-movie-id-number'));
+		postEvent('MOUSEOVER_INFO', {id: $(this).attr('data-movie-id')});
+	});
+	
+	$('.movie_info').mouseout(function() {
+		postEvent('MOUSEOUT_INFO', {id: $(this).attr('data-movie-id')});
+	});
 
-			updateHoveredPoster(moviePos);
-		}, delay);
-	}, function() {
-		// on mouse out, cancel the timer
-		clearTimeout(timer);
+	$('.movie_img').mouseover(function() {
+		updateHoveredPoster($(this).attr('data-movie-id-number'));
+		postEvent('MOUSEOVER_POSTER', {id: $(this).attr('data-movie-id')});
+	});
+	
+	$('.movie_img').mouseout(function() {
+		postEvent('MOUSEOUT_POSTER', {id: $(this).attr('data-movie-id')});
 	});
 
 	// Look for trailer/poster when hovering over movie in movieblock
 	$('.movie-block .wrapper-block').click(function() {
-		// on mouse click, clear timeout
-		clearTimeout(timer);
 		// Find which movie was clicked
 		var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
 		var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
@@ -103,8 +99,6 @@ $(document).ready(function() {
 	});
 
 	$('.movie-block .choose').click(function() {
-		// on mouse click, clear timeout
-		clearTimeout(timer);
 		// Find which movie was clicked
 		var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
 		var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
@@ -113,9 +107,6 @@ $(document).ready(function() {
 
 	//When ratings is selected 
 	$('.movie-block .icon-holder').click(function() {
-		// on mouse click, clear timeout
-		//FIXME: Is the time still needed if there is no hover block?
-		clearTimeout(timer);
 		// Find which movie was clicked
 		var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
 		var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
@@ -150,7 +141,8 @@ $(document).ready(function() {
 			var promises = [];
 
 			promises.push(postChoices(movies[moviePos]._id));
-			promises.push(postEvent('Final movie selected', movies[moviePos]._id));
+			promises.push(postRecommendedChoice(movies[moviePos]._id));
+			promises.push(postEvent('CHOOSE_FINAL_MOVIE', {message: "Final movie selected", id: movies[moviePos]._id}));
 
 			promises.push(postChoiceNumber(function() {}));
 
@@ -190,7 +182,7 @@ $(document).ready(function() {
 	});
 
 	$(window).on("unload", function() {
-		postEvent('Closed connection', null);
+		postEvent('DISCONNECT_USER', {message : 'Closed Connection'});
 	});
 });
 //end of document 
@@ -222,7 +214,8 @@ function onYouTubeIframeAPIReady() {
 		videoId: '',
 		events: {
 			'onReady': onPlayerReady,
-			'onStateChange': onPlayerStateChange
+			'onStateChange': onPlayerStateChange,
+			'onError': onPlayerError
 		}
 	});
 }
@@ -238,12 +231,19 @@ function onPlayerReady() {
  * Callback for when youtube player state changes.
  */
 function onPlayerStateChange(e) {
-	if (e.data == YT.PlayerState.PLAYING) {
+	if (e.data == YT.PlayerState.PAUSED) {
 		if (currentTrailer !== null) {
-			updateWatchedTrailers(currentTrailer);
+			updateWatchedTrailers(currentTrailer, player.getCurrentTime());
 			currentTrailer = null;
 		}
 	}
+}
+
+/**
+ * Callback for when youtube player state encounters an error.
+ */
+function onPlayerError(e) {
+	console.warn("Error in YT.Player :: " + JSON.stringify(e));
 }
 
 /**
@@ -258,10 +258,7 @@ function loadSelectedMovie(pos) {
 	} catch (e) {
 		console.warn("Exception in loadSelectedMovie :: loadTrailer failed with error = " + e);
 	}
-	postEvent('Selected movie', movies[pos]._id);
-	updateHoveredMovies(movies[pos].id_number);
-	updateHoveredInfo(movies[pos].id_number);
-	//need to update and change above to differentiate clicks from hovers 
+	postEvent('SELECT_MOVIE', {id: movies[pos]._id});
 }
 
 /**
@@ -286,11 +283,15 @@ function getMoviesCount(cb) {
  */
 function loadRandomMovies() {
 	getMoviesCount(function(count) {
+		var promises = [];
 		for (var i = 0; i < nrOfMovies; i++) {
 			var mID = 1 + Math.floor(Math.random() * count);
-			//match randomly selected movie to movieID 
-			loadMovieInfo(i, mID, 'num');
+			//match randomly selected movie to movieID
+			promises.push(loadMovieInfo(i, mID, 'num'));
 		}
+		$.when.apply($, promises).done(function() {
+			postInitialMovies();
+		});
 	});
 }
 
@@ -362,12 +363,12 @@ function loadTrailer(pos) {
 	if (movies[pos]) {
 		if (movies[pos].trailer) {
 			embedTrailer(movies[pos].trailer);
-			currentTrailer = movies[pos]._id;
+			currentTrailer = movies[pos].id_number;
 		} else {
 			getTrailer(movies[pos]._id, function(trailerKey) {
 				movies[pos].trailer = trailerKey;
 				embedTrailer(trailerKey);
-				currentTrailer = movies[pos]._id;
+				currentTrailer = movies[pos].id_number;
 			});
 		}
 	}
@@ -430,18 +431,23 @@ function loadMovieDescription(pos) {
 	$('#movietitle').text(movies[pos].title);
 	$('#movieyear').text(movies[pos].year);
 	$('#movieposter').prop("src", movies[pos].poster);
+	$('#mouseCap_video').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
+	$('.movie_img').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
+	$('.movie_info').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
 }
 
 /**
  * POST id of movie whose trailer was watched.
  */
-function updateWatchedTrailers(mID) {
+function updateWatchedTrailers(mID, duration) {
 	return $.ajax({
 		type: 'POST',
 		url: '/api/update/watchedtrailers',
 		data: {
 			userid: userid,
-			movie: mID
+			movie: mID,
+			choiceSetNumber: choiceSetNumber,
+			duration, duration
 		},
 		dataType: 'json',
 		error: function(err) {
@@ -469,7 +475,7 @@ function getChoiceSet(pos, cb) {
 		success: function(data) {
 			// Load the new choice set
 			setTimeout(function() {
-				loadChoiceSet('Loaded choice set', movies[pos]._id, data);
+				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false);
 			}, delay);
 		},
 		error: function(err) {
@@ -563,7 +569,7 @@ function getFinalRecommendationSet(pos, cb) {
 		success: function(data) {
 			// Load the new choice set
 			setTimeout(function() {
-				loadChoiceSet('Loaded final recommendation set', movies[pos]._id, data);
+				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, true);
 			}, delay);
 		},
 		error: function(err) {
@@ -575,7 +581,7 @@ function getFinalRecommendationSet(pos, cb) {
 /**
  * Load the new choice set on-screen
  */
-function loadChoiceSet(event, mID, data) {
+function loadChoiceSet(event, mID, data, isFinal) {
 	// First, reset movies list on-screen
 	resetMovies();
 
@@ -598,13 +604,18 @@ function loadChoiceSet(event, mID, data) {
 	// Update choice number
 	postChoiceNumber(function() {
 		// Log choice set load event
-		postEvent(event, choiceNumber + 1);
+		postEvent(event, {id: mID, choiceNumber: choiceNumber});
 	});
 
 	// When movie info is loaded for all movies
 	$.when.apply($, promises).done(function() {
 		// Update the movies list on the backend for the user
 		postMovies();
+		// Update Index of the choice set being shown
+		choiceSetNumber++;
+		if(isFinal) {
+			postFinalMovies();
+		}
 	});
 }
 
@@ -651,6 +662,24 @@ function postChoices(mID) {
 	return $.ajax({
 		type: 'POST',
 		url: '/api/update/choices',
+		data: {
+			userid: userid,
+			movie: mID
+		},
+		dataType: 'json',
+		error: function(err) {
+			console.log(err.responseText);
+		}
+	});
+}
+
+/**
+ * POST final selected recomended choice.
+ */
+function postRecommendedChoice(mID) {
+	return $.ajax({
+		type: 'POST',
+		url: '/api/update/recommendedchoice',
 		data: {
 			userid: userid,
 			movie: mID
@@ -734,6 +763,57 @@ function postMovies() {
 			movies: JSON.stringify(movieIds)
 		},
 		dataType: 'json',
+		success: function() {
+			postEvent("LOAD_MOVIES", {ids: movieIds, choiceNumber: choiceNumber});
+		},
+		error: function(err) {
+			console.log(err.responseText);
+		}
+	});
+}
+
+/**
+ * Update the intial set of movies that are on-screen to the backend
+ */
+function postInitialMovies() {
+	var movieIds = movies.map(function(movie) {
+		return movie._id;
+	});
+	return $.ajax({
+		type: 'POST',
+		url: '/api/update/initialmovies',
+		data: {
+			userid: userid,
+			movies: JSON.stringify(movieIds)
+		},
+		dataType: 'json',
+		success: function() {
+			postEvent("LOAD_INITIAL_MOVIES", {ids: movieIds, choiceNumber: choiceNumber});
+		},
+		error: function(err) {
+			console.log(err.responseText);
+		}
+	});
+}
+
+/**
+ * Update the intial set of movies that are on-screen to the backend
+ */
+function postFinalMovies() {
+	var movieIds = movies.map(function(movie) {
+		return movie._id;
+	});
+	return $.ajax({
+		type: 'POST',
+		url: '/api/update/finalmovies',
+		data: {
+			userid: userid,
+			movies: JSON.stringify(movieIds)
+		},
+		dataType: 'json',
+		success: function() {
+			postEvent("LOAD_FINAL_MOVIES", {ids: movieIds, choiceNumber: choiceNumber});
+		},
 		error: function(err) {
 			console.log(err.responseText);
 		}
@@ -749,7 +829,8 @@ function updateHoveredInfo(mID) {
 		url: '/api/update/hoveredinfo',
 		data: {
 			userid: userid,
-			movie: mID
+			movie: mID,
+			choiceSetNumber: choiceSetNumber
 		},
 		dataType: 'json',
 		error: function(err) {
@@ -767,7 +848,8 @@ function updateHoveredPoster(mID) {
 		url: '/api/update/hoveredposter',
 		data: {
 			userid: userid,
-			movie: mID
+			movie: mID,
+			choiceSetNumber: choiceSetNumber
 		},
 		dataType: 'json',
 		error: function(err) {
@@ -785,7 +867,8 @@ function updateHoveredMovies(mID) {
 		url: '/api/update/hoveredmovies',
 		data: {
 			userid: userid,
-			movie: mID
+			movie: mID,
+			choiceSetNumber: choiceSetNumber
 		},
 		dataType: 'json',
 		error: function(err) {
@@ -811,7 +894,7 @@ function postEvent(event, eventdesc) {
 		data: {
 			userid: userid,
 			event: event,
-			eventdesc: eventdesc
+			eventdesc: JSON.stringify(eventdesc)
 		},
 		dataType: 'json',
 		error: function(err) {

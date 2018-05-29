@@ -9,10 +9,38 @@
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/intro.js" ></script>
-	
+  <script type="text/javascript">
+		$(function() {
+			introJs()
+			.onexit(function() {
+				if (typeof postEvent === "function") {
+					postEvent('EXIT_INTRO', {message: "Exiting hints"});
+				}
+			})
+			.oncomplete(function() {
+				if (typeof postEvent === "function") {
+					postEvent('COMPLETE_INTRO', {message: "Completed hints"});
+				}
+			})
+			.onchange(function(targetElement) {
+				if (typeof postEvent === "function") {
+					postEvent('CLICK_INTRO', {message: "Moving to next hint", step: targetElement});
+				}
+			})
+			.start();
+			
+			$('#helpInfo').on('show.bs.modal', function (e) {
+				setTimeout(function(){
+					if (typeof postEvent === "function") {
+						postEvent('CLICK_HELP', {message: "Clicked on help", choiceNumber: choiceNumber});
+					}
+				}, 300);
+			});
+		});
+	</script>
 </head>
 
-<body onload="introJs().start()">
+<body>
 
 <header>
 </header>

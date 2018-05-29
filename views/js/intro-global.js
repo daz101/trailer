@@ -20,7 +20,7 @@ $('[data-toggle="tooltip"]').tooltip();
 	// Make sure client wants leave
   $(window).on('beforeunload', function() {
     if(confirmUnload)
-      return 'We would really appreciate it if you could complete this survey for our course project.'
+      return 'We would really appreciate it if you could complete this survey for our project.'
             + ' You can also come back to complete it later on from where you left.';
   });
 

@@ -2,13 +2,11 @@
 var express = require('express');
 var router = express.Router();
 var utils = require('./utils.js');
-var useTrailerProbability = 0.5;
 var initId = 1000;
 
 /* GET error if no user id specified in URL.*/
 router.get('/', function(req, res, next) {
 	var cookieValue = utils.getCookie(req, 'userid');
-	console.log(cookieValue);
 	if(cookieValue == null) {
 		// No userid found in cookie, first time user
 		redirectToNewId(req, res);
@@ -50,35 +48,36 @@ router.get('/:id', function(req, res, next) {
 				switch (doc.choice_number) {
 					case -3:
 						// Introduction page
-						renderPageResponse(req, res,  'welcome.html', userid, {}, 'Loaded Introduction page');
+						renderPageResponse(req, res,  'welcome.html', userid, {}, {page: 'welcome.html', message: 'Loaded Introduction page'});
 						break;
 
 					case -2:
 						//Verbal Visual Survey
-						renderPageResponse(req, res,  'firstsurvey.html', userid, {}, 'Loaded Verbal Visual Survey');
+						renderPageResponse(req, res,  'firstsurvey.html', userid, {}, {page: 'firstsurvey.html', message: 'Loaded Verbal Visual Survey'});
 						break;
 
 					case -1:
 						//Overview
-						renderPageResponse(req, res,  'overview.html', userid, {}, 'Loaded Overview');
+						renderPageResponse(req, res,  'overview.html', userid, {}, {page: 'overview.html', message: 'Loaded Overview'});
 						break;
 
 					case 11:
 						//Rating Page
 						renderPageResponse(req, res,  'ratings.html', userid, {
-							choiceNumber: doc.choice_number, 
+							choiceNumber: doc.choice_number,
+							choiceSetNumber: 9,
 							movies: JSON.stringify(doc.choice_set[9] || [])
-						}, 'Loaded Ratings Page');
+						}, {page: 'welcome.html', message: 'Loaded Ratings Page'});
 						break;
 
 					case 12:
 						var finish = typeof doc.secondanswers != 'undefined' && doc.secondanswers !== null && doc.secondanswers.length > 0;
 						if (finish) {
 							// Finish page
-							renderPageResponse(req, res,  'thankyou.html', userid, {}, 'Loaded Finish page', false);
+							renderPageResponse(req, res,  'thankyou.html', userid, {}, {page: 'thankyou.html', message: 'Loaded Finish page'}, false);
 						} else {
 							// Survey page
-							renderPageResponse(req, res,  'secondsurvey.html', userid, {}, 'Loaded Survey page');
+							renderPageResponse(req, res,  'secondsurvey.html', userid, {}, {page: 'secondsurvey.html', message: 'Loaded Survey page'});
 						}
 						break;
 
@@ -86,9 +85,10 @@ router.get('/:id', function(req, res, next) {
 						// Choices page
 						renderPageResponse(req, res,  'Info.html', userid, {
 							choiceNumber: doc.choice_number, 
+							choiceSetNumber: doc.choice_number - 1,
 							movies: JSON.stringify(doc.choice_set[doc.choice_number - 1] || []),
 							conditionNum: doc.conditionNum
-						}, {choice_set : doc.choice_number + 1});
+						}, {page: 'Info.html', choice_set : doc.choice_number + 1});
 				}
 			} catch (e) {
 				console.log(e.stack);
@@ -100,7 +100,7 @@ router.get('/:id', function(req, res, next) {
 		});
 
 		// Save the user agent from which the user is connecting
-		utils.updateEvent(db, 'New connection Made', req.useragent, userid, res);
+		utils.updateEvent(db, 'CONNECT_USER', req.useragent, userid, res);
 	} catch (e) {
 		console.log(e.stack);
 		console.error("routes/index :: /:id :: Error in handling id = " + userid);
@@ -150,13 +150,16 @@ function createNewUser(req, res, users, userid) {
 		_id: userid,
 		userid: userid,
 		choice_number: -3,
+		initial_choice_set: [],
 		choice_set: [],
+		recommended_set: [],
 		conditionNum: expCondition,
 		watched_trailers: [],
 		hovered_movies: [],
 		hovered_info: [],
 		hovered_poster: [],
 		choices: [],
+		recommended_choices: [],
 		ratings: [],
 		known: [],
 		feedback: null,
@@ -167,7 +170,7 @@ function createNewUser(req, res, users, userid) {
 			console.error("Error in createNewUser while users.insert :: " + err);
 			return next(err);
 		}
-		renderPageResponse(req, res,  'welcome.html', userid, {}, 'Loaded Introduction page');
+		renderPageResponse(req, res,  'welcome.html', userid, {}, {page: 'welcome.html', message: 'Loaded Introduction page'});
 	});
 }
 
@@ -188,7 +191,7 @@ function renderPageResponse(req, res, page, userid, info, eventDesc, setCookie) 
 			res = utils.deleteCookie(req, res, 'userid');
 		}
 		res.send(html);
-		utils.updateEvent(req.db, 'PAGE_LOAD', eventDesc, userid, res);
+		utils.updateEvent(req.db, 'LOAD_PAGE', eventDesc, userid, res);
 	});
 }
 

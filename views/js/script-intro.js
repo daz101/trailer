@@ -12,7 +12,7 @@ $(document).ready(function() {
 	//welcome
   $('#consentBody, #consentbutton, #resizeBody, #resizebutton').hide();
    $('#welcomebutton').click(function() {
-    postEvent('Clicked "Start Welcome"', null);
+    postEvent('CLICK_WELCOME', {message: 'Clicked "Start Welcome"'});
 	$('#welcomeBody, #welcomebutton').fadeOut("slow", function() {
       $('#welcomeBody, #welcomebutton').hide();
       $('#consentBody, #consentbutton').show().fadeIn("slow");
@@ -21,7 +21,7 @@ $(document).ready(function() {
 
 	$('#consentbutton').click(function() {
 		if(consent_check==1){
-    postEvent('Clicked "Start Consent"', null);
+		postEvent('CLICK_CONSENT', {message : 'Clicked "Start Consent"'});
 	$('#consentBody, #consentbutton').fadeOut("slow", function() {
       $('#consentBody, #consentbutton').hide();
 	$('#resizeBody, #resizebutton').show().fadeIn("slow");
@@ -46,7 +46,7 @@ $( "#consent_Q tr td" ).click(function() {
 });
 	
 	$('#resizebutton').click(function() {	
-    postEvent('Clicked "Start Resize"', null);
+    postEvent('CLICK_RESIZE', {message : 'Clicked "Start Resize"'});
 	start();
     }); 
 	//end of welcome 
@@ -69,7 +69,7 @@ $('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpa
 		var hookpage = $("#verbalpage1");
 		if(isSurveyComplete(hookpage))
 		{
-			postEvent('Clicked "Started Verbal Visual Survey"', null);
+			postEvent('CLICK_VERBAL_VISUAL_SURVEY', {message : 'Clicked "Verbal Visual Survey Page 1"'});
 			//Loading page 2
 			$('#verbalpage1, #verbalpage1button').fadeOut("slow", function() {
 			  $('#verbalpage1, #verbalpage1button').hide();
@@ -83,6 +83,7 @@ $('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpa
 		var hookpage = $("#verbalpage2");
 		if(isSurveyComplete(hookpage))
 		{
+			postEvent('CLICK_VERBAL_VISUAL_SURVEY', {message : 'Clicked "Started Verbal Visual Survey Page 2"'});
 		  $('#verbalpage2, #verbalpage2button').fadeOut("slow", function() {
 		  $('#verbalpage2, #verbalpage2button').hide();
 		  $('#verbalpage3, #verbalpage3button').show().fadeIn("slow");
@@ -95,6 +96,7 @@ $('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpa
 		var hookpage = $("#verbalpage3");
 		if(isSurveyComplete(hookpage))
 		{
+			postEvent('CLICK_VERBAL_VISUAL_SURVEY', {message : 'Clicked "Started Verbal Visual Survey Page 3"'});
 		  $('#verbalpage3, #verbalpage3button').fadeOut("slow", function() {
 		  $('#verbalpage3, #verbalpage3button').hide();
 		  $('#verbalpage4, #resize_nextOverview').show().fadeIn("slow");
@@ -109,6 +111,7 @@ $('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpa
 		{
 		   finish();
 		   start();
+		   postEvent('CLICK_VERBAL_VISUAL_SURVEY', {message : 'Clicked "Finished Verbal Visual Survey"'});
 		}
 	});
 	
@@ -144,7 +147,7 @@ function isSurveyComplete(hookpage) {
 	$('#begin, #beginbutton, #instructions3button').hide();
 	
 	$('#overviewbutton').click(function() {
-    postEvent('Clicked "Start Overview"', null);
+    postEvent('CLICK_OVERIVEW', {message : 'Clicked "Start Overview"'});
 	$('#overviewbutton, #overview').fadeOut("slow", function() {
       $('#overviewbutton, #overview').hide();
       $('#begin, #beginbutton').show().fadeIn("slow");
@@ -153,7 +156,7 @@ function isSurveyComplete(hookpage) {
 	});
 	
 	$('#beginbutton').click(function() {
-	postEvent('Clicked "Start Begin"', null);
+	postEvent('CLICK_BEGIN', {message : 'Clicked "Start Begin"'});
 	start(); 
 	});
 	
@@ -167,7 +170,7 @@ function isSurveyComplete(hookpage) {
   });
 
   $(window).on('unload', function() {
-    postEvent('Closed connection', null);
+    postEvent('DISCONNECT_USER', {message : 'Closed Connection'});
   });
 
 });
@@ -248,7 +251,7 @@ function postEvent(event, eventdesc) {
     data: {
       userid: userid,
       event: event,
-      eventdesc: eventdesc
+      eventdesc: JSON.stringify(eventdesc)
     },
     dataType: 'json',
     error: function(err) {
