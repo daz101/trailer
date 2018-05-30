@@ -71,6 +71,12 @@ $(document).ready(function() {
 		var moviePos = idArr[idArr.length - 1] - 1;
 		postEvent('MOUSEOUT_MOVIE', {id: movies[moviePos]._id});
 	});
+	
+	$('.movie-block').click(function() {
+		var idArr = $(this).prop('id').split("_");
+		var moviePos = idArr[idArr.length - 1] - 1;
+		postEvent('SELECT_MOVIE', {id: movies[moviePos]._id});
+	});
 
 	$('.movie_info').mouseover(function() {
 		updateHoveredInfo($(this).attr('data-movie-id-number'));
@@ -110,7 +116,6 @@ $(document).ready(function() {
 		// Find which movie was clicked
 		var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
 		var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
-
 		//if clicked then send value and movie id to array 
 	});
 
@@ -168,16 +173,27 @@ $(document).ready(function() {
 
 	//ratings push 
 	$('#ratingsButton').click(function() {
+		for (var i = 1; i <= nrOfMovies; i++) {
+			if(!$('input[name=rating_' + i + ']:checked').val()) {
+				return;
+			}
+		}
+		
+		for (var i = 1; i <= nrOfMovies; i++) {
+			if(!$('input[name=known_' + i + ']:checked').val()) {
+				return;
+			}
+		}
 		postRatings();
 		postKnown();
+		postEvent('RATE_MOVIE', {message: "Movies Rated", ratings: ratings, known: known});
 		nextPage();
-
 	});
 
 	// Make sure client wants leave
 	$(window).on('beforeunload', function() {
 		if (confirmUnload)
-			return 'We would really appreciate it if you could complete this survey for our course project.' +
+			return 'We would really appreciate it if you could complete this survey for our project.' +
 				' You can also come back to complete it later on from where you left.';
 	});
 
@@ -258,7 +274,6 @@ function loadSelectedMovie(pos) {
 	} catch (e) {
 		console.warn("Exception in loadSelectedMovie :: loadTrailer failed with error = " + e);
 	}
-	postEvent('SELECT_MOVIE', {id: movies[pos]._id});
 }
 
 /**
