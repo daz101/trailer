@@ -21,6 +21,7 @@
     "express": "https://registry.npmjs.org/express/-/express-4.13.4.tgz",
     "express-generator": "^4.15.0",
     "express-useragent": "^0.2.4",
+    "hashids": "^1.1.4",
     "jade": "~1.11.0",
     "mongodb": "^1.4.40",
     "mongoose": "~4.11.7",

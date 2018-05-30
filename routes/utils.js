@@ -1,4 +1,7 @@
 "use strict";
+var Hashids = require('hashids');
+var hashLength = 6;
+var hashids = new Hashids('', hashLength);
 
 /**
  * Pad a string with zero's on the left to required length.
@@ -69,6 +72,16 @@ var decrypt = function(req, text){
 	return dec;
 };
 
+var hash = function(req, id){
+	var salt = req.settings.hashSalt;
+	if(!isNumeric(id) || !isNumeric(salt)) {
+		throw "id or salt is not a number";
+	}
+	id = parseInt(id);
+	salt = parseInt(salt);
+	return hashids.encode(id * salt);
+}
+
 
 ////////////////////
 // Cookie Utils
@@ -106,6 +119,7 @@ module.exports = {
 	updateEvent: updateEvent,
 	encrypt: encrypt,
 	decrypt: decrypt,
+	hash: hash,
 	getCookie: getCookie,
 	setCookie: setCookie,
 	deleteCookie: deleteCookie

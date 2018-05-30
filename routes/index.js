@@ -74,7 +74,7 @@ router.get('/:id', function(req, res, next) {
 						var finish = typeof doc.secondanswers != 'undefined' && doc.secondanswers !== null && doc.secondanswers.length > 0;
 						if (finish) {
 							// Finish page
-							renderPageResponse(req, res,  'thankyou.html', userid, {}, {page: 'thankyou.html', message: 'Loaded Finish page'}, false);
+							renderPageResponse(req, res,  'thankyou.html', userid, {hashId: utils.hash(req, userid)}, {page: 'thankyou.html', message: 'Loaded Finish page'}, false);
 						} else {
 							// Survey page
 							renderPageResponse(req, res,  'secondsurvey.html', userid, {}, {page: 'secondsurvey.html', message: 'Loaded Survey page'});

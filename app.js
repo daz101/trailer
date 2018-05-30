@@ -18,6 +18,8 @@ app.db = db;
 // settings
 var encryptionPassword = process.env.ENCRYPTION_PASSWORD;
 app.set("ENCRYPTION_PASSWORD", encryptionPassword);
+var hashSalt = process.env.HASH_SALT;
+app.set("HASH_SALT", hashSalt);
 
 // view engine setup
 
@@ -42,6 +44,7 @@ app.use(function(req,res,next){
   req.db = db;
   req.settings = {}
   req.settings.encryptionPassword = encryptionPassword;
+  req.settings.hashSalt = hashSalt;
   next();
 });
 

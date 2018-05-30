@@ -43,7 +43,7 @@ $(document).ready(function() {
 		//send comment from comment box
 		var text = $('#textbox').val();
 		postFeedback(text, function() {
-			postEvent('DONE_FEEDBACK', 'Feedback sent');
+			postEvent('DONE_FEEDBACK', {message: 'Feedback sent'});
 			$('#surveyintro, #beginbutton').fadeOut("slow", function() {
 				$('#surveyintro, #beginbutton').hide();
 				$('#surveypage1, #surveypage1button').show().fadeIn("slow");
@@ -54,8 +54,7 @@ $(document).ready(function() {
 	$('#surveypage1button').click(function() {
 		var hookpage = $('#surveypage1');
 		if (isSurveyComplete(hookpage)) {
-			//postEvent('Started Final Survey', null);
-			postEvent('START_FINAL_SURVEY', 'Started Final Survey');
+			postEvent('START_FINAL_SURVEY', {message: 'Started Final Survey'});
 			//go to page 2
 			secondanswers = saveSurveyResults(hookpage, secondanswers);
 			$('#surveypage1, #surveypage1button').fadeOut("slow", function() {
@@ -97,7 +96,7 @@ $(document).ready(function() {
 	});
 
 	$(window).on('unload', function(e) {
-		postEvent('Closed connection', null);
+		postEvent('DISCONNECT_USER', {message: 'Closed connection'});
 	});
 });
 
@@ -159,7 +158,7 @@ function finish() {
 		},
 		dataType: 'json',
 		success: function() {
-			postEvent('DONE_FINAL_SURVEY', 'Final Survey Completed');
+			postEvent('DONE_FINAL_SURVEY', {message: 'Final Survey Completed'});
 			confirmUnload = false;
 			location.reload(true);
 		},
@@ -191,7 +190,7 @@ function postEvent(event, eventdesc) {
 		data: {
 			userid: userid,
 			event: event,
-			eventdesc: eventdesc
+			eventdesc: JSON.stringify(eventdesc)
 		},
 		dataType: 'json',
 		error: function(err) {
