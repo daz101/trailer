@@ -494,7 +494,8 @@ function getChoiceSet(pos, cb) {
 			}, delay);
 		},
 		error: function(err) {
-			console.log(err.responseText);
+			console.log("Error in getChoiceSet :: " + JSON.stringify(err));
+			loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, false);
 		}
 	});
 }
@@ -588,7 +589,8 @@ function getFinalRecommendationSet(pos, cb) {
 			}, delay);
 		},
 		error: function(err) {
-			console.log(err.responseText);
+			console.log("Error in getFinalRecommendationSet :: " + JSON.stringify(err));
+			loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, true);
 		}
 	});
 }
@@ -631,6 +633,45 @@ function loadChoiceSet(event, mID, data, isFinal) {
 		if(isFinal) {
 			postFinalMovies();
 		}
+	});
+}
+
+/**
+ * Load the new choice set on-screen with random movies
+ * NOTE: This will be called only on Error and is for TESTING purposes only.
+ */
+function loadRandomMoviesOnError(event, mID, isFinal) {
+	// First, reset movies list on-screen
+	resetMovies();
+
+	// Load the new recommendation set
+	getMoviesCount(function(count) {
+		var promises = [];
+		for (var i = 0; i < nrOfMovies; i++) {
+			var mID = 1 + Math.floor(Math.random() * count);
+			//match randomly selected movie to movieID
+			promises.push(loadMovieInfo(i, mID, 'num'));
+		}
+		
+		// Save the movie selected
+		promises.push(postChoices(mID));
+
+		// Update choice number
+		promises.push(postChoiceNumber(function() {
+			// Log choice set load event
+			postEvent(event, {id: mID, choiceNumber: choiceNumber});
+		}));
+		
+		// When movie info is loaded for all movies
+		$.when.apply($, promises).done(function() {
+			// Update the movies list on the backend for the user
+			postMovies();
+			// Update Index of the choice set being shown
+			choiceSetNumber++;
+			if(isFinal) {
+				postFinalMovies();
+			}
+		});
 	});
 }
 
