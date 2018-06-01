@@ -1,485 +1,424 @@
 <!DOCTYPE HTML>
 <meta charset="utf-8" />
 <html>
-
-<head>
-  <title>Movie Trailer</title>
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-</head>
-
-<body id="page12" onload="timerFunction()">
-
-<header>
-</header>
-
-<div class="holding_container" id="ratingsPage">
-	<div class="movie-progress">           
-
-        <ul id="progress_circles">
-		<li class="step" id="pb_1"></li>
-		<li class="done" id="pb_2"></li>
-		<li class="done"id="pb_3"></li>
-		<li class="step" id="pb_4"></li>
-		<li class="done" id="pb_5"></li>
-		<li class="done" id="pb_6"></li>
-		<li class="step" id="pb_7"></li>
-		<li class="done" id="pb_8"></li>
-		<li class="done" id="pb_9"></li>
-        <li class="activeStep" id="pb_10"></li>
-        <li class="stepDisabled" id="pb_11"></li>
-        <li id="pb_12"></li>
-        <li id="pb_13"></li>
-		<li id="pb_14"></li>
-		<li id="pb_15"></li>
-		<li id="pb_16"></li>
-        <li class="stepDisabled" id="pb_17"></li>
-		</ul>            
-  </div>
-
-			
-  
-  
-  <div id="pageno">
-	<span>11</span>
-  </div>
-  
-  
-  <div class="info_holder">
-	<a href="" data-toggle="modal" data-target="#helpInfo"> 
-	<img data-toggle="tooltip" title="Help" src="img/info.png" alt="info"> 
-	</a>
-	
-	<div id="helpInfo" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">			
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Instructions</h4>
+	<head>
+		<title>Movie Trailer</title>
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+	</head>
+	<body id="page12">
+		<header></header>
+		<div class="container-fluid parent_container">
+			<div class="holding_container" id="ratingsPage">
+				<div class="movie-progress">
+					<ul id="progress_circles">
+						<li class="step" id="pb_1"></li>
+						<li class="done" id="pb_2"></li>
+						<li class="done"id="pb_3"></li>
+						<li class="step" id="pb_4"></li>
+						<li class="done" id="pb_5"></li>
+						<li class="done" id="pb_6"></li>
+						<li class="step" id="pb_7"></li>
+						<li class="done" id="pb_8"></li>
+						<li class="done" id="pb_9"></li>
+						<li class="activeStep" id="pb_10"></li>
+						<li class="stepDisabled" id="pb_11"></li>
+						<li id="pb_12"></li>
+						<li id="pb_13"></li>
+						<li id="pb_14"></li>
+						<li id="pb_15"></li>
+						<li id="pb_16"></li>
+						<li class="stepDisabled" id="pb_17"></li>
+					</ul>
 				</div>
-				
-				<div class="modal-body">
-					<p>
-					1. These are exactly the same movies that you saw on the last page. You may click on the movie posters to read more information about the movie. 
-				<br><b>2. Rate all the ten movies. If you haven't seen the movie please rate based on the information given. </b>
-				<br>3. Click on the Next button to go to the next page. This button won't be activated until you rate all the movies and select either the tick or cross options for all the movies.</span>
-					</p>
+				<div id="pageno">
+					<span>11</span>
 				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>	
-		    </div>
+				<div class="info_holder">
+					<a href="" data-toggle="modal" data-target="#helpInfo"> 
+					<img data-toggle="tooltip" title="Help" src="img/info.png" alt="info"> 
+					</a>
+					<div id="helpInfo" class="modal fade" role="dialog">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<h4 class="modal-title">Instructions</h4>
+								</div>
+								<div class="modal-body">
+									<p>
+										1. These are exactly the same movies that you saw on the last page. You may click on the movie posters to read more information about the movie. 
+										<br><b>2. Rate all the ten movies. If you haven't seen the movie please rate based on the information given. </b>
+										<br>3. Click on the Next button to go to the next page. This button won't be activated until you rate all the movies and select either the tick or cross options for all the movies.</span>
+									</p>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="movie_display_block">
+					<div class="intro">
+						<span><b>Rate Your Movie Recommendations</b><br> Instructions</span>
+						<span>1. These are exactly the same movies that you saw on the last page. You may click on the movie posters to read more information about the movie. 
+						<br><b>2. Rate all the ten movies. If you haven't seen the movie please rate based on the information given </b>
+						<br>3. Click on the Next button to go to the next page. This button won't be activated until you rate all the movies and select either the tick or cross options for all the movies.</span>
+					</div>
+					<div class="movie_img">
+						<img class="object-fit_contain" id="movieposter">
+					</div>
+					<div class="movie_info">
+						<div class="movie-title">
+							<h6><b><span class="title" id="movietitle"></span></b></h6>
+						</div>
+						<div class="movie-plot">
+							<span class="plot">Plot: </span>
+							<span class="pname" id="moviesummary"></span>
+						</div>
+						<div class="movie-plot">
+							<span class="plot">Genre: </span>
+							<span class="pname" id="moviegenres"></span>
+						</div>
+						<div class="movie-plot">
+							<span class="plot">Director: </span>
+							<span class="pname" id="moviedirector"></span>
+						</div>
+						<div class="movie-cast">
+							<span class="cast">Cast: </span>
+							<span class="cname" id="moviecast"></span>
+						</div>
+					</div>
+				</div>
+				<div id="movie_ribbon">
+					<div class="block_holder">
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="highlight">
+						</div>
+						<div class="movie-block" id="movie_1">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c1" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k1_1" name="known_1" value="1" />
+									<label for="k1_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k1_2" name="known_1" value="0" />
+									<label for="k1_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb1">
+								<fieldset class="rating">
+									<input type="radio" id="star5_1" name="rating_1" value="5" /><label for="star5_1"></label>
+									<input type="radio" id="star4_1" name="rating_1" value="4" /><label for="star4_1"></label>
+									<input type="radio" id="star3_1" name="rating_1" value="3" /><label for="star3_1"></label>
+									<input type="radio" id="star2_1" name="rating_1" value="2" /><label for="star2_1"></label>
+									<input type="radio" id="star1_1" name="rating_1" value="1" /><label for="star1_1"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_2">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c2" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k2_1" name="known_2" value="1" />
+									<label for="k2_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k2_2" name="known_2" value="0" />
+									<label for="k2_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb2">
+								<fieldset class="rating">
+									<input type="radio" id="star5_2" name="rating_2" value="5" /><label for="star5_2"></label>
+									<input type="radio" id="star4_2" name="rating_2" value="4" /><label for="star4_2"></label>
+									<input type="radio" id="star3_2" name="rating_2" value="3" /><label for="star3_2"></label>
+									<input type="radio" id="star2_2" name="rating_2" value="2" /><label for="star2_2"></label>
+									<input type="radio" id="star1_2" name="rating_2" value="1" /><label for="star1_2"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_3">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c3" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k3_1" name="known_3" value="1" />
+									<label for="k3_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k3_2" name="known_3" value="0" />
+									<label for="k3_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb3">
+								<fieldset class="rating">
+									<input type="radio" id="star5_3" name="rating_3" value="5" /><label for="star5_3"></label>
+									<input type="radio" id="star4_3" name="rating_3" value="4" /><label for="star4_3"></label>
+									<input type="radio" id="star3_3" name="rating_3" value="3" /><label for="star3_3"></label>
+									<input type="radio" id="star2_3" name="rating_3" value="2" /><label for="star2_3"></label>
+									<input type="radio" id="star1_3" name="rating_3" value="1" /><label for="star1_3"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_4">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c4" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k4_1" name="known_4" value="1" />
+									<label for="k4_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k4_2" name="known_4" value="0" />
+									<label for="k4_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb4">
+								<fieldset class="rating">
+									<input type="radio" id="star5_4" name="rating_4" value="5" /><label for="star5_4"></label>
+									<input type="radio" id="star4_4" name="rating_4" value="4" /><label for="star4_4"></label>
+									<input type="radio" id="star3_4" name="rating_4" value="3" /><label for="star3_4"></label>
+									<input type="radio" id="star2_4" name="rating_4" value="2" /><label for="star2_4"></label>
+									<input type="radio" id="star1_4" name="rating_4" value="1" /><label for="star1_4"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_5">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c5" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k5_1" name="known_5" value="1" />
+									<label for="k5_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k5_2" name="known_5" value="0" />
+									<label for="k5_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb5">
+								<fieldset class="rating">
+									<input type="radio" id="star5_5" name="rating_5" value="5" /><label for="star5_5"></label>
+									<input type="radio" id="star4_5" name="rating_5" value="4" /><label for="star4_5"></label>
+									<input type="radio" id="star3_5" name="rating_5" value="3" /><label for="star3_5"></label>
+									<input type="radio" id="star2_5" name="rating_5" value="2" /><label for="star2_5"></label>
+									<input type="radio" id="star1_5" name="rating_5" value="1" /><label for="star1_5"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_6">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c6" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k6_1" name="known_6" value="1" />
+									<label for="k6_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k6_2" name="known_6" value="0" />
+									<label for="k6_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb6">
+								<fieldset class="rating">
+									<input type="radio" id="star5_6" name="rating_6" value="5" /><label for="star5_6"></label>
+									<input type="radio" id="star4_6" name="rating_6" value="4" /><label for="star4_6"></label>
+									<input type="radio" id="star3_6" name="rating_6" value="3" /><label for="star3_6"></label>
+									<input type="radio" id="star2_6" name="rating_6" value="2" /><label for="star2_6"></label>
+									<input type="radio" id="star1_6" name="rating_6" value="1" /><label for="star1_6"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_7">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c7" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k7_1" name="known_7" value="1" />
+									<label for="k7_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k7_2" name="known_7" value="0" />
+									<label for="k7_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb7">
+								<fieldset class="rating">
+									<input type="radio" id="star5_7" name="rating_7" value="5" /><label for="star5_7"></label>
+									<input type="radio" id="star4_7" name="rating_7" value="4" /><label for="star4_7"></label>
+									<input type="radio" id="star3_7" name="rating_7" value="3" /><label for="star3_7"></label>
+									<input type="radio" id="star2_7" name="rating_7" value="2" /><label for="star2_7"></label>
+									<input type="radio" id="star1_7" name="rating_7" value="1" /><label for="star1_7"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_8">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c8" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k8_1" name="known_8" value="1" />
+									<label for="k8_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k8_2" name="known_8" value="0" />
+									<label for="k8_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb8">
+								<fieldset class="rating">
+									<input type="radio" id="star5_8" name="rating_8" value="5" /><label for="star5_8"></label>
+									<input type="radio" id="star4_8" name="rating_8" value="4" /><label for="star4_8"></label>
+									<input type="radio" id="star3_8" name="rating_8" value="3" /><label for="star3_8"></label>
+									<input type="radio" id="star2_8" name="rating_8" value="2" /><label for="star2_8"></label>
+									<input type="radio" id="star1_8" name="rating_8" value="1" /><label for="star1_8"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_9">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c9" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k9_1" name="known_9" value="1" />
+									<label for="k9_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k9_2" name="known_9" value="0" />
+									<label for="k9_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose" id="cb9">
+								<fieldset class="rating">
+									<input type="radio" id="star5_9" name="rating_9" value="5" /><label for="star5_9"></label>
+									<input type="radio" id="star4_9" name="rating_9" value="4" /><label for="star4_9"></label>
+									<input type="radio" id="star3_9" name="rating_9" value="3" /><label for="star3_9"></label>
+									<input type="radio" id="star2_9" name="rating_9" value="2" /><label for="star2_9"></label>
+									<input type="radio" id="star1_9" name="rating_9" value="1" /><label for="star1_9"></label>
+								</fieldset>
+							</div>
+						</div>
+						<div class="movie-block" id="movie_10">
+							<div class="wrapper-block">
+								<div class="cover">	
+									<img id="c10" src="img/placeholder.png">
+								</div>
+								<div class="hover-block">
+									Click to read info
+								</div>
+							</div>
+							<div class="choose firstBlk">
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k10_1" name="known_10" value="1" />
+									<label for="k10_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
+								</div>
+								<div class="icon-holder">
+									<input class="input-hidden" type="radio" id="k10_2" name="known_10" value="0" />
+									<label for="k10_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
+								</div>
+							</div>
+							<div class="choose"id="cb10">
+								<fieldset class="rating">
+									<input type="radio" id="star5_10" name="rating_10" value="5" /><label for="star5_10"></label>
+									<input type="radio" id="star4_10" name="rating_10" value="4" /><label for="star4_10"></label>
+									<input type="radio" id="star3_10" name="rating_10" value="3" /><label for="star3_10"></label>
+									<input type="radio" id="star2_10" name="rating_10" value="2" /><label for="star2_10"></label>
+									<input type="radio" id="star1_10" name="rating_10" value="1" /><label for="star1_10"></label>
+								</fieldset>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="next-button">
+					<button id="ratingsButton" type="button">Next</button>
+				</div>
+			</div>
+			<!--end of ratings--> 
 		</div>
-	</div>
-	
-</div>
-  
-	<div id="movie_display_block">
-		
-		<div class="intro">
-		<span><b>Rate Your Movie Recommendations</b><br> Instructions</span>
-		<span>1. These are exactly the same movies that you saw on the last page. You may click on the movie posters to read more information about the movie. 
-		<br><b>2. Rate all the ten movies. If you haven't seen the movie please rate based on the information given </b>
-	<br>3. Click on the Next button to go to the next page. This button won't be activated until you rate all the movies and select either the tick or cross options for all the movies.</span>
-
-		</div>
-		
-		<div class="movie_img">
-			<img class="object-fit_contain" id="movieposter">
-		</div>
-		
-		<div class="movie_info">
-			<div class="movie-title">
-				<h6><b><span class="title" id="movietitle"></span></b></h6>
-			</div>
-			
-			<div class="movie-plot">
-				<span class="plot">Plot: </span>
-				<span class="pname" id="moviesummary"></span>
-			</div>
-			
-			<div class="movie-plot">
-				<span class="plot">Genre: </span>
-				<span class="pname" id="moviegenres"></span>
-			</div>
-			
-			
-			<div class="movie-plot">
-				<span class="plot">Director: </span>
-				<span class="pname" id="moviedirector"></span>
-			</div>
-			
-			<div class="movie-cast">
-				<span class="cast">Cast: </span>
-				<span class="cname" id="moviecast"></span>
-			</div>
-			
-		</div>
-	</div>
-	<div id="movie_ribbon">
-	   <div class="block_holder">
-	   
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-	   
-			<div class="movie-block" id="movie_1">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c1" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k1_1" name="known_1" value="1" />
-						<label for="k1_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k1_2" name="known_1" value="0" />
-						<label for="k1_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb1">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_1" name="rating_1" value="5" /><label for="star5_1"></label>
-						<input type="radio" id="star4_1" name="rating_1" value="4" /><label for="star4_1"></label>
-						<input type="radio" id="star3_1" name="rating_1" value="3" /><label for="star3_1"></label>
-						<input type="radio" id="star2_1" name="rating_1" value="2" /><label for="star2_1"></label>
-						<input type="radio" id="star1_1" name="rating_1" value="1" /><label for="star1_1"></label>
-					</fieldset>
-				</div>
-				
-			</div>
-			
-			<div class="movie-block" id="movie_2">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c2" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k2_1" name="known_2" value="1" />
-						<label for="k2_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k2_2" name="known_2" value="0" />
-						<label for="k2_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb2">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_2" name="rating_2" value="5" /><label for="star5_2"></label>
-						<input type="radio" id="star4_2" name="rating_2" value="4" /><label for="star4_2"></label>
-						<input type="radio" id="star3_2" name="rating_2" value="3" /><label for="star3_2"></label>
-						<input type="radio" id="star2_2" name="rating_2" value="2" /><label for="star2_2"></label>
-						<input type="radio" id="star1_2" name="rating_2" value="1" /><label for="star1_2"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_3">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c3" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k3_1" name="known_3" value="1" />
-						<label for="k3_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k3_2" name="known_3" value="0" />
-						<label for="k3_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb3">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_3" name="rating_3" value="5" /><label for="star5_3"></label>
-						<input type="radio" id="star4_3" name="rating_3" value="4" /><label for="star4_3"></label>
-						<input type="radio" id="star3_3" name="rating_3" value="3" /><label for="star3_3"></label>
-						<input type="radio" id="star2_3" name="rating_3" value="2" /><label for="star2_3"></label>
-						<input type="radio" id="star1_3" name="rating_3" value="1" /><label for="star1_3"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_4">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c4" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k4_1" name="known_4" value="1" />
-						<label for="k4_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k4_2" name="known_4" value="0" />
-						<label for="k4_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb4">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_4" name="rating_4" value="5" /><label for="star5_4"></label>
-						<input type="radio" id="star4_4" name="rating_4" value="4" /><label for="star4_4"></label>
-						<input type="radio" id="star3_4" name="rating_4" value="3" /><label for="star3_4"></label>
-						<input type="radio" id="star2_4" name="rating_4" value="2" /><label for="star2_4"></label>
-						<input type="radio" id="star1_4" name="rating_4" value="1" /><label for="star1_4"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_5">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c5" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k5_1" name="known_5" value="1" />
-						<label for="k5_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k5_2" name="known_5" value="0" />
-						<label for="k5_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb5">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_5" name="rating_5" value="5" /><label for="star5_5"></label>
-						<input type="radio" id="star4_5" name="rating_5" value="4" /><label for="star4_5"></label>
-						<input type="radio" id="star3_5" name="rating_5" value="3" /><label for="star3_5"></label>
-						<input type="radio" id="star2_5" name="rating_5" value="2" /><label for="star2_5"></label>
-						<input type="radio" id="star1_5" name="rating_5" value="1" /><label for="star1_5"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_6">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c6" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k6_1" name="known_6" value="1" />
-						<label for="k6_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k6_2" name="known_6" value="0" />
-						<label for="k6_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb6">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_6" name="rating_6" value="5" /><label for="star5_6"></label>
-						<input type="radio" id="star4_6" name="rating_6" value="4" /><label for="star4_6"></label>
-						<input type="radio" id="star3_6" name="rating_6" value="3" /><label for="star3_6"></label>
-						<input type="radio" id="star2_6" name="rating_6" value="2" /><label for="star2_6"></label>
-						<input type="radio" id="star1_6" name="rating_6" value="1" /><label for="star1_6"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_7">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c7" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k7_1" name="known_7" value="1" />
-						<label for="k7_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k7_2" name="known_7" value="0" />
-						<label for="k7_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb7">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_7" name="rating_7" value="5" /><label for="star5_7"></label>
-						<input type="radio" id="star4_7" name="rating_7" value="4" /><label for="star4_7"></label>
-						<input type="radio" id="star3_7" name="rating_7" value="3" /><label for="star3_7"></label>
-						<input type="radio" id="star2_7" name="rating_7" value="2" /><label for="star2_7"></label>
-						<input type="radio" id="star1_7" name="rating_7" value="1" /><label for="star1_7"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_8">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c8" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k8_1" name="known_8" value="1" />
-						<label for="k8_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k8_2" name="known_8" value="0" />
-						<label for="k8_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb8">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_8" name="rating_8" value="5" /><label for="star5_8"></label>
-						<input type="radio" id="star4_8" name="rating_8" value="4" /><label for="star4_8"></label>
-						<input type="radio" id="star3_8" name="rating_8" value="3" /><label for="star3_8"></label>
-						<input type="radio" id="star2_8" name="rating_8" value="2" /><label for="star2_8"></label>
-						<input type="radio" id="star1_8" name="rating_8" value="1" /><label for="star1_8"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_9">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c9" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k9_1" name="known_9" value="1" />
-						<label for="k9_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k9_2" name="known_9" value="0" />
-						<label for="k9_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose" id="cb9">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_9" name="rating_9" value="5" /><label for="star5_9"></label>
-						<input type="radio" id="star4_9" name="rating_9" value="4" /><label for="star4_9"></label>
-						<input type="radio" id="star3_9" name="rating_9" value="3" /><label for="star3_9"></label>
-						<input type="radio" id="star2_9" name="rating_9" value="2" /><label for="star2_9"></label>
-						<input type="radio" id="star1_9" name="rating_9" value="1" /><label for="star1_9"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_10">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c10" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				
-				<div class="choose firstBlk">
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k10_1" name="known_10" value="1" />
-						<label for="k10_1"><img data-toggle="tooltip" title="I know this movie" src="img/tick.png"></label>
-					</div>
-					<div class="icon-holder">
-						<input class="input-hidden" type="radio" id="k10_2" name="known_10" value="0" />
-						<label for="k10_2"><img data-toggle="tooltip" title="I DON'T know this movie" src="img/wrong.png"></label>
-					</div>
-				</div>
-				
-				<div class="choose"id="cb10">
-					 <fieldset class="rating">
-						<input type="radio" id="star5_10" name="rating_10" value="5" /><label for="star5_10"></label>
-						<input type="radio" id="star4_10" name="rating_10" value="4" /><label for="star4_10"></label>
-						<input type="radio" id="star3_10" name="rating_10" value="3" /><label for="star3_10"></label>
-						<input type="radio" id="star2_10" name="rating_10" value="2" /><label for="star2_10"></label>
-						<input type="radio" id="star1_10" name="rating_10" value="1" /><label for="star1_10"></label>
-					</fieldset>
-				</div>
-			</div>
-			
-		</div>
-	</div>
-	
-	<div class="next-button">
-	<button id="ratingsButton" type="button">Next</button>
-	</div>
-	</div><!--end of ratings--> 
-    	
-</div>
-<script type="text/javascript">
-      data=<%- JSON.stringify(data) %>;
-      confirmUnload = true;
-      $('a').click(function() { confirmUnload = false});
-</script>
-<script type="text/javascript" rel="javascript" src="js/script-index.js"></script>
-<script type="text/javascript" src="js/rating.js"></script>
-</body>
-
+		<script type="text/javascript">
+			data=<%- JSON.stringify(data) %>;
+			confirmUnload = true;
+			$('a').click(function() { confirmUnload = false});
+		</script>
+		<script type="text/javascript" rel="javascript" src="js/script-index.js"></script>
+		<script type="text/javascript" src="js/rating.js"></script>
+	</body>
 </html>
