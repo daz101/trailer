@@ -1,370 +1,347 @@
 <!DOCTYPE HTML>
 <html>
-
-<head>
-  <title>Movie Trailer</title>
-  <link href="css/bootstrap.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet" type="text/css" />
-  <link href="css/introjs.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/intro.js" ></script>
-  <script type="text/javascript">
-		$(function() {
-			introJs()
-			.onexit(function() {
-				if (typeof postEvent === "function") {
-					postEvent('EXIT_INTRO', {message: "Exiting hints"});
-				}
-			})
-			.oncomplete(function() {
-				if (typeof postEvent === "function") {
-					postEvent('COMPLETE_INTRO', {message: "Completed hints"});
-				}
-			})
-			.onchange(function(targetElement) {
-				if (typeof postEvent === "function") {
-					postEvent('CLICK_INTRO', {message: "Moving to next hint", step: targetElement});
-				}
-			})
-			.start();
-			
-			$('#helpInfo').on('show.bs.modal', function (e) {
-				setTimeout(function(){
+	<head>
+		<title>Movie Trailer</title>
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/style.css" rel="stylesheet" type="text/css" />
+		<link href="css/introjs.css" rel="stylesheet" type="text/css" />
+		<link href="css/jquery.loading.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery.loading.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.js"></script>
+		<script type="text/javascript" src="js/intro.js" ></script>
+		<script type="text/javascript">
+			$(function() {
+				introJs()
+				.onexit(function() {
 					if (typeof postEvent === "function") {
-						postEvent('CLICK_HELP', {message: "Clicked on help", choiceNumber: choiceNumber});
+						postEvent('EXIT_INTRO', {message: "Exiting hints"});
 					}
-				}, 300);
+				})
+				.oncomplete(function() {
+					if (typeof postEvent === "function") {
+						postEvent('COMPLETE_INTRO', {message: "Completed hints"});
+					}
+				})
+				.onchange(function(targetElement) {
+					if (typeof postEvent === "function") {
+						postEvent('CLICK_INTRO', {message: "Moving to next hint", step: targetElement});
+					}
+				})
+				.start();
+				
+				$('#helpInfo').on('show.bs.modal', function (e) {
+					setTimeout(function(){
+						if (typeof postEvent === "function") {
+							postEvent('CLICK_HELP', {message: "Clicked on help", choiceNumber: choiceNumber});
+						}
+					}, 300);
+				});
 			});
-		});
-	</script>
-</head>
-
-<body>
-
-<header>
-</header>
-<div class="container-fluid parent_container">
-
-	<div class="movie-progress">           
-        <ul id="progress_circles">
-		<li class="step" id="pb_1"></li>
-		<li class="done" id="pb_2"></li>
-		<li class="done"id="pb_3"></li>
-		<li class="step" id="pb_4"></li>
-		<li class="done" id="pb_5"></li>
-		<li class="done" id="pb_6"></li>
-		<li class="activeStep" id="pb_7"></li>
-		<li id="pb_8"></li>
-		<li id="pb_9"></li>
-        <li id="pb_10"></li>
-        <li class="stepDisabled" id="pb_11"></li>
-        <li id="pb_12"></li>
-        <li id="pb_13"></li>
-		<li id="pb_14"></li>
-		<li id="pb_15"></li>
-		<li id="pb_16"></li>
-        <li class="stepDisabled" id="pb_17"></li>
-		</ul>     
-		
-  </div>
-  
-  <div id="pageno" data-intro="This indicates the number of choices left" data-step="2">
-	<span>10</span>
-  </div>
-  
- <div class="info_holder">
-	<a href="" data-toggle="modal" data-target="#helpInfo"> 
-	<img data-toggle="tooltip" title="Help" data-intro="If you need to help remembering the instructions you can click here" data-step="5" src="img/info.png" alt="info"> 
-	</a>
-	
-	<div id="helpInfo" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">			
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Instructions</h4>
-				</div>
-				
-				<div class="modal-body">
-					<p>
-					1. Click on the movie poster to read more information about the movie.
-				<br>2. Among the ten presented movies choose the movie which you like the best by clicking on the 'Choose' button. This will help us to learn about your preferences.  
-				<br>3. Click on the Next button to go to the next page. This button won't be activated till you choose a movie.
-					</p>
-				</div>
-
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>	
-		    </div>
-		</div>
-	</div>
-	
-</div>
-
-	<div id="movie_display_block">
-		
-		<div class="intro">
-		<span>
-		<h2 data-intro="The next pages will collect information about <b>your movie preferences</b>" data-step="1"><b>Indicate your Preferences</b></h2>
-		Instructions
-		</span>
-		<span>1. Click on the movie poster to read more information about the movie.
-		<br>2. Among the ten presented movies choose the movie which you like the best by clicking on the 'Choose' button. This will help us to learn about your preferences.  
-		<br>3. Click on the Next button to go to the next page. This button won't be activated till you choose a movie.</span>
-		</div>
-		
-		<!--For trailer condition -->
-		<div id="mouseCap_video">
-			<div class="video_goes_here">
-		
-				<div id="player"></div>
+		</script>
+	</head>
+	<body>
+		<header></header>
+		<div class="container-fluid loading_container hide">
+			<div class="loadingBlock" id="loading">
+				<br/>
+				<center>
+					<span>
+						<h3>
+							<strong>
+								<center>Loading Recommendations</center>
+							</strong>
+						</h3>
+					</span>
+					<br/>
+					<br/>
+					<div class="loader"></div>
+				</center>
 			</div>
 		</div>
 		
-		
-		<!--For conditions with info on the right -->
-		<div class="movie_img">
-			<img class="object-fit_contain" id="movieposter">
+		<div class="container-fluid parent_container">
+			<div class="movie-progress">
+				<ul id="progress_circles">
+					<li class="step" id="pb_1"></li>
+					<li class="done" id="pb_2"></li>
+					<li class="done"id="pb_3"></li>
+					<li class="step" id="pb_4"></li>
+					<li class="done" id="pb_5"></li>
+					<li class="done" id="pb_6"></li>
+					<li class="activeStep" id="pb_7"></li>
+					<li id="pb_8"></li>
+					<li id="pb_9"></li>
+					<li id="pb_10"></li>
+					<li class="stepDisabled" id="pb_11"></li>
+					<li id="pb_12"></li>
+					<li id="pb_13"></li>
+					<li id="pb_14"></li>
+					<li id="pb_15"></li>
+					<li id="pb_16"></li>
+					<li class="stepDisabled" id="pb_17"></li>
+				</ul>
+			</div>
+			<div id="pageno" data-intro="This indicates the number of choices left" data-step="2">
+				<span>10</span>
+			</div>
+			<div class="info_holder">
+				<a href="" data-toggle="modal" data-target="#helpInfo"> 
+				<img data-toggle="tooltip" title="Help" data-intro="If you need to help remembering the instructions you can click here" data-step="5" src="img/info.png" alt="info"> 
+				</a>
+				<div id="helpInfo" class="modal fade" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+								<h4 class="modal-title">Instructions</h4>
+							</div>
+							<div class="modal-body">
+								<p>
+									1. Click on the movie poster to read more information about the movie.
+									<br>2. Among the ten presented movies choose the movie which you like the best by clicking on the 'Choose' button. This will help us to learn about your preferences.  
+									<br>3. Click on the Next button to go to the next page. This button won't be activated till you choose a movie.
+								</p>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="movie_display_block">
+				<div class="intro">
+					<span>
+						<h2 data-intro="The next pages will collect information about <b>your movie preferences</b>" data-step="1"><b>Indicate your Preferences</b></h2>
+						Instructions
+					</span>
+					<span>1. Click on the movie poster to read more information about the movie.
+					<br>2. Among the ten presented movies choose the movie which you like the best by clicking on the 'Choose' button. This will help us to learn about your preferences.  
+					<br>3. Click on the Next button to go to the next page. This button won't be activated till you choose a movie.</span>
+				</div>
+				<!--For trailer condition -->
+				<div id="mouseCap_video">
+					<div class="video_goes_here">
+						<div id="player"></div>
+					</div>
+				</div>
+				<!--For conditions with info on the right -->
+				<div class="movie_img">
+					<img class="object-fit_contain" id="movieposter">
+				</div>
+				<div class="movie_info">
+					<div class="movie-title">
+						<h6><b><span class="title" id="movietitle"></span> 
+							<span>(<span id="movieyear"></span>)</span>
+							</b>
+						</h6>
+					</div>
+					<div id="blurred_content">
+						<div class="movie-plot">
+							<span class="plot">Plot: </span>
+							<span class="pname" id="moviesummary"></span>
+						</div>
+						<div class="movie-plot">
+							<span class="plot">Genre: </span>
+							<span class="pname" id="moviegenres"></span>
+						</div>
+						<div class="movie-plot">
+							<span class="plot">Director: </span>
+							<span class="pname" id="moviedirector"></span>
+						</div>
+						<div class="movie-cast">
+							<span class="cast">Cast: </span>
+							<span class="cname" id="moviecast"></span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="movie_ribbon">
+				<div class="block_holder" data-intro="<b>SELECT</b> a movie poster to see more information about that movie.<br><br> Among the ten presented movies choose one which <u>you like the best</u>." data-step="3" data-position="top">
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="highlight">
+					</div>
+					<div class="movie-block" id="movie_1">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c1" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb1">
+							<button type="button" data-intro="Select the movie you like best by clicking on the <b>'CHOOSE'</b> button.
+								<br><br>You could proceed to the next page by clicking the <u>'Next' </u>button" data-step="4" data-position="top">Choose</button> 
+						</div>
+					</div>
+					<div class="movie-block" id="movie_2">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c2" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb2">
+							<button type="button">Choose</button> 
+						</div>
+					</div>
+					<div class="movie-block" id="movie_3">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c3" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb3">
+							<button type="button">Choose</button> 
+						</div>
+					</div>
+					<div class="movie-block" id="movie_4">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c4" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb4">
+							<button type="button">Choose</button> 	
+						</div>
+					</div>
+					<div class="movie-block" id="movie_5">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c5" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb5">
+							<button type="button">Choose</button> 
+						</div>
+					</div>
+					<div class="movie-block" id="movie_6">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c6" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb6">
+							<button type="button">Choose</button> 
+						</div>
+					</div>
+					<div class="movie-block" id="movie_7">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c7" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb7">
+							<button type="button">Choose</button> 
+						</div>
+					</div>
+					<div class="movie-block" id="movie_8">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c8" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb8">
+							<button type="button">Choose</button> 
+						</div>
+					</div>
+					<div class="movie-block" id="movie_9">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c9" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb9">
+							<button type="button">Choose</button> 
+						</div>
+					</div>
+					<div class="movie-block" id="movie_10">
+						<div class="wrapper-block">
+							<div class="cover">	
+								<img id="c10" src="img/placeholder.png">
+							</div>
+							<div class="hover-block">
+								Click to read info
+							</div>
+						</div>
+						<div class="choose" id="cb10">
+							<button type="button">Choose</button> 
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="next-button">
+				<button type="button" data-toggle="modal" data-target="#confirmation_modal">Next</button>
+			</div>
+			<div id="confirmation_modal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Confirm Navigation</h4>
+						</div>
+						<div class="modal-body">
+							<p>
+								You have selected the movie <b><span id="mt"></span></b>. Are you sure you want to proceed to the next page?
+							</p>
+						</div>
+						<div class="modal-footer">
+							<button id="confirmNo" type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+							<button id="confirmYes" type="button" class="btn btn-success pull-left">Yes</button>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		
-		<div class="movie_info">
-			<div class="movie-title">
-				<h6><b><span class="title" id="movietitle"></span> 
-				<span>(<span id="movieyear"></span>)</span>
-				</b></h6>
-			</div>
-			
-			<div id="blurred_content">
-				<div class="movie-plot">
-					<span class="plot">Plot: </span>
-					<span class="pname" id="moviesummary"></span>
-				</div>
-				
-				<div class="movie-plot">
-					<span class="plot">Genre: </span>
-					<span class="pname" id="moviegenres"></span>
-				</div>
-			
-			<div class="movie-plot">
-				<span class="plot">Director: </span>
-				<span class="pname" id="moviedirector"></span>
-			</div>
-			
-			<div class="movie-cast">
-				<span class="cast">Cast: </span>
-				<span class="cname" id="moviecast"></span>
-			</div>
-			</div>		
 		</div>
-	</div>
-	
-	<div id="movie_ribbon">
-	   <div class="block_holder" data-intro="<b>SELECT</b> a movie poster to see more information about that movie.<br><br> Among the ten presented movies choose one which <u>you like the best</u>." data-step="3" data-position="top">
-	   
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-		   <div class="highlight">
-		   </div>
-	   
-			<div class="movie-block" id="movie_1">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c1" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb1">
-				 <button type="button" data-intro="Select the movie you like best by clicking on the <b>'CHOOSE'</b> button.
-				 <br><br>You could proceed to the next page by clicking the <u>'Next' </u>button" data-step="4" data-position="top">Choose</button> 
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_2">				
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c2" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb2">
-				 <button type="button">Choose</button> 
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_3">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c3" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb3">
-				 <button type="button">Choose</button> 
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_4">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c4" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb4">
-				 <button type="button">Choose</button> 	
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_5">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c5" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb5">
-				 <button type="button">Choose</button> 
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_6">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c6" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb6">
-				 <button type="button">Choose</button> 
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_7">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c7" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb7">
-				 <button type="button">Choose</button> 
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_8">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c8" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb8">
-				 <button type="button">Choose</button> 
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_9">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c9" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb9">
-				 <button type="button">Choose</button> 
-				</div>
-			</div>
-			
-			<div class="movie-block" id="movie_10">
-				<div class="wrapper-block">
-					<div class="cover">	
-						<img id="c10" src="img/placeholder.png">
-					</div>
-					<div class="hover-block">
-						Click to read info
-					</div>
-				</div>
-				<div class="choose" id="cb10">
-				 <button type="button">Choose</button> 
-				</div>
-			</div>
-			
-		</div>
-	</div>
-	
-	<div class="next-button">
-	<button type="button" data-toggle="modal" data-target="#confirmation_modal">Next</button>
-	</div>
-	
-	<div id="confirmation_modal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">			
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Confirm Navigation</h4>
-				</div>
-				
-				<div class="modal-body">
-					<p>
-					You have selected the movie <b><span id="mt"></span></b>. Are you sure you want to proceed to the next page?
-					</p>
-				</div>
-
-				<div class="modal-footer">
-					<button id="confirmNo" type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-					<button id="confirmYes" type="button" class="btn btn-success pull-left">Yes</button>
-				</div>	
-		    </div>
-		</div>
-	</div>
-	
-</div>
-	
-</div>
-
-<script type="text/javascript">
-      data=<%- JSON.stringify(data) %>;
-      confirmUnload = true;
-      $('a').click(function() { confirmUnload = false});
-</script>
-<script type="text/javascript" rel="javascript" src="js/script-index.js"></script>
-<script type="text/javascript" src="js/global.js"></script>
-</body>
-
+		<script type="text/javascript">
+			data=<%- JSON.stringify(data) %>;
+			confirmUnload = true;
+			$('a').click(function() { confirmUnload = false});
+		</script>
+		<script type="text/javascript" rel="javascript" src="js/script-index.js"></script>
+		<script type="text/javascript" src="js/global.js"></script>
+	</body>
 </html>

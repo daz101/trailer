@@ -138,10 +138,14 @@ $(document).ready(function() {
 		}
 
 		if (choiceNumber + 1 < maxChoices)
-			getChoiceSet(moviePos);
+			showLoading(function(cb) {
+				getChoiceSet(moviePos, cb);
+			});
 		else if (choiceNumber < maxChoices) {
 			// Change appearance of the infobox
-			getFinalRecommendationSet(moviePos);
+			delayAndShowRecommendation(function(cb) {
+				getFinalRecommendationSet(moviePos, cb);
+			});
 		} else {
 			var promises = [];
 
@@ -490,12 +494,12 @@ function getChoiceSet(pos, cb) {
 		success: function(data) {
 			// Load the new choice set
 			setTimeout(function() {
-				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false);
+				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
 			}, delay);
 		},
 		error: function(err) {
 			console.log("Error in getChoiceSet :: " + JSON.stringify(err));
-			loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, false);
+			loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, false, cb);
 		}
 	});
 }
@@ -571,6 +575,34 @@ function refreshChoicesCount() {
 }
 
 /**
+ * Show Loading Overlay for loading delays
+ * 
+ */
+function showLoading(cb) {
+	$('body').loading('start');
+	$('#confirmation_modal .close').click();
+	cb(function() {
+		$('body').loading('stop');
+	});
+}
+
+/**
+ * Show Loading screen for Final Recommendation
+ * 
+ */
+function delayAndShowRecommendation(cb) {
+	$(".parent_container").addClass("hide");
+	$(".loading_container").removeClass("hide");
+	$('#confirmation_modal .close').click();
+	setTimeout(function() {
+		cb(function() {
+			$(".loading_container").addClass("hide");
+			$(".parent_container").removeClass("hide");
+		});
+	}, delay*3);
+}
+
+/**
  * GET (POST) final recommendation set
  */
 function getFinalRecommendationSet(pos, cb) {
@@ -585,12 +617,12 @@ function getFinalRecommendationSet(pos, cb) {
 		success: function(data) {
 			// Load the new choice set
 			setTimeout(function() {
-				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, true);
+				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, true, cb);
 			}, delay);
 		},
 		error: function(err) {
 			console.log("Error in getFinalRecommendationSet :: " + JSON.stringify(err));
-			loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, true);
+			loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, true, cb);
 		}
 	});
 }
@@ -598,7 +630,7 @@ function getFinalRecommendationSet(pos, cb) {
 /**
  * Load the new choice set on-screen
  */
-function loadChoiceSet(event, mID, data, isFinal) {
+function loadChoiceSet(event, selectedId, data, isFinal, cb) {
 	// First, reset movies list on-screen
 	resetMovies();
 
@@ -616,12 +648,12 @@ function loadChoiceSet(event, mID, data, isFinal) {
 	}
 
 	// Save the movie selected
-	postChoices(mID);
+	postChoices(selectedId);
 
 	// Update choice number
 	postChoiceNumber(function() {
 		// Log choice set load event
-		postEvent(event, {id: mID, choiceNumber: choiceNumber});
+		postEvent(event, {id: selectedId, choiceNumber: choiceNumber});
 	});
 
 	// When movie info is loaded for all movies
@@ -630,9 +662,8 @@ function loadChoiceSet(event, mID, data, isFinal) {
 		postMovies();
 		// Update Index of the choice set being shown
 		choiceSetNumber++;
-		if(isFinal) {
-			postFinalMovies();
-		}
+		if(isFinal) postFinalMovies();
+		if(typeof cb != 'undefined') cb();
 	});
 }
 
@@ -640,7 +671,7 @@ function loadChoiceSet(event, mID, data, isFinal) {
  * Load the new choice set on-screen with random movies
  * NOTE: This will be called only on Error and is for TESTING purposes only.
  */
-function loadRandomMoviesOnError(event, mID, isFinal) {
+function loadRandomMoviesOnError(event, selectedId, isFinal, cb) {
 	// First, reset movies list on-screen
 	resetMovies();
 
@@ -654,12 +685,12 @@ function loadRandomMoviesOnError(event, mID, isFinal) {
 		}
 		
 		// Save the movie selected
-		promises.push(postChoices(mID));
+		promises.push(postChoices(selectedId));
 
 		// Update choice number
 		promises.push(postChoiceNumber(function() {
 			// Log choice set load event
-			postEvent(event, {id: mID, choiceNumber: choiceNumber});
+			postEvent(event, {id: selectedId, choiceNumber: choiceNumber});
 		}));
 		
 		// When movie info is loaded for all movies
@@ -668,9 +699,8 @@ function loadRandomMoviesOnError(event, mID, isFinal) {
 			postMovies();
 			// Update Index of the choice set being shown
 			choiceSetNumber++;
-			if(isFinal) {
-				postFinalMovies();
-			}
+			if(isFinal) postFinalMovies();
+			if(typeof cb != 'undefined') cb();
 		});
 	});
 }
@@ -931,13 +961,6 @@ function updateHoveredMovies(mID) {
 			console.log(err.responseText);
 		}
 	});
-}
-
-function timerFunction() {
-	setTimeout(function() {
-		document.getElementById('ratingsPage').classList.remove('hide');
-		document.getElementById('loading').classList.add('hide');
-	}, 2000);
 }
 
 /**
