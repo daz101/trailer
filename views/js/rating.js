@@ -21,6 +21,46 @@ $(document).ready(function() {
 			$(this).css("outline", "none");
 		}
 	});
+	
+	$("#mouseCap_video").mouseover(function(event) {
+		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
+			$(this).find(".video_goes_here").css("filter", "blur(0)");
+			player.playVideo();
+			if (typeof postEvent === "function") {
+				for(let i in movies) {
+					if(movies[i].trailer == player.getVideoData()['video_id']) {
+						postEvent('PLAY_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
+					}
+				}
+			}
+		}
+	});
+
+	$("#mouseCap_video").mouseout(function(event) {
+		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
+			$(this).find(".video_goes_here").css("filter", "blur(5px)");
+			player.pauseVideo();
+			if (typeof postEvent === "function") {
+				for(let i in movies) {
+					if(movies[i].trailer == player.getVideoData()['video_id']) {
+						postEvent('PAUSE_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
+					}
+				}
+			}
+		}
+	});
+
+	$("#blurred_content").mouseover(function(event) {
+		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
+			$(this).css("filter", "blur(0)");
+		}
+	});
+
+	$("#blurred_content").mouseout(function(event) {
+		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
+			$(this).css("filter", "blur(10px)");
+		}
+	});
 
 	$(".hover-block").click(function() {
 		if (clicked_hoverBox == 1) {
@@ -31,12 +71,19 @@ $(document).ready(function() {
 		}
 
 		$(".intro").hide();
-		$(".movie_img").show();
-		$(".movie_info").show();
+		if (conditionNum != 2) $(".movie_info").show();
+
+		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
+			$.getScript('https://www.youtube.com/iframe_api');
+			$(".movie_img").hide();
+			$("#mouseCap_video").show();
+		} else {
+			$("#mouseCap_video").hide();
+			$(".movie_img").show();
+		}
 
 		listitem_hoverBox = $(this).parents(".movie-block");
 		item_hoverBox = listitem_hoverBox.index(".movie-block");
-		$(".movie_img").show();
 		$(this).text("Now showing info");
 		clicked_hoverBox = 1;
 		$("#movie_display_block").css("outline", "5px solid #463856"); //change

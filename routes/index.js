@@ -66,8 +66,9 @@ router.get('/:id', function(req, res, next) {
 						renderPageResponse(req, res,  'ratings.html', userid, {
 							choiceNumber: doc.choice_number,
 							choiceSetNumber: 9,
-							movies: JSON.stringify(doc.choice_set[9] || [])
-						}, {page: 'welcome.html', message: 'Loaded Ratings Page'});
+							movies: JSON.stringify(doc.choice_set[9] || []),
+							conditionNum: doc.conditionNum
+						}, {page: 'ratings.html', message: 'Loaded Ratings Page'});
 						break;
 
 					case 12:

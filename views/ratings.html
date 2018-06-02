@@ -68,28 +68,39 @@
 						<br><b>2. Rate all the ten movies. If you haven't seen the movie please rate based on the information given </b>
 						<br>3. Click on the Next button to go to the next page. This button won't be activated until you rate all the movies and select either the tick or cross options for all the movies.</span>
 					</div>
+					<!--For trailer condition -->
+					<div id="mouseCap_video">
+						<div class="video_goes_here">
+							<div id="player"></div>
+						</div>
+					</div>
 					<div class="movie_img">
 						<img class="object-fit_contain" id="movieposter">
 					</div>
 					<div class="movie_info">
 						<div class="movie-title">
-							<h6><b><span class="title" id="movietitle"></span></b></h6>
+							<h6><b><span class="title" id="movietitle"></span> 
+								<span>(<span id="movieyear"></span>)</span>
+								</b>
+							</h6>
 						</div>
-						<div class="movie-plot">
-							<span class="plot">Plot: </span>
-							<span class="pname" id="moviesummary"></span>
-						</div>
-						<div class="movie-plot">
-							<span class="plot">Genre: </span>
-							<span class="pname" id="moviegenres"></span>
-						</div>
-						<div class="movie-plot">
-							<span class="plot">Director: </span>
-							<span class="pname" id="moviedirector"></span>
-						</div>
-						<div class="movie-cast">
-							<span class="cast">Cast: </span>
-							<span class="cname" id="moviecast"></span>
+						<div id="blurred_content">
+							<div class="movie-plot">
+								<span class="plot">Plot: </span>
+								<span class="pname" id="moviesummary"></span>
+							</div>
+							<div class="movie-plot">
+								<span class="plot">Genre: </span>
+								<span class="pname" id="moviegenres"></span>
+							</div>
+							<div class="movie-plot">
+								<span class="plot">Director: </span>
+								<span class="pname" id="moviedirector"></span>
+							</div>
+							<div class="movie-cast">
+								<span class="cast">Cast: </span>
+								<span class="cname" id="moviecast"></span>
+							</div>
 						</div>
 					</div>
 				</div>
