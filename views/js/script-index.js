@@ -466,7 +466,7 @@ function updateWatchedTrailers(mID, duration) {
 			userid: userid,
 			movie: mID,
 			choiceSetNumber: choiceSetNumber,
-			duration, duration
+			duration: duration
 		},
 		dataType: 'json',
 		error: function(err) {
