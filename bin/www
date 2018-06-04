@@ -101,8 +101,8 @@ function onListening() {
  * when server shuts down
  */
 
-function onClose() {
-  console.log('Shutting down server');
+function onClose(err) {
+  console.log('Shutting down server with error = ' + err);
   //app.db.close();
   process.exit();
 }

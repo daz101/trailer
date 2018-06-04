@@ -4,6 +4,36 @@ var router = express.Router();
 var utils = require('./utils.js');
 var initId = 1000;
 
+/* GET server status interceptor */
+router.get('/status', function(req, res) {
+	try {
+		var request = require('request');
+		request('http://131.155.121.165:8080', function (error, response, body) {
+			var result = {'success': false, 'result': {'state': {'db' : 'down', 'recommendation_server': 'down'}}};
+			try {
+				if(response.statusCode == 200) {
+					result.result.state.recommendation_server = 'up';
+				}
+			} catch(e) {
+				
+			}
+			var responseCode = 500;
+			if(req.db.hasOwnProperty('driver') && req.db.driver.hasOwnProperty('_native') && req.db.driver._native.hasOwnProperty('_state') 
+				&& req.db.driver._native._state === 'connected') {
+				result.result.state.db = 'up';
+			}
+			if(result.result.state.db == 'up' && result.result.state.recommendation_server == 'up') {
+				result.success = true;
+				responseCode = 200;
+			}
+			res.status(responseCode).json(result);
+			res.end();
+		});
+	} catch(e) {
+		
+	}
+});
+
 /* GET error if no user id specified in URL.*/
 router.get('/', function(req, res, next) {
 	var cookieValue = utils.getCookie(req, 'userid');
