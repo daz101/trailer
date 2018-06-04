@@ -76,6 +76,11 @@ router.get('/:id', function(req, res, next) {
 	}
 	// Get the user id from the request
 	var userid = utils.pad(req.params.id, 12);
+	
+	//Check if Browser if Compatible, else ask the user to download a compatible browser
+	if(!checkBrowserCompatibility(req, res, userid)) {
+		return;
+	}
 	try {
 		// Check if user id exists
 		var db = req.db;
@@ -167,7 +172,7 @@ router.get('/:id', function(req, res, next) {
 		});
 
 		// Save the user agent from which the user is connecting
-		utils.updateEvent(db, 'CONNECT_USER', req.useragent, userid, res);
+		utils.updateEvent(db, 'CONNECT_USER', {user_agent: req.useragent, ip: utils.getClientIP(req)}, userid, res);
 	} catch (e) {
 		console.log(e.stack);
 		console.error("routes/index :: /:id :: Error in handling id = " + userid);
@@ -181,6 +186,33 @@ router.get('/:id', function(req, res, next) {
 // Helper Functions
 //
 /////////////////////////////////
+
+function checkBrowserCompatibility(req, res, userid) {
+	try {
+		var compatibilityMatrix = {
+			'Microsoft Windows': ['Chrome', 'Firefox', 'Opera', 'Edge'],
+			'Apple Mac': ['Chrome', 'Firefox', 'Opera'],
+			'Linux': ['Chrome', 'Firefox'],
+			'Other': ['Chrome']
+		}
+		var platform = req.useragent.platform;
+		if(!compatibilityMatrix.hasOwnProperty(req.useragent.platform)) {
+			platform = 'Other';
+		}
+		if(compatibilityMatrix[platform].indexOf(req.useragent.browser) == -1) {
+			res.render('browser.html', {
+				data: compatibilityMatrix[platform]
+			}, function(err, html) {
+				res.send(html);
+				utils.updateEvent(req.db, 'LOAD_BROWSER_COMPATIBILITY_PAGE', {user_agent: req.useragent, ip: utils.getClientIP(req)}, userid, res);
+			});
+			return false;
+		}
+	} catch(e) {
+		console.error("Exception in checkBrowserCompatibility :: Error = " + e + " , useragent = " + JSON.stringify(req.useragent));
+	}
+	return true;
+}
 
 function redirect(res, id) {
 	res.redirect('/' + id);
@@ -271,15 +303,6 @@ function renderPageResponse(req, res, page, userid, info, eventDesc, setCookie) 
 }
 
 function getExperimentCondition(req, userid, cb) {
-	/* conditionNum:1=>Info only, conditionNum:2=>Trailer only, conditionNum:3=>Info-left Trailer-right, conditionNum:4=>Info-right Trailer-left */
-
-	//TESTING CODE: Remove before study
-	userid = parseInt(userid);
-	if (10000 <= userid && userid <= 19999) return 1
-	if (20000 <= userid && userid <= 29999) return 2
-	if (30000 <= userid && userid <= 39999) return 3
-	if (40000 <= userid && userid <= 49999) return 4
-
 	try {
 		var db = req.db;
 		var conditions = db.get('conditions');

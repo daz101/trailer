@@ -121,7 +121,7 @@ $(document).ready(function() {
 
 	$('#confirmYes').click(function() {
 		// Find which movie was clicked
-		var movieSelectedIdArr = $('.movie-block[data-movieSelected=true').prop('id').split("_");
+		var movieSelectedIdArr = $('.movie-block[data-movieSelected=true]').prop('id').split("_");
 		var moviePos = movieSelectedIdArr[movieSelectedIdArr.length - 1] - 1;
 		// Update choice number && Get new recommendations
 
@@ -716,7 +716,7 @@ function resetMovies() {
 		$(".movie_img").hide();
 		$(".movie_info").hide();
 		$('#movie_display_block').css("outline", "none");
-		var movieSelectedIdArr = $('.movie-block[data-movieSelected=true');
+		var movieSelectedIdArr = $('.movie-block[data-movieSelected=true]');
 		$(movieSelectedIdArr).find("button").css("background-color", "#8c8c8c");
 		$(movieSelectedIdArr).find("button").text("Choose");
 		$(movieSelectedIdArr).find(".wrapper-block").css("outline", "none");

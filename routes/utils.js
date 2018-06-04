@@ -15,6 +15,17 @@ var isNumeric = function(n) {
 	return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
+var getClientIP = function(req) {
+	var ipAddr = req.headers["x-forwarded-for"];
+	if (ipAddr){
+		var list = ipAddr.split(",");
+		ipAddr = list[list.length-1];
+	} else {
+		ipAddr = req.connection.remoteAddress;
+	}
+	return ipAddr;
+}
+
 /**
  * Send an error response.
  */
@@ -115,6 +126,7 @@ var deleteCookie = function(req, res, key) {
 module.exports = {
 	pad: pad,
 	isNumeric: isNumeric,
+	getClientIP: getClientIP,
 	sendErr: sendErr,
 	updateEvent: updateEvent,
 	encrypt: encrypt,

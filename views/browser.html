@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<meta charset="utf-8" />
+<html>
+	<head>
+		<title>Update your browser!</title>
+		<link href="css/browser.css" rel="stylesheet">
+		<script type="text/javascript">
+			var data=<%- JSON.stringify(data) %>;
+			window.onload = function() {
+				var cells = document.getElementsByClassName('b');
+				for(var i = 0; i < cells.length; i++) {
+					cells[i].style.display = "none";
+				}
+				for(var j = 0; j < data.length; j++) {
+					console.log(data[j]);
+					var cell = document.getElementById(data[j]);
+					cell.style.display = "table-cell";
+				}
+			}
+		</script>
+		</head>
+		<body>
+			<div class="noti">
+				<div class="whatnow">
+					<p>Your web browser is out of date/not supported and cannot be used to participate in this study.</p>
+					<p>Please download one of these up-to-date, free and excellent browsers to continue with the study:</p>
+				</div>
+				<table class="logos" id="browserlist">
+					<tbody>
+						<tr>
+							<td id="Chrome" class="b">
+								<a class="l" href="https://www.google.com/chrome/browser/desktop/" target="_blank" rel="noopener" style="background-image: url(img/c.png)" title="Download updated Chrome web browser from official Google website!">
+									<span class="bro">Chrome</span>
+									<span class="vendor">Google</span>
+								</a>
+							</td>
+							<td id="Firefox" class="b">
+								<a class="l" href="https://www.mozilla.com/firefox/" target="_blank" rel="noopener" style="background-image: url(img/f.png)" title="Download updated Firefox web browser from official Mozilla Foundation website!">
+									<span class="bro">Firefox</span>
+									<span class="vendor">Mozilla Foundation</span>
+								</a>
+							</td>
+							<td id="Opera" class="b">
+								<a class="l" href="https://opera.com" target="_blank" rel="noopener" style="background-image: url(img/o.png)" title="Download updated Opera web browser from official Opera Software website!">
+									<span class="bro">Opera</span>
+									<span class="vendor">Opera Software</span>
+								</a>
+							</td>
+							<td id="Edge" class="b">
+								<a class="l" href="https://www.microsoft.com/en-us/windows/microsoft-edge" target="_blank" rel="noopener" style="background-image: url(img/e.png)" title="Download updated Edge web browser from official Microsoft website!">
+									<span class="bro">Edge</span>
+									<span class="vendor">Microsoft</span>
+								</a>
+							</td>
+							<td id="Safari" class="b">
+								<a class="l" href="https://www.apple.com/safari/" target="_blank" rel="noopener" style="background-image: url(img/s.png)" title="Download updated Safari web browser from official Apple website!">
+									<span class="bro">Safari</span>
+									<span class="vendor">Apple</span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="whatnow-small">The download is safe from the vendor's official website.</div>
+			</div>
+		</body>
+	</html>
