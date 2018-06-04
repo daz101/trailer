@@ -7,14 +7,22 @@ var initId = 1000;
 /* GET server status interceptor */
 router.get('/status', function(req, res) {
 	try {
-		var result = {'success': false, 'result': {'state': {'db' : 'down', 'recommendation_server': 'down'}}};
+		var result = {
+			'success': false,
+			'result': {
+				'state': {
+					'db': 'down',
+					'recommendation_server': 'down'
+				}
+			}
+		};
 		var sendStatusResponse = function() {
 			var responseCode = 500;
-			if(req.db.hasOwnProperty('driver') && req.db.driver.hasOwnProperty('_native') && req.db.driver._native.hasOwnProperty('_state') 
-				&& req.db.driver._native._state === 'connected') {
+			if (req.db.hasOwnProperty('driver') && req.db.driver.hasOwnProperty('_native') && req.db.driver._native.hasOwnProperty('_state') &&
+				req.db.driver._native._state === 'connected') {
 				result.result.state.db = 'up';
 			}
-			if(result.result.state.db == 'up' && result.result.state.recommendation_server == 'up') {
+			if (result.result.state.db == 'up' && result.result.state.recommendation_server == 'up') {
 				result.success = true;
 				responseCode = 200;
 			}
@@ -23,26 +31,26 @@ router.get('/status', function(req, res) {
 		};
 		var statusTimer = setTimeout(sendStatusResponse, 20000);
 		var request = require('request');
-		request('http://131.155.121.165:8080', function (error, response, body) {
+		request('http://131.155.121.165:8080', function(error, response, body) {
 			try {
-				if(response.statusCode == 200) {
+				if (response.statusCode == 200) {
 					result.result.state.recommendation_server = 'up';
 					sendStatusResponse();
 					statusTimer = null;
 				}
-			} catch(e) {
-				
+			} catch (e) {
+
 			}
 		});
-	} catch(e) {
-		
+	} catch (e) {
+
 	}
 });
 
 /* GET error if no user id specified in URL.*/
 router.get('/', function(req, res, next) {
 	var cookieValue = utils.getCookie(req, 'userid');
-	if(cookieValue == null) {
+	if (cookieValue == null) {
 		// No userid found in cookie, first time user
 		redirectToNewId(req, res);
 	} else {
@@ -63,7 +71,7 @@ router.get('/favicon.ico', function(req, res) {
 
 /* GET home page. */
 router.get('/:id', function(req, res, next) {
-	if(!utils.isNumeric( req.params.id)) {
+	if (!utils.isNumeric(req.params.id)) {
 		redirectToNewId(req, res);
 	}
 	// Get the user id from the request
@@ -83,48 +91,71 @@ router.get('/:id', function(req, res, next) {
 				switch (doc.choice_number) {
 					case -3:
 						// Introduction page
-						renderPageResponse(req, res,  'welcome.html', userid, {}, {page: 'welcome.html', message: 'Loaded Introduction page'});
+						renderPageResponse(req, res, 'welcome.html', userid, {}, {
+							page: 'welcome.html',
+							message: 'Loaded Introduction page'
+						});
 						break;
 
 					case -2:
 						//Verbal Visual Survey
-						renderPageResponse(req, res,  'firstsurvey.html', userid, {}, {page: 'firstsurvey.html', message: 'Loaded Verbal Visual Survey'});
+						renderPageResponse(req, res, 'firstsurvey.html', userid, {}, {
+							page: 'firstsurvey.html',
+							message: 'Loaded Verbal Visual Survey'
+						});
 						break;
 
 					case -1:
 						//Overview
-						renderPageResponse(req, res,  'overview.html', userid, {}, {page: 'overview.html', message: 'Loaded Overview'});
+						renderPageResponse(req, res, 'overview.html', userid, {}, {
+							page: 'overview.html',
+							message: 'Loaded Overview'
+						});
 						break;
 
 					case 11:
 						//Rating Page
-						renderPageResponse(req, res,  'ratings.html', userid, {
+						renderPageResponse(req, res, 'ratings.html', userid, {
 							choiceNumber: doc.choice_number,
 							choiceSetNumber: 9,
 							movies: JSON.stringify(doc.choice_set[9] || []),
 							conditionNum: doc.conditionNum
-						}, {page: 'ratings.html', message: 'Loaded Ratings Page'});
+						}, {
+							page: 'ratings.html',
+							message: 'Loaded Ratings Page'
+						});
 						break;
 
 					case 12:
 						var finish = typeof doc.secondanswers != 'undefined' && doc.secondanswers !== null && doc.secondanswers.length > 0;
 						if (finish) {
 							// Finish page
-							renderPageResponse(req, res,  'thankyou.html', userid, {hashId: utils.hash(req, userid)}, {page: 'thankyou.html', message: 'Loaded Finish page'}, false);
+							renderPageResponse(req, res, 'thankyou.html', userid, {
+								hashId: utils.hash(req, userid)
+							}, {
+								page: 'thankyou.html',
+								message: 'Loaded Finish page'
+							}, false);
 						} else {
 							// Survey page
-							renderPageResponse(req, res,  'secondsurvey.html', userid, {}, {page: 'secondsurvey.html', message: 'Loaded Survey page'});
+							renderPageResponse(req, res, 'secondsurvey.html', userid, {}, {
+								page: 'secondsurvey.html',
+								message: 'Loaded Survey page'
+							});
 						}
 						break;
 
 					default:
 						// Choices page
-						renderPageResponse(req, res,  'Info.html', userid, {
-							choiceNumber: doc.choice_number, 
+						renderPageResponse(req, res, 'Info.html', userid, {
+							choiceNumber: doc.choice_number,
 							choiceSetNumber: doc.choice_number - 1,
 							movies: JSON.stringify(doc.choice_set[doc.choice_number - 1] || []),
 							conditionNum: doc.conditionNum
-						}, {page: 'Info.html', choice_set : doc.choice_number + 1});
+						}, {
+							page: 'Info.html',
+							choice_set: doc.choice_number + 1
+						});
 				}
 			} catch (e) {
 				console.log(e.stack);
@@ -168,7 +199,7 @@ function redirectToNewId(req, res) {
 			limit: 1
 		}, function(err, doc) {
 			var newUserId = initId;
-			if(doc != null || doc.length > 0) {
+			if (doc != null || doc.length > 0) {
 				newUserId = parseInt(doc[0].userid) + 1;
 			}
 			redirect(res, newUserId);
@@ -181,32 +212,40 @@ function redirectToNewId(req, res) {
 }
 
 function createNewUser(req, res, users, userid) {
-	var expCondition = getExperimentCondition(userid);
-	return users.insert({
-		_id: userid,
-		userid: userid,
-		choice_number: -3,
-		initial_choice_set: [],
-		choice_set: [],
-		recommended_set: [],
-		conditionNum: expCondition,
-		watched_trailers: [],
-		hovered_movies: [],
-		hovered_info: [],
-		hovered_poster: [],
-		choices: [],
-		recommended_choices: [],
-		ratings: [],
-		known: [],
-		feedback: null,
-		firstanswers: null,
-		secondanswers: null
-	}, function(err) {
+	return getExperimentCondition(req, userid, function(err, expCondition) {
 		if (err) {
-			console.error("Error in createNewUser while users.insert :: " + err);
-			return next(err);
+			console.error("Error in createNewUser while getExperimentCondition :: " + err);
+			return res.end();
 		}
-		renderPageResponse(req, res,  'welcome.html', userid, {}, {page: 'welcome.html', message: 'Loaded Introduction page'});
+		return users.insert({
+			_id: userid,
+			userid: userid,
+			choice_number: -3,
+			initial_choice_set: [],
+			choice_set: [],
+			recommended_set: [],
+			conditionNum: expCondition,
+			watched_trailers: [],
+			hovered_movies: [],
+			hovered_info: [],
+			hovered_poster: [],
+			choices: [],
+			recommended_choices: [],
+			ratings: [],
+			known: [],
+			feedback: null,
+			firstanswers: null,
+			secondanswers: null
+		}, function(err) {
+			if (err) {
+				console.error("Error in createNewUser while users.insert :: " + err);
+				return res.end();
+			}
+			renderPageResponse(req, res, 'welcome.html', userid, {}, {
+				page: 'welcome.html',
+				message: 'Loaded Introduction page'
+			});
+		});
 	});
 }
 
@@ -215,13 +254,13 @@ function renderPageResponse(req, res, page, userid, info, eventDesc, setCookie) 
 	var data = {
 		userid: userid
 	};
-	for(var key in info) {
+	for (var key in info) {
 		data[key] = info[key];
 	}
 	res.render(page, {
 		data: data
 	}, function(err, html) {
-		if(setCookie) {
+		if (setCookie) {
 			res = utils.setCookie(req, res, 'userid', userid);
 		} else {
 			res = utils.deleteCookie(req, res, 'userid');
@@ -231,29 +270,60 @@ function renderPageResponse(req, res, page, userid, info, eventDesc, setCookie) 
 	});
 }
 
-function getExperimentCondition(userid) {
+function getExperimentCondition(req, userid, cb) {
 	/* conditionNum:1=>Info only, conditionNum:2=>Trailer only, conditionNum:3=>Info-left Trailer-right, conditionNum:4=>Info-right Trailer-left */
-	
+
 	//TESTING CODE: Remove before study
 	userid = parseInt(userid);
-	if(10000 <= userid && userid <= 19999) return 1
-	if(20000 <= userid && userid <= 29999) return 2
-	if(30000 <= userid && userid <= 39999) return 3
-	if(40000 <= userid && userid <= 49999) return 4
-	
-	var randomNum = Math.random();
-	var expCondition = 0;
-	if (randomNum < 0.3)
-		expCondition = 1;
-	else
-	if (randomNum < 0.6)
-		expCondition = 2;
-	else
-	if (randomNum < 0.8)
-		expCondition = 3;
-	else
-		expCondition = 4;
-	return expCondition;
+	if (10000 <= userid && userid <= 19999) return 1
+	if (20000 <= userid && userid <= 29999) return 2
+	if (30000 <= userid && userid <= 39999) return 3
+	if (40000 <= userid && userid <= 49999) return 4
+
+	try {
+		var db = req.db;
+		var conditions = db.get('conditions');
+		conditions.find({}, {
+				sort: {
+					assigned: 1
+				},
+
+			},
+			function(err, docs) {
+				if (err) {
+					console.error("Error while obtaining conditions, error = " + err);
+					cb(err, -1);
+				}
+				var possibleConditions = [];
+				for (var i in docs) {
+					if (docs[i].assigned == docs[0].assigned) {
+						possibleConditions.push(docs[i]);
+					} else {
+						break;
+					}
+				}
+				var expCondition = possibleConditions[Math.floor(Math.random() * possibleConditions.length)];
+				conditions.findAndModify({
+					conditionNum: expCondition.conditionNum
+				}, {
+					$inc: {
+						assigned: expCondition.incrementBy
+					}
+				}, {
+					new: true
+				}, function(err, doc) {
+					if (err) {
+						console.error("Error while incrementing selected condition, error = " + err);
+						cb(err, -1);
+					}
+					cb(err, doc.conditionNum);
+				});
+			});
+	} catch (e) {
+		console.log(e.stack);
+		console.error("Exception in getExperimentCondition :: " + e);
+		cb(e, -1);
+	}
 }
 
 module.exports = router;
