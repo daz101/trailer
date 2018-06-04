@@ -189,9 +189,10 @@ router.get('/:id', function(req, res, next) {
 
 function checkBrowserCompatibility(req, res, userid) {
 	try {
+		console.log(req.useragent);
 		var compatibilityMatrix = {
 			'Microsoft Windows': ['Chrome', 'Firefox', 'Opera', 'Edge'],
-			'Apple Mac': ['Chrome', 'Firefox', 'Opera'],
+			'Apple Mac': ['Chrome', 'Firefox', 'Opera', 'Safari'],
 			'Linux': ['Chrome', 'Firefox'],
 			'Other': ['Chrome']
 		}

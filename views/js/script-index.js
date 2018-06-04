@@ -202,7 +202,11 @@ $(document).ready(function() {
 	});
 
 	$(window).on("unload", function() {
-		postEvent('DISCONNECT_USER', {message : 'Closed Connection'});
+		try {
+			postEvent('DISCONNECT_USER', {message : 'Closed Connection'});
+		} catch(e) {
+			console.warn("Exception while window.onunload :: " + e);
+		}
 	});
 });
 //end of document 
@@ -481,6 +485,7 @@ function updateWatchedTrailers(mID, duration) {
 function getChoiceSet(pos, cb) {
 	return $.ajax({
 		type: 'POST',
+		timeout: 10000,			
 		url: 'http://131.155.121.165:8080/json/asynconeway/Choice',
 		data: {
 			userid: "" + userid,
@@ -608,6 +613,7 @@ function delayAndShowRecommendation(cb) {
 function getFinalRecommendationSet(pos, cb) {
 	return $.ajax({
 		type: 'GET',
+		timeout: 10000,
 		url: 'http://131.155.121.165:8080/recommendation/' + userid + '/' +
 			nrOfMovies + '/' + diversification + '/alternative',
 		data: {
