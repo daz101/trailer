@@ -7,16 +7,8 @@ var initId = 1000;
 /* GET server status interceptor */
 router.get('/status', function(req, res) {
 	try {
-		var request = require('request');
-		request('http://131.155.121.165:8080', function (error, response, body) {
-			var result = {'success': false, 'result': {'state': {'db' : 'down', 'recommendation_server': 'down'}}};
-			try {
-				if(response.statusCode == 200) {
-					result.result.state.recommendation_server = 'up';
-				}
-			} catch(e) {
-				
-			}
+		var result = {'success': false, 'result': {'state': {'db' : 'down', 'recommendation_server': 'down'}}};
+		var sendStatusResponse = function() {
 			var responseCode = 500;
 			if(req.db.hasOwnProperty('driver') && req.db.driver.hasOwnProperty('_native') && req.db.driver._native.hasOwnProperty('_state') 
 				&& req.db.driver._native._state === 'connected') {
@@ -28,6 +20,19 @@ router.get('/status', function(req, res) {
 			}
 			res.status(responseCode).json(result);
 			res.end();
+		};
+		var statusTimer = setTimeout(sendStatusResponse, 20000);
+		var request = require('request');
+		request('http://131.155.121.165:8080', function (error, response, body) {
+			try {
+				if(response.statusCode == 200) {
+					result.result.state.recommendation_server = 'up';
+					sendStatusResponse();
+					statusTimer = null;
+				}
+			} catch(e) {
+				
+			}
 		});
 	} catch(e) {
 		
