@@ -26,7 +26,7 @@ events.remove({userid: userid}, {}, function(e, evtCount) {
 	if(e) return console.log("Could not remove events for userid = " + userid + " :: " + e);
 	console.log("Deleted " + evtCount + " events for userid = " + userid);
 	users.remove({userid: userid}, {}, function(err, userCount) {
-		if(e) return console.log("Could not remove events for userid = " + userid + " :: " + e);
+		if(e) return console.log("Could not remove users for userid = " + userid + " :: " + e);
 		console.log("Deleted " + userCount + " users for userid = " + userid);
 		process.exit();
 	});
