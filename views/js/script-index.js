@@ -120,6 +120,9 @@ $(document).ready(function() {
 	});
 
 	$('#confirmYes').click(function() {
+		//Close the modal to prevent multiple clicks!
+		$('#confirmation_modal .close').click();
+		
 		// Find which movie was clicked
 		var movieSelectedIdArr = $('.movie-block[data-movieSelected=true]').prop('id').split("_");
 		var moviePos = movieSelectedIdArr[movieSelectedIdArr.length - 1] - 1;
@@ -162,10 +165,27 @@ $(document).ready(function() {
 			});
 		}
 	});
+	
+	$('#confirmation_modal').on('show.bs.modal', function (e) {
+		try {
+			postEvent('CLICK_NEXT', {choiceNumber: choiceNumber});
+		} catch(e) {
+			console.warn("Exception on confirmation_modal : show.bs.modal :: " + e);
+		}
+	});
+	
+	$('#confirmNo').click(function() {
+		try {
+			postEvent('CLICK_CANCEL_NEXT', {choiceNumber: choiceNumber});
+		} catch(e) {
+			console.warn("Exception on confirmNo : click :: " + e);
+		}
+	});
 
 	$('#nextPage12').click(function() {
 		var promises = [];
 		promises.push(postChoiceNumberNoRefresh(function() {}));
+		promises.push(postEvent('CLICK_NEXT_12', {choiceNumber: choiceNumber}));
 
 		// When the ratings have been saved and the event logged,
 		$.when.apply($, promises).done(function() {

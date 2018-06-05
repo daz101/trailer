@@ -36,7 +36,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser()); 
-app.use(express.static(path.join(__dirname, 'views')));
+app.use(express.static(path.join(__dirname, 'views'), {
+	etag: false,
+	maxAge: 0,
+	setHeaders: function(res, path) {
+		res.setHeader('Cache-Control', 'no-cache, no-store');
+	}
+}));
 app.use(useragent.express());
 
 // Make our db and settings accessible to our routes
