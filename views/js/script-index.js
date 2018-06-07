@@ -322,6 +322,7 @@ function onPlayerError(e) {
  * movie has been hovered/selected.
  */
 function loadSelectedMovie(pos) {
+	$('.movie_info').animate({scrollTop:0},0);
 	loadMovieDescription(pos);
 	try {
 		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4)
