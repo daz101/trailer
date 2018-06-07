@@ -16,7 +16,7 @@ In case the script encounters network issues such as 'Connection Reset' (ECONNRE
 $ node data-sanity-check.js
 ```
 
-### Output
+## Output
 The script dumps the output to a file set as FILE_NAME in the script. The default value of `FILE_NAME` is 'data-sanity-errors.csv'. It is a CSV file with the following columns :
 - `_id` : `_id` in the `movies` in DB
 - `id_number` : `id_number` in the `movies` in DB
@@ -30,3 +30,9 @@ The script dumps the output to a file set as FILE_NAME in the script. The defaul
 - `youtubeError` : TRAILER_FOUND / TRAILER_UNAVAILABLE
 - `youtubeErrorDetails` : if TRAILER_UNAVAILABLE, the error associated with it (eg. 'Video not found', 'Video cannot be played', 'Video is private', 'Video cannot be embedded')
 - `youtubeSuggestion` : if TRAILER_UNAVAILABLE, the possible subsititute video (maybe empty)
+
+## Data Correction
+`data-correction.js` corrects the data in DB. It reads a csv file 'data-sanity-corrected.csv' with same format as 'data-sanity-errors.csv'.
+```sh
+$ node data-correction.js
+```
