@@ -28,7 +28,7 @@
 				})
 				.onchange(function(targetElement) {
 					if (typeof postEvent === "function") {
-						postEvent('CLICK_INTRO', {message: "Moving to next hint", step: targetElement});
+						postEvent('CLICK_INTRO', {message: "Moving to next hint", step: $(targetElement).attr("data-step")});
 					}
 				})
 				.start();
