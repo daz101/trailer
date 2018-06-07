@@ -173,6 +173,7 @@ router.post('/update/watchedtrailers', function(req, res, next) {
 	var userid = utils.pad(req.body.userid, 12);
 	var movie = req.body.movie;
 	var choiceSetNumber = req.body.choiceSetNumber;
+	var currentTime = req.body.currentTime || -1;
 	var duration = req.body.duration || -1;
 	var db = req.db;
 	var users = db.get('users');
@@ -183,7 +184,8 @@ router.post('/update/watchedtrailers', function(req, res, next) {
 			watched_trailers: {
 				id: movie,
 				choice_set_index: choiceSetNumber,
-				watched_till: duration
+				watched_till: currentTime,
+				duration: duration
 			}
 		}
 	}, function(err) {

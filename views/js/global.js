@@ -52,9 +52,9 @@ $(document).ready(function() {
 			$(this).find(".video_goes_here").css("filter", "blur(0)");
 			player.playVideo();
 			if (typeof postEvent === "function") {
-				for(let i in movies) {
+				for(var i in movies) {
 					if(movies[i].trailer == player.getVideoData()['video_id']) {
-						postEvent('PLAY_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
+						postEvent('MOUSEOVER_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
 					}
 				}
 			}
@@ -66,9 +66,9 @@ $(document).ready(function() {
 			$(this).find(".video_goes_here").css("filter", "blur(5px)");
 			player.pauseVideo();
 			if (typeof postEvent === "function") {
-				for(let i in movies) {
+				for(var i in movies) {
 					if(movies[i].trailer == player.getVideoData()['video_id']) {
-						postEvent('PAUSE_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
+						postEvent('MOUSEOUT_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
 					}
 				}
 			}

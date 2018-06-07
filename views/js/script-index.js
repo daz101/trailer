@@ -15,11 +15,11 @@ var choiceNumber = data.choiceNumber;
 var choiceSetNumber = data.choiceSetNumber;
 var movies = JSON.parse(data.movies);
 var player, useTrailers = data.useTrailers,
-	conditionNum = data.conditionNum,
-	currentTrailer = null;
+	conditionNum = data.conditionNum;
 var timer, delay = 1000;
 var ratings = [];
 var known = [];
+var captureMouseEvents = false;
 
 $(document).ready(function() {
 	// Update the remaining number of choices to make
@@ -60,21 +60,26 @@ $(document).ready(function() {
 	}
 	
 	$('.movie-block').mouseover(function() {
-		var idArr = $(this).prop('id').split("_");
-		var moviePos = idArr[idArr.length - 1] - 1;
-		updateHoveredMovies(movies[moviePos].id_number);
-		postEvent('MOUSEOVER_MOVIE', {id: movies[moviePos]._id});
+		if(captureMouseEvents) {
+			var idArr = $(this).prop('id').split("_");
+			var moviePos = idArr[idArr.length - 1] - 1;
+			postEvent('MOUSEOVER_MOVIE', {id: movies[moviePos]._id});
+		}
 	});
 	
 	$('.movie-block').mouseout(function() {
-		var idArr = $(this).prop('id').split("_");
-		var moviePos = idArr[idArr.length - 1] - 1;
-		postEvent('MOUSEOUT_MOVIE', {id: movies[moviePos]._id});
+		if(captureMouseEvents) {
+			var idArr = $(this).prop('id').split("_");
+			var moviePos = idArr[idArr.length - 1] - 1;
+			postEvent('MOUSEOUT_MOVIE', {id: movies[moviePos]._id});
+		}
+		
 	});
 	
 	$('.movie-block').click(function() {
 		var idArr = $(this).prop('id').split("_");
 		var moviePos = idArr[idArr.length - 1] - 1;
+		updateHoveredMovies(movies[moviePos].id_number);
 		postEvent('SELECT_MOVIE', {id: movies[moviePos]._id});
 	});
 
@@ -275,11 +280,33 @@ function onPlayerReady() {
  * Callback for when youtube player state changes.
  */
 function onPlayerStateChange(e) {
-	if (e.data == YT.PlayerState.PAUSED) {
-		if (currentTrailer !== null) {
-			updateWatchedTrailers(currentTrailer, player.getCurrentTime());
-			currentTrailer = null;
+	var data = {};
+	for(let i in movies) {
+		if(movies[i].trailer == player.getVideoData()['video_id']) {
+			data = {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()};
+			if(e.data == YT.PlayerState.PLAYING) {
+				clearInterval(movies[i].durationTimer);
+				movies[i].durationTimer = setInterval(function() {
+					movies[i].duration = (movies[i].hasOwnProperty('duration') ? movies[i].duration : 0) + 0.1;
+				}, 100);
+			}
+			if(e.data == YT.PlayerState.PAUSED || e.data == YT.PlayerState.ENDED) {
+				clearInterval(movies[i].durationTimer);
+			}
+			movies[i].current_time = player.getCurrentTime();
 		}
+	}
+	var stateMap = {};
+	stateMap[-1] = "LOADING_TRAILER";
+	stateMap[YT.PlayerState.CUED] = "CUED_TRAILER";
+	stateMap[YT.PlayerState.BUFFERING] = "BUFFERING_TRAILER";
+	stateMap[YT.PlayerState.PLAYING] = "PLAYING_TRAILER";
+	stateMap[YT.PlayerState.PAUSED] = "PAUSED_TRAILER";
+	stateMap[YT.PlayerState.ENDED] = "ENDED_TRAILER";
+	if(stateMap.hasOwnProperty(e.data)) {
+		postEvent(stateMap[e.data], data);
+	} else {
+		postEvent("UNKNOWN_EVENT_TRAILER", data);
 	}
 }
 
@@ -406,12 +433,10 @@ function loadTrailer(pos) {
 	if (movies[pos]) {
 		if (movies[pos].trailer) {
 			embedTrailer(movies[pos].trailer);
-			currentTrailer = movies[pos].id_number;
 		} else {
 			getTrailer(movies[pos]._id, function(trailerKey) {
 				movies[pos].trailer = trailerKey;
 				embedTrailer(trailerKey);
-				currentTrailer = movies[pos].id_number;
 			});
 		}
 	}
@@ -455,7 +480,6 @@ function getTrailer(mID, cb) {
 		},
 		error: function(err) {
 			cb(null);
-			currentTrailer = null;
 			console.log(err.responseText);
 		}
 	});
@@ -482,7 +506,7 @@ function loadMovieDescription(pos) {
 /**
  * POST id of movie whose trailer was watched.
  */
-function updateWatchedTrailers(mID, duration) {
+function updateWatchedTrailers(mID, currentTime, duration) {
 	return $.ajax({
 		type: 'POST',
 		url: '/api/update/watchedtrailers',
@@ -490,6 +514,7 @@ function updateWatchedTrailers(mID, duration) {
 			userid: userid,
 			movie: mID,
 			choiceSetNumber: choiceSetNumber,
+			currentTime: currentTime,
 			duration: duration
 		},
 		dataType: 'json',
@@ -657,6 +682,13 @@ function getFinalRecommendationSet(pos, cb) {
  * Load the new choice set on-screen
  */
 function loadChoiceSet(event, selectedId, data, isFinal, cb) {
+	//Save Watched Trailers
+	for(var i in movies) {
+		if(movies[i].hasOwnProperty('duration') && movies[i].duration > 0) {
+			updateWatchedTrailers(movies[i].id_number, movies[i].current_time, movies[i].duration);
+		}
+	}
+	
 	// First, reset movies list on-screen
 	resetMovies();
 
@@ -698,6 +730,13 @@ function loadChoiceSet(event, selectedId, data, isFinal, cb) {
  * NOTE: This will be called only on Error and is for TESTING purposes only.
  */
 function loadRandomMoviesOnError(event, selectedId, isFinal, cb) {
+	//Save Watched Trailers
+	for(var i in movies) {
+		if(movies[i].hasOwnProperty('duration') && movies[i].duration > 0) {
+			updateWatchedTrailers(movies[i].id_number, movies[i].current_time, movies[i].duration);
+		}
+	}
+	
 	// First, reset movies list on-screen
 	resetMovies();
 
