@@ -40,6 +40,13 @@
 						}
 					}, 300);
 				});
+				$("#helpInfo").on("hidden.bs.modal", function () {
+					setTimeout(function(){
+						if (typeof postEvent === "function") {
+							postEvent('CLOSE_HELP', {message: "Closed help", choiceNumber: choiceNumber});
+						}
+					}, 300);
+				});
 			});
 		</script>
 	</head>
