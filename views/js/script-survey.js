@@ -40,6 +40,12 @@ $(document).ready(function() {
 
 	//go to page 1
 	$('#beginbutton').click(function() {
+		var isUnderProcess = $(this).attr('data-under-process');
+		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
+			console.warn("#beginbutton :: Prevented multiple clicks.");
+			return;
+		}
+		$(this).attr("data-under-process", "true");
 		//send comment from comment box
 		var text = $('#textbox').val();
 		postFeedback(text, function() {
@@ -52,6 +58,12 @@ $(document).ready(function() {
 	});
 
 	$('#surveypage1button').click(function() {
+		var isUnderProcess = $(this).attr('data-under-process');
+		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
+			console.warn("#surveypage1button :: Prevented multiple clicks.");
+			return;
+		}
+		$(this).attr("data-under-process", "true");
 		var hookpage = $('#surveypage1');
 		if (isSurveyComplete(hookpage)) {
 			postEvent('START_FINAL_SURVEY', {message: 'Started Final Survey'});
@@ -61,12 +73,20 @@ $(document).ready(function() {
 				$('#surveypage1, #surveypage1button').hide();
 				$('#surveypage2, #surveypage2button').show().fadeIn("slow");
 			});
+		} else {
+			$(this).attr("data-under-process", "false");
 		}
 	});
 	
 	for(let pageNo = 2; pageNo <= 14; pageNo++) {
 		(function(pageNo) {
 			$('#surveypage' + pageNo + 'button').click(function() {
+				var isUnderProcess = $(this).attr('data-under-process');
+				if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
+					console.warn('#surveypage' + pageNo + 'button :: Prevented multiple clicks.');
+					return;
+				}
+				$(this).attr("data-under-process", "true");
 				let hookpage = $("#surveypage" + pageNo);
 				if (isSurveyComplete(hookpage)) {
 					secondanswers = saveSurveyResults(hookpage, secondanswers);
@@ -75,6 +95,8 @@ $(document).ready(function() {
 						$('#surveypage' + pageNo + ', #surveypage' + pageNo + 'button').hide();
 						$('#surveypage' + nextPageNo + ', #surveypage' + nextPageNo + 'button').show().fadeIn("slow");
 					});
+				} else {
+					$(this).attr("data-under-process", "false");
 				}
 			});
 		})(pageNo);
@@ -82,10 +104,18 @@ $(document).ready(function() {
 
 	//last survey page
 	$('#surveypage15button').click(function() {
+		var isUnderProcess = $(this).attr('data-under-process');
+		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
+			console.warn("#surveypage15button :: Prevented multiple clicks.");
+			return;
+		}
+		$(this).attr("data-under-process", "true");
 		var hookpage = $('#surveypage15');
 		if (isSurveyComplete(hookpage)) {
 			secondanswers = saveSurveyResults(hookpage, secondanswers);
 			finish();
+		} else {
+			$(this).attr("data-under-process", "false");
 		}
 	});
 	// Make sure client wants leave
@@ -118,7 +148,6 @@ function saveSurveyResults(hookpage, results) {
 			results.push($(this).val());
         });
 	});
-	console.log(results);
 	return results;
 }
 

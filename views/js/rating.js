@@ -25,28 +25,50 @@ $(document).ready(function() {
 	$("#mouseCap_video").mouseover(function(event) {
 		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
 			$(this).find(".video_goes_here").css("filter", "blur(0)");
-			player.playVideo();
-			if (typeof postEvent === "function") {
-				for(var i in movies) {
-					if(movies[i].trailer == player.getVideoData()['video_id']) {
-						postEvent('MOUSEOVER_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
+			//TEMP_FIX: Check if youtube player is loaded, else retry after 100 milliseconds
+			//TODO: Implement proper callback structure involving youtube player and document ready.
+			function playVideo() {
+				if ($('#player').hasClass('video-loaded')) {
+					player.playVideo();
+					if (typeof postEvent === "function") {
+						for(var i in movies) {
+							if(movies[i].trailer == player.getVideoData()['video_id']) {
+								postEvent('MOUSEOVER_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
+							}
+						}
 					}
+				} else {
+					setTimeout(function() {
+						playVideo();
+					}, 100);
 				}
 			}
+			playVideo();
 		}
 	});
 
 	$("#mouseCap_video").mouseout(function(event) {
 		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
 			$(this).find(".video_goes_here").css("filter", "blur(5px)");
-			player.pauseVideo();
-			if (typeof postEvent === "function") {
-				for(var i in movies) {
-					if(movies[i].trailer == player.getVideoData()['video_id']) {
-						postEvent('MOUSEOUT_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
+			//TEMP_FIX: Check if youtube player is loaded, else retry after 100 milliseconds
+			//TODO: Implement proper callback structure involving youtube player and document ready.
+			function pauseVideo() {
+				if ($('#player').hasClass('video-loaded')) {
+					player.pauseVideo();
+					if (typeof postEvent === "function") {
+						for(var i in movies) {
+							if(movies[i].trailer == player.getVideoData()['video_id']) {
+								postEvent('MOUSEOUT_TRAILER', {id: movies[i]._id, video_id: movies[i].trailer, current_video_pos: player.getCurrentTime()});
+							}
+						}
 					}
+				} else {
+					setTimeout(function() {
+						pauseVideo();
+					}, 100);
 				}
-			}
+			};
+			pauseVideo();
 		}
 	});
 
@@ -91,8 +113,6 @@ $(document).ready(function() {
 	});
 
 	$('input[type=radio][name^=rating_],input[type=radio][name^=known]').change(function() {
-		console.log($('input[type=radio][name^=rating_]:checked').length);
-		console.log($('input[type=radio][name^=known]:checked').length);
 		if (($('input[type=radio][name^=rating_]:checked').length === 10) && ($('input[type=radio][name^=known]:checked').length === 10)) {
 			$(".next-button").children("button").css({
 				"cursor": "pointer",

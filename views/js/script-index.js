@@ -17,8 +17,6 @@ var movies = JSON.parse(data.movies);
 var player, useTrailers = data.useTrailers,
 	conditionNum = data.conditionNum;
 var timer, delay = 1000;
-var ratings = [];
-var known = [];
 var captureMouseEvents = false;
 
 $(document).ready(function() {
@@ -125,8 +123,14 @@ $(document).ready(function() {
 	});
 
 	$('#confirmYes').click(function() {
-		//Close the modal to prevent multiple clicks!
-		$('#confirmation_modal .close').click();
+		//Prevent multiple clicks!
+		$('#confirmation_modal .close').click();	
+		var isUnderProcess = $(this).attr('data-under-process');
+		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
+			console.warn("#confirmYes :: Prevented multiple clicks.");
+			return;
+		}
+		$(this).attr("data-under-process", "true");
 		
 		// Find which movie was clicked
 		var movieSelectedIdArr = $('.movie-block[data-movieSelected=true]').prop('id').split("_");
@@ -202,19 +206,34 @@ $(document).ready(function() {
 
 	//ratings push 
 	$('#ratingsButton').click(function() {
+		var isUnderProcess = $(this).attr('data-under-process');
+		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
+			console.warn("#ratingsButton :: Prevented multiple clicks.");
+			return;
+		}
+		$(this).attr("data-under-process", "true");
+		var ratings = [];
 		for (var i = 1; i <= nrOfMovies; i++) {
-			if(!$('input[name=rating_' + i + ']:checked').val()) {
+			var ratingVal = $('input[name=rating_' + i + ']:checked').val();
+			if(!ratingVal) {
+				$(this).attr("data-under-process", "false");
 				return;
 			}
+			ratings.push(ratingVal);
 		}
 		
+		var known = [];
 		for (var i = 1; i <= nrOfMovies; i++) {
-			if(!$('input[name=known_' + i + ']:checked').val()) {
+			var knownVal = $('input[name=known_' + i + ']:checked').val();
+			if(!knownVal) {
+				$(this).attr("data-under-process", "false");
 				return;
 			}
+			known.push(knownVal);
 		}
-		postRatings();
-		postKnown();
+		
+		postRatings(ratings);
+		postKnown(known);
 		postEvent('RATE_MOVIE', {message: "Movies Rated", ratings: ratings, known: known});
 		nextPage();
 	});
@@ -307,6 +326,10 @@ function onPlayerStateChange(e) {
 		postEvent(stateMap[e.data], data);
 	} else {
 		postEvent("UNKNOWN_EVENT_TRAILER", data);
+	}
+	
+	if(e.data == YT.PlayerState.CUED) {
+		$('#player').addClass("video-loaded");
 	}
 }
 
@@ -846,23 +869,13 @@ function postRecommendedChoice(mID) {
 /**
  * POST update the selected ratings.
  */
-function postRatings() {
-
-	//var stars= ('input[name=rating_'+i+']:checked').val();
-	//var known= ('input[name=known_'+i+']:checked').val(); 
-	for (var i = 1; i <= nrOfMovies; i++) {
-		ratings.push($('input[name=rating_' + i + ']:checked').val());
-		//known.push($('input[name=known_'+i+']:checked').val());
-	}
-
-	$.ajax({
+function postRatings(ratings) {
+	return $.ajax({
 		type: 'POST',
 		url: '/api/update/ratings',
 		data: {
 			userid: userid,
-			//movie: mID,
 			ratings: JSON.stringify(ratings)
-			//known: JSON.stringify(known)
 		},
 		dataType: 'json',
 		error: function(err) {
@@ -874,22 +887,12 @@ function postRatings() {
 /**
  * POST update the known items.
  */
-function postKnown() {
-
-	//var stars= ('input[name=rating_'+i+']:checked').val();
-	//var known= ('input[name=known_'+i+']:checked').val(); 
-	for (var i = 1; i <= nrOfMovies; i++) {
-		//ratings.push($('input[name=rating_'+i+']:checked').val());
-		known.push($('input[name=known_' + i + ']:checked').val());
-	}
-
-	$.ajax({
+function postKnown(known) {
+	return $.ajax({
 		type: 'POST',
 		url: '/api/update/known',
 		data: {
 			userid: userid,
-			//movie: mID,
-			//ratings: JSON.stringify(ratings)
 			known: JSON.stringify(known)
 		},
 		dataType: 'json',
