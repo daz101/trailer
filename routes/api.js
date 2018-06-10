@@ -456,6 +456,140 @@ router.post('/update/feedback', function(req, res, next) {
 	});
 });
 
+router.get('/report/users', function(req, res) {
+	var i;
+	var db = req.db;
+	var users = db.get('users');
+	users.find({}, {}, function(err, docs) {
+		if(err) {
+			console.error("routes/api :: /report/users :: Error in users.find :: " + err);
+			return utils.sendErr(res, 'Failed to obtain list of users');
+		}
+		try {
+			var result = "userid,mTurkCode,experimentalCondition,stepsCompleted,moviesSelected,trailersWatched,moviesHovered,infoHovered,posterHovered,feedback";
+			for(i = 0; i < 11; i++) {
+				result = result + ",movieSelectionPos_" + i;
+			}
+			for(i = 0; i < 10; i++) {
+				result = result + ",ratings_" + i;
+			}
+			for(i = 0; i < 10; i++) {
+				result = result + ",known_" + i;
+			}
+			for(i = 0; i < 11; i++) {
+				result = result + ",firstanswers_" + i;
+			}
+			for(i = 0; i < 39; i++) {
+				result = result + ",secondanswers_" + i;
+			}
+			result = result + "\n";
+			
+			for(var idx in docs) {
+				try {
+					var docResult = "";
+					docResult = docResult + parseInt(docs[idx].userid) + ",";
+					try {
+						docResult = docResult + utils.hash(req, docs[idx].userid) + ",";
+					} catch(ex) {
+						docResult = docResult + "NULL,";
+					}
+					try {
+						docResult = docResult + docs[idx].conditionNum + ",";
+					} catch(ex) {
+						docResult = docResult + "NULL,";
+					}
+					try {
+						docResult = docResult + docs[idx].choice_number + ",";
+					} catch(ex) {
+						docResult = docResult + "NULL,";
+					}
+					try {
+						docResult = docResult + docs[idx].choices.length + ",";
+					} catch(ex) {
+						docResult = docResult + "NULL,";
+					}
+					try {
+						docResult = docResult + docs[idx].watched_trailers.length + ",";
+					} catch(ex) {
+						docResult = docResult + "NULL,";
+					}
+					try {
+						docResult = docResult + docs[idx].hovered_movies.length + ",";
+					} catch(ex) {
+						docResult = docResult + "NULL,";
+					}
+					try {
+						docResult = docResult + docs[idx].hovered_info.length + ",";
+					} catch(ex) {
+						docResult = docResult + "NULL,";
+					}
+					try {
+						docResult = docResult + docs[idx].hovered_poster.length + ",";
+					} catch(ex) {
+						docResult = docResult + "NULL,";
+					}
+					try {
+						docResult = docResult + docs[idx].feedback;
+					} catch(ex) {
+						docResult = docResult + "NULL";
+					}
+					
+					try {
+						docResult = docResult + "," + docs[idx].initial_choice_set[0].indexOf(docs[idx].choices[0]);
+					} catch(ex) {
+						docResult = docResult + ",NULL";
+					}
+					for(i = 1; i < 11; i++) {
+						try {
+							docResult = docResult + "," + docs[idx].choice_set[i - 1].indexOf(docs[idx].choices[i]);
+						} catch(ex) {
+							docResult = docResult + ",NULL";
+						}
+					}
+					for(i = 0; i < 10; i++) {
+						try {
+							docResult = docResult + "," + docs[idx].ratings[i];
+						} catch(ex) {
+							docResult = docResult + ",NULL";
+						}
+					}
+					for(i = 0; i < 10; i++) {
+						try {
+							docResult = docResult + "," + docs[idx].known[i];
+						} catch(ex) {
+							docResult = docResult + ",NULL";
+						}
+					}
+					for(i = 0; i < 11; i++) {
+						try {
+							docResult = docResult + "," + docs[idx].firstanswers[i];
+						} catch(ex) {
+							docResult = docResult + ",NULL";
+						}
+					}
+					for(i = 0; i < 39; i++) {
+						try {
+							docResult = docResult + "," + docs[idx].secondanswers[i];
+						} catch(ex) {
+							docResult = docResult + ",NULL";
+						}
+					}
+					result = result + docResult + "\n";
+				} catch(e) {
+					console.warn("Exception in transforming to csv for userid = " + docs[idx].userid + " :: " + e);
+				}
+			}
+			
+			res.setHeader('Content-disposition', 'attachment; filename=report_users.csv');
+			res.setHeader('Content-Type', 'text/csv');
+			res.status(200).send(result);
+		} catch(e) {
+			console.trace();
+			console.error("routes/api :: /report/users :: Exception in users.find :: " + e);
+		}
+	});
+});
+
 /**
  * Get TheMovieDB movie id using ImDB id.
  */
