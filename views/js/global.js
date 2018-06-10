@@ -108,6 +108,19 @@ $(document).ready(function() {
 			$(this).css("filter", "blur(10px)");
 		}
 	});
+	
+	
+	$(".movie_info").scroll(function(event) {
+		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
+			$("#blurred_content").css("filter", "blur(0)");
+		}
+	});
+	
+	$(".movie_info").mouseout(function(event) {
+		if (conditionNum == 2 || conditionNum == 3 || conditionNum == 4) {
+			$("#blurred_content").css("filter", "blur(10px)");
+		}
+	});
 
 	$(".hover-block").click(function() {
 		if (clicked == 1) {
