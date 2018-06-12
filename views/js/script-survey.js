@@ -126,6 +126,7 @@ $(document).ready(function() {
 	});
 
 	$(window).on('unload', function(e) {
+		$('[data-under-process]').attr('data-under-process', "false");
 		postEvent('DISCONNECT_USER', {message: 'Closed connection'});
 	});
 });

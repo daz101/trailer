@@ -226,6 +226,7 @@ $(document).ready(function() {
 	});
 
 	$(window).on('unload', function() {
+		$('[data-under-process]').attr('data-under-process', "false");
 		postEvent('DISCONNECT_USER', {
 			message: 'Closed Connection'
 		});

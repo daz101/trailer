@@ -152,11 +152,13 @@ $(document).ready(function() {
 		if (choiceNumber + 1 < maxChoices)
 			showLoading(function(cb) {
 				getChoiceSet(moviePos, cb);
+				$('#confirmYes').attr("data-under-process", "false");
 			});
 		else if (choiceNumber < maxChoices) {
 			// Change appearance of the infobox
 			delayAndShowRecommendation(function(cb) {
 				getFinalRecommendationSet(moviePos, cb);
+				$('#confirmYes').attr("data-under-process", "false");
 			});
 		} else {
 			var promises = [];
@@ -169,6 +171,7 @@ $(document).ready(function() {
 
 			// When the final movie selected has been saved and the event logged,
 			$.when.apply($, promises).done(function() {
+				$('#confirmYes').attr("data-under-process", "false");
 				confirmUnload = false;
 				location.reload(true);
 			});
@@ -247,6 +250,7 @@ $(document).ready(function() {
 
 	$(window).on("unload", function() {
 		try {
+			$('[data-under-process]').attr('data-under-process', "false");
 			postEvent('DISCONNECT_USER', {message : 'Closed Connection'});
 		} catch(e) {
 			console.warn("Exception while window.onunload :: " + e);
