@@ -33,6 +33,7 @@ $(document).ready(function() {
 			var mID = movies[i];
 			loadMovieInfo(i, mID, 'id');
 		}
+		if(choiceNumber == 11) postEvent("LOAD_RATING_MOVIES", {ids: movies, choiceNumber: choiceNumber});
 	}
 
 	// conditionNum:3 => Info:left, Blur: right
