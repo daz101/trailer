@@ -149,11 +149,10 @@ $(document).ready(function() {
 		$(this).attr("data-under-process", "true");
 		var hookpage = $("#verbalpage4");
 		if (isSurveyComplete(hookpage)) {
-			finish();
-			start();
 			postEvent('CLICK_VERBAL_VISUAL_SURVEY', {
 				message: 'Clicked "Finished Verbal Visual Survey"'
 			});
+			finish(start);
 		} else {
 			$(this).attr("data-under-process", "false");
 		}
@@ -275,7 +274,7 @@ function launchnow() {
 	});
 }
 
-function finish() {
+function finish(cb) {
 	$.ajax({
 		type: 'POST',
 		url: '/api/update/firstanswers',
@@ -285,8 +284,9 @@ function finish() {
 		},
 		dataType: 'json',
 		success: function() {
-			//  confirmUnload = false;
-			location.reload(true);
+			// confirmUnload = false;
+			// location.reload(true);
+			cb();
 		},
 		error: function(err) {
 			console.log(err.responseText);
