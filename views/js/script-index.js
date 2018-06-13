@@ -751,6 +751,9 @@ function loadChoiceSet(event, selectedId, data, isFinal, cb) {
 		choiceSetNumber++;
 		if(isFinal) postFinalMovies();
 		if(typeof cb != 'undefined') cb();
+		
+		//Init Scrollbars
+		$('.movie_info').animate({scrollTop:0},0);
 	});
 }
 
@@ -795,6 +798,9 @@ function loadRandomMoviesOnError(event, selectedId, isFinal, cb) {
 			choiceSetNumber++;
 			if(isFinal) postFinalMovies();
 			if(typeof cb != 'undefined') cb();
+			
+			//Init Scrollbars
+			$('.movie_info').animate({scrollTop:0},0);
 		});
 	});
 }
