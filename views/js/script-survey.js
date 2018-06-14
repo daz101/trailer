@@ -11,7 +11,8 @@ $(document).ready(function() {
 	
 	$('#surveypage1, #surveypage1button,#surveypage2, #surveypage2button, #surveypage3, #surveypage3button, #surveypage4, #surveypage4button').hide();
 	$('#surveypage5, #surveypage5button,#surveypage6, #surveypage6button, #surveypage7, #surveypage7button,#surveypage8, #surveypage8button').hide();
-	$('#surveypage9, #surveypage9button, #surveypage10, #surveypage10button, #surveypage11, #surveypage11button, #surveypage12, #surveypage12button, #surveypage13, #surveypage13button, #surveypage14, #surveypage14button, #surveypage15, #surveypage15button, #surveypage16, #surveypage16button').hide();
+	$('#surveypage9, #surveypage9button, #surveypage10, #surveypage10button, #surveypage11, #surveypage11button, #surveypage12, #surveypage12button').hide();
+	$('#surveypage13, #surveypage13button, #surveypage14, #surveypage14button, #surveypage15, #surveypage15button, #surveypage16, #surveypage16button').hide();
 
 	$(".question .rad_row td").click(function() {
 		$(this).find('input[type="radio"]').each(function() {
@@ -106,7 +107,7 @@ $(document).ready(function() {
 	$('#surveypage16button').click(function() {
 		var isUnderProcess = $(this).attr('data-under-process');
 		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
-			console.warn("#surveypage15button :: Prevented multiple clicks.");
+			console.warn("#surveypage16button :: Prevented multiple clicks.");
 			return;
 		}
 		$(this).attr("data-under-process", "true");
