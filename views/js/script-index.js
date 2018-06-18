@@ -520,11 +520,11 @@ function getTrailer(mID, cb) {
  */
 function loadMovieDescription(pos) {
 	//FIXME: Remove the data elements not needed
-	$('#moviesummary').text(movies[pos].summary);
+	$('#moviesummary').html(movies[pos].summary);
 	$('#moviegenres').text(movies[pos].Genres);
 	$('#moviedirector').text(movies[pos].director);
 	$('#moviecast').text(movies[pos].cast);
-	$('#movietitle').text(movies[pos].title);
+	$('#movietitle').html(movies[pos].title);
 	$('#movieyear').text(movies[pos].year);
 	$('#movieposter').prop("src", movies[pos].poster);
 	$('#mouseCap_video').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
