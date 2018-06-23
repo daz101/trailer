@@ -57,3 +57,11 @@ movies.find({summary: {$regex: '<a href="/'}}, {}, function(err, docs) {
 	}
 });
 */
+
+// SNIPPET 3 - CODE TO DELETE EMPTY OBJECTS
+/*
+movies.remove({id_number: null}, function(e, count) {
+	if(e) return console.log("Could not remove movies :: " + e);
+	console.log("Deleted " + count + " movies");
+})
+*/
