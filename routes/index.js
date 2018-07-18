@@ -36,7 +36,7 @@ router.get('/status', function(req, res) {
 				if (response.statusCode == 200) {
 					result.result.state.recommendation_server = 'up';
 					sendStatusResponse();
-					statusTimer = null;
+					clearTimeout(statusTimer);
 				}
 			} catch (e) {
 
