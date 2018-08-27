@@ -564,9 +564,9 @@ function getChoiceSet(pos, cb) {
 		data: {
 			userid: "" + userid,
 			movieid: "" + movies[pos].movieID,
-			learn_rate: learnRate,
-			choice_number: "" + choiceNumber,
 			discard_rate: discardRate,
+			//learn_rate: learnRate,
+			choice_number: "" + choiceNumber,
 			number_of_candidates: "" + nrOfMovies
 		},
 		dataType: 'json',
