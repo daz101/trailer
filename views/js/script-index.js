@@ -560,7 +560,7 @@ function getChoiceSet(pos, cb) {
 	return $.ajax({
 		type: 'POST',
 		timeout: 10000,			
-		url: 'https://mmlite.azurewebsites.net/api/Choiceset/',
+		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/',
 		data: {
 			userid: "" + userid,
 			movieid: "" + movies[pos].movieID,
@@ -688,7 +688,7 @@ function getFinalRecommendationSet(pos, cb) {
 	return $.ajax({
 		type: 'GET',
 		timeout: 10000,
-		url: 'https://mmlite.azurewebsites.net/api/recommendation/' + userid + '/' +
+		url: 'https://mmlitetrailer.azurewebsites.net/api/recommendation/' + userid + '/' +
 			nrOfMovies + '/' + diversification + '/alternative',
 		data: {
 			format: 'json'
