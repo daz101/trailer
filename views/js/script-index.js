@@ -560,10 +560,8 @@ function getChoiceSet(pos, cb) {
 	return $.ajax({
 		type: 'POST',
 		timeout: 10000,			
-		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' + movies[pos]movieID + '/' + discardRate + '/' + choiceNumber
-		+ '/' + nrOfMovies,
+		url: 'https://mmlitetrailer.azurewebsites.net/api/Choices/',
 		data: {
-			format: 'json'
 			userid: "" + userid,
 			movieid: "" + movies[pos].movieID,
 			discard_rate: discardRate,
