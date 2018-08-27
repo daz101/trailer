@@ -78,7 +78,7 @@ $(document).ready(function() {
 	$('.movie-block').click(function() {
 		var idArr = $(this).prop('id').split("_");
 		var moviePos = idArr[idArr.length - 1] - 1;
-		updateHoveredMovies(movies[moviePos].id_number);
+		//updateHoveredMovies(movies[moviePos].id_number);
 		postEvent('SELECT_MOVIE', {id: movies[moviePos]._id});
 	});
 
@@ -521,15 +521,15 @@ function getTrailer(mID, cb) {
 function loadMovieDescription(pos) {
 	//FIXME: Remove the data elements not needed
 	//$('#moviesummary').html(movies[pos].summary);
-	$('#moviegenres').text(movies[pos].Genres);
-	$('#moviedirector').text(movies[pos].director);
-	$('#moviecast').text(movies[pos].cast);
-	$('#movietitle').html(movies[pos].title);
-	$('#movieyear').text(movies[pos].year);
-	$('#movieposter').prop("src", movies[pos].poster);
-	$('#mouseCap_video').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
-	$('.movie_img').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
-	$('.movie_info').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
+	//$('#moviegenres').text(movies[pos].Genres);
+	//$('#moviedirector').text(movies[pos].director);
+	//$('#moviecast').text(movies[pos].cast);
+	//$('#movietitle').html(movies[pos].title);
+	//$('#movieyear').text(movies[pos].year);
+	//$('#movieposter').prop("src", movies[pos].poster);
+	//$('#mouseCap_video').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
+	//$('.movie_img').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
+	//$('.movie_info').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
 }
 
 /**
