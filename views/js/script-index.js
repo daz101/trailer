@@ -562,7 +562,7 @@ function getChoiceSet(pos, cb) {
 		timeout: 10000,
 		crossDomain: true,		
 		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' +
-			itemid + '/' + discard_rate + '/' + choice_number + '/' + number_of_candidates,
+			movies[pos].movieID + '/' + discardRate + '/' + choiceNumber + '/' + nrOfMovies,
 		data: {
 			userid: "" + userid,
 			itemid: "" + movies[pos].movieID,
