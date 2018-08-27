@@ -559,8 +559,9 @@ function updateWatchedTrailers(mID, currentTime, duration) {
 function getChoiceSet(pos, cb) {
 	return $.ajax({
 		type: 'POST',
-		timeout: 10000,			
-		url: 'https://mmlitetrailer.azurewebsites.net/api/Choices/',
+		timeout: 10000,
+crossDomain: true,		
+		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/',
 		data: {
 			userid: "" + userid,
 			movieid: "" + movies[pos].movieID,
@@ -569,7 +570,7 @@ function getChoiceSet(pos, cb) {
 			choice_number: "" + choiceNumber,
 			number_of_candidates: "" + nrOfMovies
 		},
-		dataType: 'json',
+		dataType: 'jsonp',
 		success: function(data) {
 			// Load the new choice set
 			setTimeout(function() {
