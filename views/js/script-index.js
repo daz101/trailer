@@ -520,7 +520,7 @@ function getTrailer(mID, cb) {
  */
 function loadMovieDescription(pos) {
 	//FIXME: Remove the data elements not needed
-	$('#moviesummary').html(movies[pos].summary);
+	//$('#moviesummary').html(movies[pos].summary);
 	$('#moviegenres').text(movies[pos].Genres);
 	$('#moviedirector').text(movies[pos].director);
 	$('#moviecast').text(movies[pos].cast);
@@ -578,7 +578,7 @@ function getChoiceSet(pos, cb) {
 			// Load the new choice set
 			setTimeout(function() {
 				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
-				console.log("It works" + JSON.stringify());
+				console.log("It works, Yang!");
 			}, delay);
 		},
 		error: function(err) {
