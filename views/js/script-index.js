@@ -570,7 +570,9 @@ crossDomain: true,
 			choice_number: "" + choiceNumber,
 			number_of_candidates: "" + nrOfMovies
 		},
+		beforeSend: setHeader, 
 		dataType: 'jsonp',
+		jsonpCallback: 'callback',
 		success: function(data) {
 			// Load the new choice set
 			setTimeout(function() {
