@@ -570,7 +570,7 @@ crossDomain: true,
 			choice_number: "" + choiceNumber,
 			number_of_candidates: "" + nrOfMovies
 		},
-		beforeSend: setHeader, 
+		//beforeSend: setHeader, 
 		dataType: 'jsonp',
 		jsonpCallback: 'callback',
 		success: function(data) {
