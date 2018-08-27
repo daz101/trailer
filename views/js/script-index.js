@@ -564,7 +564,7 @@ crossDomain: true,
 		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/',
 		data: {
 			userid: "" + userid,
-			movieid: "" + movies[pos].movieID,
+			itemid: "" + movies[pos].movieID,
 			discard_rate: discardRate,
 			//learn_rate: learnRate,
 			choice_number: "" + choiceNumber,
