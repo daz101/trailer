@@ -577,6 +577,7 @@ crossDomain: true,
 			// Load the new choice set
 			setTimeout(function() {
 				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
+				console.log("It works" + JSON.stringify());
 			}, delay);
 		},
 		error: function(err) {
