@@ -568,7 +568,7 @@ function getChoiceSet(pos, cb) {
 			itemid: "" + movies[pos].movieID,
 			discard_rate: discardRate,
 			//learn_rate: learnRate,
-			choice_number: "" + choiceNumber,
+			choice_number: "" + (choiceNumber + 1),
 			number_of_candidates: "" + nrOfMovies
 			//format: 'json'
 		},
