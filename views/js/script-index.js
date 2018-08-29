@@ -579,7 +579,7 @@ function getChoiceSet(pos, cb) {
 			// Load the new choice set
 			setTimeout(function() {
 				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
-				console.log("It works, Yang!");
+				console.log(data);
 			}, delay);
 		},
 		error: function(err) {
