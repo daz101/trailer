@@ -31,7 +31,7 @@ router.get('/status', function(req, res) {
 		};
 		var statusTimer = setTimeout(sendStatusResponse, 20000);
 		var request = require('request');
-		request('https://mmlitetrailer.azurewebsites.net/', function(error, response, body) {
+		request('https://mmlitetrailer.azurewebsites.net/api/status', function(error, response, body) {
 			try {
 				if (response.statusCode == 200) {
 					result.result.state.recommendation_server = 'up';
