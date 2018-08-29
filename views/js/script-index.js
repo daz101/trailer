@@ -520,7 +520,7 @@ function getTrailer(mID, cb) {
  */
 function loadMovieDescription(pos) {
 	//FIXME: Remove the data elements not needed
-	//$('#moviesummary').html(movies[pos].summary);
+	$('#moviesummary').html(movies[pos].summary);
 	$('#moviegenres').text(movies[pos].Genres);
 	$('#moviedirector').text(movies[pos].director);
 	$('#moviecast').text(movies[pos].cast);
@@ -558,7 +558,7 @@ function updateWatchedTrailers(mID, currentTime, duration) {
  */
 function getChoiceSet(pos, cb) {
 	return $.ajax({
-		type: 'GET',
+		type: 'POST',
 		timeout: 10000,
 		crossDomain: true,		
 		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' +
