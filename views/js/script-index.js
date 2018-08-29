@@ -557,7 +557,8 @@ function updateWatchedTrailers(mID, currentTime, duration) {
  * GET (POST) new recommendation set
  */
 function getChoiceSet(pos, cb) {
-	 console.log("before::"+movies); 
+	 console.log("before::");
+	 cosole.log(movies); 
 	return $.ajax({
 		type: 'GET',
 		timeout: 10000,
