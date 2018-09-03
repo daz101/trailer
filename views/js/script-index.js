@@ -564,13 +564,13 @@ function getChoiceSet(pos, cb) {
 		timeout: 10000,
 		crossDomain: true,		
 		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' +
-			movies[pos].id_number + '/' + discardRate + '/' + (choiceNumber + 1) + '/' + nrOfMovies,
+			movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + nrOfMovies,
 		data: {
 			userid: "" + userid,
 			itemid: "" + movies[pos].id_number,
 			discard_rate: discardRate,
 			//learn_rate: learnRate,
-			choice_number: "" + (choiceNumber + 1),
+			choice_number: "" + choiceNumber,
 			number_of_candidates: "" + nrOfMovies
 			//format: 'json'
 		},
