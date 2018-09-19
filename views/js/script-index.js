@@ -565,7 +565,7 @@ function getChoiceSet(pos, cb) {
 		timeout: 10000,
 		crossDomain: true,		
 		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' +
-			movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + nrOfMovies,
+			movies[pos].id_number + '/' + discardRate + '/' + (choiceNumber*2+1) + '/' + nrOfMovies,
 		data: {
 			//userid: "" + userid,
 			//itemid: "" + movies[pos].id_number,
@@ -579,6 +579,7 @@ function getChoiceSet(pos, cb) {
 		dataType: 'json',
 		//jsonpCallback: 'callback',
 		success: function(data) {
+			delete data.items[0];
 			// Load the new choice set
 			setTimeout(function() {
 				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
