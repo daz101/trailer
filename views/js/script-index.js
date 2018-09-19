@@ -37,7 +37,7 @@ $(document).ready(function() {
 	}
 
 	// conditionNum:3 => Info:left, Blur: right
-	// conditionNum:4 => Info:right, Blur: left 
+	// conditionNum:4 => Info:right, Blur: left
 	// Blur the content when conditionNum is 3 or 4
 	if (conditionNum == 3 || conditionNum == 4) {
 		$('#blurred_content').css("filter", "blur(10px)");
@@ -52,12 +52,12 @@ $(document).ready(function() {
 		$('#blurred_content').css("filter", "blur(0px)");
 	}
 
-	// For trailer-only condition; when conditionNum is 2 display only trailer  
+	// For trailer-only condition; when conditionNum is 2 display only trailer
 	if (conditionNum == 2) {
 		$('#mouseCap_video').css("width", "100%");
 		$('.movie_info').css("display", "none");
 	}
-	
+
 	$('.movie-block').mouseover(function() {
 		if(captureMouseEvents) {
 			var idArr = $(this).prop('id').split("_");
@@ -65,16 +65,16 @@ $(document).ready(function() {
 			postEvent('MOUSEOVER_MOVIE', {id: movies[moviePos]._id});
 		}
 	});
-	
+
 	$('.movie-block').mouseout(function() {
 		if(captureMouseEvents) {
 			var idArr = $(this).prop('id').split("_");
 			var moviePos = idArr[idArr.length - 1] - 1;
 			postEvent('MOUSEOUT_MOVIE', {id: movies[moviePos]._id});
 		}
-		
+
 	});
-	
+
 	$('.movie-block').click(function() {
 		var idArr = $(this).prop('id').split("_");
 		var moviePos = idArr[idArr.length - 1] - 1;
@@ -86,7 +86,7 @@ $(document).ready(function() {
 		updateHoveredInfo($(this).attr('data-movie-id-number'));
 		postEvent('MOUSEOVER_INFO', {id: $(this).attr('data-movie-id')});
 	});
-	
+
 	$('.movie_info').mouseout(function() {
 		postEvent('MOUSEOUT_INFO', {id: $(this).attr('data-movie-id')});
 	});
@@ -95,7 +95,7 @@ $(document).ready(function() {
 		updateHoveredPoster($(this).attr('data-movie-id-number'));
 		postEvent('MOUSEOVER_POSTER', {id: $(this).attr('data-movie-id')});
 	});
-	
+
 	$('.movie_img').mouseout(function() {
 		postEvent('MOUSEOUT_POSTER', {id: $(this).attr('data-movie-id')});
 	});
@@ -115,30 +115,30 @@ $(document).ready(function() {
 		loadSelectedMovie(moviePos); //0
 	});
 
-	//When ratings is selected 
+	//When ratings is selected
 	$('.movie-block .icon-holder').click(function() {
 		// Find which movie was clicked
 		var parentIdArr = $(this).parent().prop('id').split('_'); //["movie","1"]
 		var moviePos = parentIdArr[parentIdArr.length - 1] - 1; //1 - 1 = 0
-		//if clicked then send value and movie id to array 
+		//if clicked then send value and movie id to array
 	});
 
 	$('#confirmYes').click(function() {
 		//Prevent multiple clicks!
-		$('#confirmation_modal .close').click();	
+		$('#confirmation_modal .close').click();
 		var isUnderProcess = $(this).attr('data-under-process');
 		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
 			console.warn("#confirmYes :: Prevented multiple clicks.");
 			return;
 		}
 		$(this).attr("data-under-process", "true");
-		
+
 		// Find which movie was clicked
 		var movieSelectedIdArr = $('.movie-block[data-movieSelected=true]').prop('id').split("_");
 		var moviePos = movieSelectedIdArr[movieSelectedIdArr.length - 1] - 1;
 		// Update choice number && Get new recommendations
 
-		//change state of progress bar according to the choiceNumber 
+		//change state of progress bar according to the choiceNumber
 		if (choiceNumber == 3) {
 			var element = document.getElementById("pb_8");
 			element.classList.add("done");
@@ -178,7 +178,7 @@ $(document).ready(function() {
 			});
 		}
 	});
-	
+
 	$('#confirmation_modal').on('show.bs.modal', function (e) {
 		try {
 			postEvent('CLICK_NEXT', {choiceNumber: choiceNumber});
@@ -186,7 +186,7 @@ $(document).ready(function() {
 			console.warn("Exception on confirmation_modal : show.bs.modal :: " + e);
 		}
 	});
-	
+
 	$('#confirmNo').click(function() {
 		try {
 			postEvent('CLICK_CANCEL_NEXT', {choiceNumber: choiceNumber});
@@ -208,7 +208,7 @@ $(document).ready(function() {
 		});
 	});
 
-	//ratings push 
+	//ratings push
 	$('#ratingsButton').click(function() {
 		var isUnderProcess = $(this).attr('data-under-process');
 		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
@@ -225,7 +225,7 @@ $(document).ready(function() {
 			}
 			ratings.push(ratingVal);
 		}
-		
+
 		var known = [];
 		for (var i = 1; i <= nrOfMovies; i++) {
 			var knownVal = $('input[name=known_' + i + ']:checked').val();
@@ -235,7 +235,7 @@ $(document).ready(function() {
 			}
 			known.push(knownVal);
 		}
-		
+
 		postRatings(ratings);
 		postKnown(known);
 		postEvent('RATE_MOVIE', {message: "Movies Rated", ratings: ratings, known: known});
@@ -258,7 +258,7 @@ $(document).ready(function() {
 		}
 	});
 });
-//end of document 
+//end of document
 
 function nextPage() {
 	$.ajax({
@@ -332,7 +332,7 @@ function onPlayerStateChange(e) {
 	} else {
 		postEvent("UNKNOWN_EVENT_TRAILER", data);
 	}
-	
+
 	if(e.data == YT.PlayerState.CUED) {
 		$('#player').addClass("video-loaded");
 	}
@@ -405,7 +405,7 @@ function loadMovieInfo(itemNr, mID, mType) {
 
 		// Load the correct poster URL
 		var pictureURL;
-		//if (movieInfo.rtPictureURL.length > 0) 
+		//if (movieInfo.rtPictureURL.length > 0)
 		// pictureURL = movieInfo.rtPictureURL;
 		if (movieInfo.poster.length > 0)
 			pictureURL = movieInfo.poster;
@@ -515,7 +515,7 @@ function getTrailer(mID, cb) {
 }
 
 /**
- * Load movie description like plot summary, cast, 
+ * Load movie description like plot summary, cast,
  * genre and director on-screen.
  */
 function loadMovieDescription(pos) {
@@ -563,9 +563,9 @@ function getChoiceSet(pos, cb) {
 	return $.ajax({
 		type: 'GET',
 		timeout: 10000,
-		crossDomain: true,		
+		crossDomain: true,
 		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' +
-			movies[pos].id_number + '/' + discardRate + '/' + (choiceNumber*2+1) + '/' + nrOfMovies,
+			movies[pos].id_number + '/' + discardRate + '/' + (choiceNumber*2+1) + '/' + (nrOfMovies+1),
 		data: {
 			//userid: "" + userid,
 			//itemid: "" + movies[pos].id_number,
@@ -575,16 +575,24 @@ function getChoiceSet(pos, cb) {
 			//number_of_candidates: "" + nrOfMovies
 			//format: 'json'
 		},
-		//beforeSend: setHeader, 
+		//beforeSend: setHeader,
 		dataType: 'json',
 		//jsonpCallback: 'callback',
 		success: function(data) {
-			delete data.items[0];
-			// Load the new choice set
-			setTimeout(function() {
-				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
-				console.log(data);
-			}, delay);
+			console.log(data);
+			var count = Object.keys(data).length;
+			if (count<10) {
+				console.log("Error: less than 10 objects returned!");
+				loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, false, cb);
+			}
+			else {
+				delete data.items[0];
+				// Load the new choice set
+				setTimeout(function() {
+					loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
+					console.log(data);
+				}, delay);
+			}
 		},
 		error: function(err) {
 			console.log("Error in getChoiceSet :: " + JSON.stringify(err));
@@ -665,7 +673,7 @@ function refreshChoicesCount() {
 
 /**
  * Show Loading Overlay for loading delays
- * 
+ *
  */
 function showLoading(cb) {
 	$('body').loading('start');
@@ -677,7 +685,7 @@ function showLoading(cb) {
 
 /**
  * Show Loading screen for Final Recommendation
- * 
+ *
  */
 function delayAndShowRecommendation(cb) {
 	$(".parent_container").addClass("hide");
@@ -733,7 +741,7 @@ function loadChoiceSet(event, selectedId, data, isFinal, cb) {
 			updateWatchedTrailers(movies[i].id_number, movies[i].current_time, movies[i].duration);
 		}
 	}
-	
+
 	// First, reset movies list on-screen
 	resetMovies();
 
@@ -767,7 +775,7 @@ function loadChoiceSet(event, selectedId, data, isFinal, cb) {
 		choiceSetNumber++;
 		if(isFinal) postFinalMovies();
 		if(typeof cb != 'undefined') cb();
-		
+
 		//Init Scrollbars
 		$('.movie_info').animate({scrollTop:0},0);
 	});
@@ -784,7 +792,7 @@ function loadRandomMoviesOnError(event, selectedId, isFinal, cb) {
 			updateWatchedTrailers(movies[i].id_number, movies[i].current_time, movies[i].duration);
 		}
 	}
-	
+
 	// First, reset movies list on-screen
 	resetMovies();
 
@@ -796,7 +804,7 @@ function loadRandomMoviesOnError(event, selectedId, isFinal, cb) {
 			//match randomly selected movie to movieID
 			promises.push(loadMovieInfo(i, mID, 'num'));
 		}
-		
+
 		// Save the movie selected
 		promises.push(postChoices(selectedId));
 
@@ -805,7 +813,7 @@ function loadRandomMoviesOnError(event, selectedId, isFinal, cb) {
 			// Log choice set load event
 			postEvent(event, {id: selectedId, choiceNumber: choiceNumber});
 		}));
-		
+
 		// When movie info is loaded for all movies
 		$.when.apply($, promises).done(function() {
 			// Update the movies list on the backend for the user
@@ -814,7 +822,7 @@ function loadRandomMoviesOnError(event, selectedId, isFinal, cb) {
 			choiceSetNumber++;
 			if(isFinal) postFinalMovies();
 			if(typeof cb != 'undefined') cb();
-			
+
 			//Init Scrollbars
 			$('.movie_info').animate({scrollTop:0},0);
 		});
