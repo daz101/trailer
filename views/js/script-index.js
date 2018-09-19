@@ -561,18 +561,18 @@ function getChoiceSet(pos, cb) {
 	console.log(movies);
 	console.log(userid+'/'+movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + nrOfMovies);
 	return $.ajax({
-		type: 'GET',
+		type: 'POST',
 		timeout: 10000,
 		crossDomain: true,
-		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' +
-			movies[pos].id_number + '/' + discardRate + '/' + (choiceNumber*2+1) + '/' + (nrOfMovies+1),
+		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/'
+		// + userid + '/' + movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + (nrOfMovies+1),
 		data: {
-			//userid: "" + userid,
-			//itemid: "" + movies[pos].id_number,
-			//discard_rate: discardRate,
-			//learn_rate: learnRate,
-			//choice_number: "" + choiceNumber,
-			//number_of_candidates: "" + nrOfMovies
+			userid: "" + userid,
+			itemid: "" + movies[pos].id_number,
+			discard_rate: discardRate,
+			learn_rate: learnRate,
+			choice_number: "" + choiceNumber,
+			number_of_candidates: "" + nrOfMovies
 			//format: 'json'
 		},
 		//beforeSend: setHeader,
