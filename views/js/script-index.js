@@ -557,8 +557,9 @@ function updateWatchedTrailers(mID, currentTime, duration) {
  * GET (POST) new recommendation set
  */
 function getChoiceSet(pos, cb) {
-	 console.log("before::");
-	 console.log(movies); 
+	console.log("before::");
+	console.log(movies);
+	console.log(userid+'/'+movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + nrOfMovies);
 	return $.ajax({
 		type: 'GET',
 		timeout: 10000,
@@ -566,12 +567,12 @@ function getChoiceSet(pos, cb) {
 		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' +
 			movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + nrOfMovies,
 		data: {
-			userid: "" + userid,
-			itemid: "" + movies[pos].id_number,
-			discard_rate: discardRate,
+			//userid: "" + userid,
+			//itemid: "" + movies[pos].id_number,
+			//discard_rate: discardRate,
 			//learn_rate: learnRate,
-			choice_number: "" + choiceNumber,
-			number_of_candidates: "" + nrOfMovies
+			//choice_number: "" + choiceNumber,
+			//number_of_candidates: "" + nrOfMovies
 			//format: 'json'
 		},
 		//beforeSend: setHeader, 
