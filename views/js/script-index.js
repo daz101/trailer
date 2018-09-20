@@ -4,10 +4,10 @@
 //$('a').click(function() { confirmUnload = false});
 
 var nrOfMovies = $(".movie-block").length;
-var learnRate = "0,7";
-var discardRate = "0,5";
+var learnRate = "0.7";
+var discardRate = "0.5";
 var maxChoices = 10;
-var diversification = '0,7';
+var diversification = '0.7';
 //var userid = data.userid;
 var userFromUrl = window.location.pathname;
 var userid = userFromUrl.replace('/', '');
@@ -561,18 +561,17 @@ function getChoiceSet(pos, cb) {
 	console.log(movies);
 	console.log(userid+'/'+movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + nrOfMovies);
 	return $.ajax({
-		type: 'POST',
+		type: 'GET',
 		timeout: 10000,
 		crossDomain: true,
-		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/',
-		// + userid + '/' + movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + (nrOfMovies+1),
+		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' + movies[pos].id_number + '/' + discardRate + '/' + choiceNumber + '/' + nrOfMovies,
 		data: {
-			userid: "" + userid,
-			itemid: "" + movies[pos].id_number,
-			discard_rate: discardRate,
-			learn_rate: learnRate,
-			choice_number: "" + choiceNumber,
-			number_of_candidates: "" + nrOfMovies
+			//userid: "" + userid,
+			//itemid: "" + movies[pos].id_number,
+			//discard_rate: discardRate,
+			//learn_rate: learnRate,
+			//choice_number: "" + choiceNumber,
+			//number_of_candidates: "" + nrOfMovies
 			//format: 'json'
 		},
 		//beforeSend: setHeader,
@@ -580,19 +579,19 @@ function getChoiceSet(pos, cb) {
 		//jsonpCallback: 'callback',
 		success: function(data) {
 			console.log(data);
-			var count = Object.keys(data).length;
-			if (count<10) {
-				console.log("Error: less than 10 objects returned!");
-				loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, false, cb);
-			}
-			else {
-				delete data.items[0];
+			//var count = Object.keys(data).length;
+			//if (count<10) {
+				//console.log("Error: less than 10 objects returned!");
+				//loadRandomMoviesOnError('CHOOSE_RANDOM_MOVIE_ON_ERROR', movies[pos]._id, false, cb);
+			//}
+			//else {
+				//delete data.items[0];
 				// Load the new choice set
 				setTimeout(function() {
 					loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
 					console.log(data);
 				}, delay);
-			}
+			//}
 		},
 		error: function(err) {
 			console.log("Error in getChoiceSet :: " + JSON.stringify(err));
