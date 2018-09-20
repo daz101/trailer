@@ -720,6 +720,7 @@ function getFinalRecommendationSet(pos, cb) {
 		success: function(data) {
 			// Load the new choice set
 			setTimeout(function() {
+				console.log(data);
 				loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, true, cb);
 			}, delay);
 		},
