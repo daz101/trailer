@@ -749,7 +749,7 @@ function loadChoiceSet(event, selectedId, data, isFinal, cb) {
 		return movie.itemid;
 	});
 	//changed by Yang
-	//data.shift();
+	data.shift();
 
 	// Load the new recommendation set
 	var promises = [];
