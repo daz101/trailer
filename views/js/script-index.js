@@ -589,7 +589,6 @@ function getChoiceSet(pos, cb) {
 				// Load the new choice set
 				setTimeout(function() {
 					loadChoiceSet('CHOOSE_MOVIE', movies[pos]._id, data, false, cb);
-					console.log(data);
 				}, delay);
 			//}
 		},
@@ -749,7 +748,8 @@ function loadChoiceSet(event, selectedId, data, isFinal, cb) {
 	data = data.map(function(movie) {
 		return movie.itemid;
 	});
-	data.shift();
+	//changed by Yang
+	//data.shift();
 
 	// Load the new recommendation set
 	var promises = [];
