@@ -706,14 +706,15 @@ function getFinalRecommendationSet(pos, cb) {
 		type: 'GET',
 		timeout: 10000,
 		url: 'https://mmlitetrailer.azurewebsites.net/api/recommendation/' + userid + '/' +
-			nrOfMovies + '/' + diversification + '/alternative',
+			nrOfMovies,
+//			+ '/' + diversification + '/alternative',
 		data: {
 			userid: "" + userid,
 			//itemid: "" + movies[pos].movieID,
 			//discard_rate: discardRate,
 			//learn_rate: learnRate,
-			diversification: diversification,
-			choice_number: "" + choiceNumber
+			//diversification: diversification,
+			//choice_number: "" + choiceNumber
 			//number_of_candidates: "" + nrOfMovies,
 		},
 		dataType: 'json',
