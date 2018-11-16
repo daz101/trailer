@@ -559,12 +559,12 @@ function updateWatchedTrailers(mID, currentTime, duration) {
 function getChoiceSet(pos, cb) {
 	console.log("before::");
 	console.log(movies);
-	console.log(userid+'/'+movies[pos].id_number + '/' + discardRate + '/' + learnRate + '/' + choiceNumber + '/' + nrOfMovies);
+	console.log(userid+'/'+movieID + '/' + discardRate + '/' + learnRate + '/' + choiceNumber + '/' + nrOfMovies);
 	return $.ajax({
 		type: 'GET',
 		timeout: 10000,
 		crossDomain: true,
-		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' + movies[pos].id_number + '/' + discardRate + '/' + learnRate + '/' + choiceNumber + '/' + nrOfMovies,
+		url: 'https://mmlitetrailer.azurewebsites.net/api/Choiceset/' + userid + '/' + movies[pos].movieID + '/' + discardRate + '/' + learnRate + '/' + choiceNumber + '/' + nrOfMovies,
 		data: {
 			//userid: "" + userid,
 			//itemid: "" + movies[pos].id_number,
