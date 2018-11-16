@@ -704,11 +704,11 @@ function getFinalRecommendationSet(pos, cb) {
 	return $.ajax({
 		type: 'GET',
 		timeout: 10000,
-		url: 'https://mmlitetrailer.azurewebsites.net/api/recommendation/' + userid,
-//        + '/' + nrOfMovies,
+		url: 'https://mmlitetrailer.azurewebsites.net/api/recommendation/' + userid + '/' +
+			nrOfMovies,
 //			+ '/' + diversification + '/alternative',
 		data: {
-			//userid: "" + userid,
+			userid: "" + userid,
 			//itemid: "" + movies[pos].movieID,
 			//discard_rate: discardRate,
 			//learn_rate: learnRate,
