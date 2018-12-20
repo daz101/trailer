@@ -529,3 +529,23 @@
 	width: 100%;
 	height: 250px;
 }
+
+/* Trailer only: Movie Title and Year*/
+
+
+
+.parent_container .video_goes_here .movie-title {
+	margin: auto;
+	width: 80%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+	background: black;
+	color: white; 
+}
+
+.parent_container .movie_info .movie-title span {
+	font-family: "Calibri", Georgia, Serif;
+	font-size: 1.4em;
+}
+
