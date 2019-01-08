@@ -524,6 +524,7 @@ function loadMovieDescription(pos) {
 	$('#moviegenres').text(movies[pos].Genres);
 	$('#moviedirector').text(movies[pos].director);
 	$('#moviecast').text(movies[pos].cast);
+	$('#trailertitle').html(movies[pos].title);
 	$('#movietitle').html(movies[pos].title);
 	$('#movieyear').text(movies[pos].year);
 	$('#movieposter').prop("src", movies[pos].poster);

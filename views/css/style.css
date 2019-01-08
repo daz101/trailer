@@ -534,7 +534,7 @@
 
 
 
-.parent_container .video_goes_here .movie-title {
+.parent_container .video_goes_here .trailer-title {
 	margin: auto;
 	width: 80%;
 	margin-top: 10px;
@@ -544,7 +544,7 @@
 	color: black; 
 }
 
-.parent_container .movie_info .movie-title span {
+.parent_container .video_goes_here .trailer-title span {
 	font-family: "Calibri", Georgia, Serif;
 	font-size: 1.4em;
 }
