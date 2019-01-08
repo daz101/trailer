@@ -11,7 +11,7 @@ var firstanswers = [];
 $(document).ready(function() {
 	
 	//GET user's IP Address and POST to the database
-	$.getJSON('https://jsonip.com/', function(data) {
+	$.getJSON('https://api.ipify.org?format=json', function(data) {
 		postIp(data.ip); 
     });
 
