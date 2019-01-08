@@ -527,6 +527,7 @@ function loadMovieDescription(pos) {
 	$('#trailertitle').html(movies[pos].title);
 	$('#movietitle').html(movies[pos].title);
 	$('#movieyear').text(movies[pos].year);
+	$('#traileryear').text(movies[pos].year);
 	$('#movieposter').prop("src", movies[pos].poster);
 	$('#mouseCap_video').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
 	$('.movie_img').attr('data-movie-id', movies[pos]._id).attr('data-movie-id-number', movies[pos].id_number);
