@@ -40,6 +40,7 @@ router.get('/:id', function(req, res, next) {
         watched_trailers: [],
         hovered_movies: [],
         choices: [],
+		user_ip: null,
         firstanswers: null,
 		secondanswers: null
       }, function(err) {

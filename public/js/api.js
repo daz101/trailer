@@ -63,13 +63,16 @@ router.post('/update/event', function(req, res, next) {
 /*POST Users' IP Address*/ 
 router.post('/update/ipaddress', function(req, res, next) {
   // Get the user id from the request
-  if (!(typeof req.body.desc != 'undefined')) 
+  if (!(typeof req.body.clientip != 'undefined')) 
     return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
-  //var event = req.body.event;
-  var desc = req.body.desc;
-  utils.updateEvent(req.db, desc, userid, res);
-  res.json({'success': true});
+  var db = req.db;
+  var users = db.get('users');
+  var clientip = req.body.clientip;
+  
+  users.updateById(userid, {$set:{user_ip: clientip}}, function(err) {
+    if (err) return utils.sendErr(res, 'Failed to update user IP.');
+    res.json({'success': true});
 });
 
 /* POST update movies on page of user. */
