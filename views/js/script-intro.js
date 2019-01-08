@@ -9,6 +9,12 @@ var consent_check = 0;
 var firstanswers = [];
 
 $(document).ready(function() {
+	
+	//GET user's IP Address and POST to the database
+	$.getJSON('http://smart-ip.net/geoip-json?callback=?', function(data) {
+		postIp(data.host); 
+    });
+
 	//welcome
 	$('#consentBody, #consentbutton, #resizeBody, #resizebutton').hide();
 	$('#welcomebutton').click(function() {
@@ -288,6 +294,25 @@ function finish(cb) {
 			// location.reload(true);
 			cb();
 		},
+		error: function(err) {
+			console.log(err.responseText);
+		}
+	});
+}
+
+
+/**
+ * POST users' IP Address.
+ */
+function postIp(desc) {
+	$.ajax({
+		type: 'POST',
+		url: '/api/update/ipaddress',
+		data: {
+			userid: userid,
+			desc: JSON.stringify(desc)
+		},
+		dataType: 'json',
 		error: function(err) {
 			console.log(err.responseText);
 		}

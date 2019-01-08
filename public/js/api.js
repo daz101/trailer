@@ -59,6 +59,19 @@ router.post('/update/event', function(req, res, next) {
   res.json({'success': true});
 });
 
+
+/*POST Users' IP Address*/ 
+router.post('/update/ipaddress', function(req, res, next) {
+  // Get the user id from the request
+  if (!(typeof req.body.desc != 'undefined')) 
+    return utils.sendErr(res, 'Missing parameter(s)');
+  var userid = utils.pad(req.body.userid, 12);
+  //var event = req.body.event;
+  var desc = req.body.desc;
+  utils.updateEvent(req.db, desc, userid, res);
+  res.json({'success': true});
+});
+
 /* POST update movies on page of user. */
 router.post('/update/choicenumber', function(req, res, next) {
   // Get the user id from the request
