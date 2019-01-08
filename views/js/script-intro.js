@@ -11,8 +11,8 @@ var firstanswers = [];
 $(document).ready(function() {
 	
 	//GET user's IP Address and POST to the database
-	$.getJSON('http://smart-ip.net/geoip-json?callback=?', function(data) {
-		postIp(data.host); 
+	$.getJSON('https://jsonip.com/', function(data) {
+		postIp(data.ip); 
     });
 
 	//welcome
