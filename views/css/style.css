@@ -540,8 +540,8 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 	text-align: center;
-	background: black;
-	color: white; 
+	/*background: black;*/
+	color: black; 
 }
 
 .parent_container .movie_info .movie-title span {
