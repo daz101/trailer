@@ -63,7 +63,7 @@ router.post('/update/event', function(req, res, next) {
 /*POST Users' IP Address*/ 
 router.post('/update/ipaddress', function(req, res, next) {
   // Get the user id from the request
-  if (!req.body.clientip) return utils.sendErr(res, 'Missing parameter(s)');
+  if (!req.body.userid) return utils.sendErr(res, 'Missing parameter(s)');
   var userid = utils.pad(req.body.userid, 12);
   var db = req.db;
   var users = db.get('users');
