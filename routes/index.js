@@ -236,8 +236,9 @@ function redirectToNewId(req, res) {
 			if (doc != null || doc.length > 0) {
 				newUserId = parseInt(doc[0].userid) + 1;
 			}
+			//MADE CHANGE HERE
 			else if (doc == null || doc.length == 0){
-				newUserId = 1;
+				newUserId = doc.userid + 1;
 			}
 			redirect(res, newUserId);
 		});
