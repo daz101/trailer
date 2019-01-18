@@ -231,15 +231,12 @@ function redirectToNewId(req, res) {
 			limit: 1
 		}, function(err, doc) {
 			var newUserId = initId;
-		       // newUserId = 1;
+		      
 			
-			/*if (doc != null || doc.length > 0) {
+			if (doc != null || doc.length > 0) {
 				newUserId = parseInt(doc[0].userid) + 1;
 			}
-			//MADE CHANGE HERE
-			else if (doc == null || doc.length == 0){
-				newUserId = 1;
-			}*/
+			
 			redirect(res, newUserId);
 		});
 	} catch (e) {
