@@ -13,6 +13,7 @@ $(document).ready(function() {
 	//GET user's IP Address and POST to the database
 	$.getJSON('https://api.ipify.org?format=json', function(data) {
 		postIp(data.ip); 
+		
     });
 
 	//welcome
@@ -311,6 +312,9 @@ function postIp(desc) {
 		data: {
 			userid: userid,
 			desc: JSON.stringify(desc)
+		},
+		success: function(desc) {
+			console.log(desc);
 		},
 		dataType: 'json',
 		error: function(err) {
