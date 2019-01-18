@@ -9,13 +9,15 @@ var consent_check = 0;
 var firstanswers = [];
 
 $(document).ready(function() {
-	
+	/*
 	//GET user's IP Address and POST to the database
 	$.getJSON('https://api.ipify.org?format=json', function(data) {
 		postIp(data.ip); 
 		
     });
-
+		*/ 
+		
+		
 	//welcome
 	$('#consentBody, #consentbutton, #resizeBody, #resizebutton').hide();
 	$('#welcomebutton').click(function() {
@@ -304,7 +306,7 @@ function finish(cb) {
 
 /**
  * POST users' IP Address.
- */
+
 function postIp(desc) {
 	$.ajax({
 		type: 'POST',
@@ -322,7 +324,7 @@ function postIp(desc) {
 		}
 	});
 }
-
+ */
 /**
  * Log any events on the backend.
  */
