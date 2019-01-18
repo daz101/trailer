@@ -231,7 +231,12 @@ function redirectToNewId(req, res) {
 			limit: 1
 		}, function(err, doc) {
 			var newUserId = initId;
+		
+			
 			if (doc != null || doc.length > 0) {
+				newUserId = parseInt(doc[0].userid) + 1;
+			}
+			else if (doc == null || doc.length == 0){
 				newUserId = parseInt(doc[0].userid) + 1;
 			}
 			redirect(res, newUserId);
