@@ -580,7 +580,7 @@ function getChoiceSet(pos, cb) {
 		dataType: 'json',
 		//jsonpCallback: 'callback',
 		success: function(data) {
-			console.log(data);
+			//console.log(data);
 			//var count = Object.keys(data).length;
 			//if (count<10) {
 				//console.log("Error: less than 10 objects returned!");
