@@ -78,9 +78,35 @@ $(document).ready(function() {
 		$(this).parent().parent().css("border-left", "3px solid #00cc00");
 	});
 
-	$('#verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpage4, #resize_nextOverview').hide();
+	$('#verbalpage1button, #verbalpage1, #verbalpage2, #verbalpage2button, #verbalpage3, #verbalpage3button, #verbalpage4, #resize_nextOverview').hide();
 
 	//INTERACTIONS ON NEXT BUTTON CLICK
+	
+	//Demographics
+	$('#verbaldemopagebutton').click(function() {
+		var isUnderProcess = $(this).attr('data-under-process');
+		if(typeof isUnderProcess !== typeof undefined && isUnderProcess == "true") {
+			console.warn("#verbaldemopagebutton :: Prevented multiple clicks.");
+			return;
+		}
+		$(this).attr("data-under-process", "true");
+		var hookpage = $("#demo_section");
+		if (isSurveyComplete(hookpage)) {
+			postEvent('CLICK_VERBAL_VISUAL_SURVEY', {
+				message: 'Clicked "Verbal Visual Survey Demo Page "'
+			});
+			//Loading page 1
+			$('#demo_section, #verbaldemopagebutton').fadeOut("slow", function() {
+				$('#demo_section, #verbaldemopagebutton').hide();
+				$('#verbalpage1, #verbalpage1button').show().fadeIn("slow");
+			});
+		} else {
+			$(this).attr("data-under-process", "false");
+		}
+	});
+	
+	
+	
 	//Survey page 1
 	$('#verbalpage1button').click(function() {
 		var isUnderProcess = $(this).attr('data-under-process');

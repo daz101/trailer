@@ -24,7 +24,7 @@
 	<div id="survey_display_block">
 		
 		<!--Begin Page 1-->
-		<div id="verbalpage1">
+		<div id="demo_section">
 		<div class="movie-progress">           
 			<ul id="progress_circles">
 			<li class="step" id="pb_1"></li>
@@ -47,6 +47,76 @@
 			</ul>     		
 		</div>
 		
+		
+		<div id="survey_section" class="addBox"> 
+		
+		<div class="intro">
+				<span>Please answer the following and select the option that is true about you</span>
+			</div>
+			
+			<table class="question" id="Q1">
+				<tr>
+					<td colspan="5"><span>What is your age?</span></td>
+				</tr>
+				<tr>
+					<td>18-24 years</td>
+					<td>25-34 years</td>
+					<td>35-44 years</td>
+					<td>45-54</td>
+					<td>Above 54</td>
+				</tr>
+
+				<tr class="rad_row">
+					<td><input type="radio" name="radOpt_1" value="1"></td>
+					<td><input type="radio" name="radOpt_1" value="2"></td>
+					<td><input type="radio" name="radOpt_1" value="3"></td>
+					<td><input type="radio" name="radOpt_1" value="4"></td>
+					<td><input type="radio" name="radOpt_1" value="5"></td>
+				</tr>
+			</table>
+			
+			<table class="question" id="Q2">
+				<tr>
+					<td colspan="5"><span>Gender?</span></td>
+				</tr>
+				<tr>
+					<td>Female</td>
+					<td>Male</td>
+					<td>Other</td>
+				</tr>
+			
+				<tr class="rad_row">
+					<td><input type="radio" name="radOpt_2" value="1"></td>
+					<td><input type="radio" name="radOpt_2" value="2"></td>
+					<td><input type="radio" name="radOpt_2" value="3"></td>
+				</tr>
+			</table>
+		</div>
+		</div> 
+		<!--End of Demo-->
+		
+		<div id="verbalpage1">
+		<div class="movie-progress">           
+			<ul id="progress_circles">
+			<li class="step" id="pb_1"></li>
+			<li class="done" id="pb_2"></li>
+			<li class="done" id="pb_3"></li>
+			<li class="activeStep" id="pb_4"></li>
+			<li id="pb_5"></li>
+			<li id="pb_6"></li>
+			<li class="stepDisabled" id="pb_7"></li>
+			<li id="pb_8"></li>
+			<li id="pb_9"></li>
+			<li id="pb_10"></li>
+			<li class="stepDisabled" id="pb_11"></li>
+			<li id="pb_12"></li>
+			<li id="pb_13"></li>
+			<li id="pb_14"></li>
+			<li id="pb_15"></li>
+			<li id="pb_16"></li>
+			<li class="stepDisabled" id="pb_17"></li>
+			</ul>     		
+		</div>
 		<div id="survey_section" class="addBox"> 
 			<div class="intro">
 				<span>Please rate the following statements and select the option that is true about you</span>
@@ -399,6 +469,7 @@ have someone show me</span></td>
 	</div><!--End of Display Container-->
 	
 	<div class="survey-next-button">
+	<button id="verbaldemopagebutton" type="button">Next</button>
 	<button id="verbalpage1button" type="button">Next</button>
 	<button id="verbalpage2button" type="button">Next</button>
 	<button id="verbalpage3button" type="button">Next</button>
