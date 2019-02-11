@@ -28,7 +28,7 @@ $(document).ready(function() {
 	$('#textbox').keyup(function() {
 		if ($(this).val().length != 0) {
 			$('#beginbutton').attr('disabled', false);
-			$('.next-button button').css({
+			$('.survey-next-button button').css({
 				"cursor": "pointer",
 				"opacity": "1",
 				"background-color": "#5cb85c"
@@ -113,6 +113,7 @@ $(document).ready(function() {
 		$(this).attr("data-under-process", "true");
 		var hookpage = $('#surveypage16');
 		if (isSurveyComplete(hookpage)) {
+			postEvent('DONE_FINAL_SURVEY', {message: 'Final Survey Completed'});
 			secondanswers = saveSurveyResults(hookpage, secondanswers);
 			finish();
 		} else {
@@ -189,7 +190,7 @@ function finish() {
 		},
 		dataType: 'json',
 		success: function() {
-			postEvent('DONE_FINAL_SURVEY', {message: 'Final Survey Completed'});
+			//postEvent('DONE_FINAL_SURVEY', {message: 'Final Survey Completed'});
 			confirmUnload = false;
 			location.reload(true);
 		},
