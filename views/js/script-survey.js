@@ -28,7 +28,7 @@ $(document).ready(function() {
 	$('#textbox').keyup(function() {
 		if ($(this).val().length != 0) {
 			$('#beginbutton').attr('disabled', false);
-			$('.survey-next-button button').css({
+			$('.next-button button').css({
 				"cursor": "pointer",
 				"opacity": "1",
 				"background-color": "#5cb85c"
