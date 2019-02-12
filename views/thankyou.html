@@ -12,7 +12,18 @@
   <script>window.LogRocket && window.LogRocket.init('548y59/trailerstudy'); window.LogRocket && window.LogRocket.identify(<%- JSON.stringify(data.userid) %>)</script>
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/intro-global.js"></script> 			
+  <script type="text/javascript" src="js/intro-global.js"></script>
+<script type="text/javascript">
+$(function() {
+
+$(window).on( "load", function(){
+					if (typeof postEvent === "function") {
+						postEvent('COMPLETE_INTRO', {message: "Completed hints"});
+					}
+				})
+
+});
+</script>  
 </head>
 
 <body id="introBackground">

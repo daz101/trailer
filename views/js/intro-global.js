@@ -23,11 +23,11 @@ $(document).ready(function() {
 		//$(location).attr('href', 'consent.html');
 	});
 
-	 $('#lastpage').is(':visible'){
+	/* $('#lastpage').is(':visible'){
 		if (typeof postEvent === "function") {
 						postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded"});
 					}
-	});
+	});*/
 	
 	// Make sure client wants leave
 	$(window).on('beforeunload', function() {
