@@ -12,16 +12,12 @@
   <script>window.LogRocket && window.LogRocket.init('548y59/trailerstudy'); window.LogRocket && window.LogRocket.identify(<%- JSON.stringify(data.userid) %>)</script>
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
-  <script type="text/javascript" src="js/intro-global.js"></script>
-  <script type="text/javascript"> 
-  $(function endStudy(){
- postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded", choiceNumber: choiceNumber});
-				});
-	</script> 			
+  <script type="text/javascript" src="js/intro-global.js"></script> 			
 </head>
 
-<body onload="endStudy();" id="introBackground">
+<body id="introBackground">
 
+<div id="lastpage">
 <div class="container-fluid parent_container">
 
 	<div class="movie-progress">           
@@ -70,8 +66,9 @@
 		
 	</div>
 	
-	
 </div>
+</div>	
+
 
 </body>
 

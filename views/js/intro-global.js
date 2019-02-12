@@ -23,6 +23,10 @@ $(document).ready(function() {
 		//$(location).attr('href', 'consent.html');
 	});
 
+	$("#lastpage").onload(function() {
+		postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded", choiceNumber: choiceNumber});
+	});
+	
 	// Make sure client wants leave
 	$(window).on('beforeunload', function() {
 		if (confirmUnload)
