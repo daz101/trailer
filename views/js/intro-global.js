@@ -23,8 +23,10 @@ $(document).ready(function() {
 		//$(location).attr('href', 'consent.html');
 	});
 
-	$("#lastpage").onload(function() {
-		postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded", choiceNumber: choiceNumber});
+	 $('#lastpage').is(':visible')){
+		if (typeof postEvent === "function") {
+						postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded"});
+					}
 	});
 	
 	// Make sure client wants leave
