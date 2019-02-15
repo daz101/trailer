@@ -456,6 +456,29 @@ router.post('/update/feedback', function(req, res, next) {
 	});
 });
 
+
+/* POST MTurk HIT number for user. */
+router.post('/update/hitNo', function(req, res, next) {
+	// Get the user id from the request
+	if (!(req.body.userid && req.body.hitNo)) return utils.sendErr(res, 'Missing parameter(s)');
+	var userid = utils.pad(req.body.userid, 12);
+	var known = JSON.parse(req.body.hitNo);
+	var db = req.db;
+	var users = db.get('users');
+
+	// Update known items chosen in user session data
+	users.updateById(userid, {
+		$set: {
+			hitNo: hitNo
+		}
+	}, function(err) {
+		if (err) return utils.sendErr(res, 'Failed to update known items.');
+		res.json({
+			'success': true
+		});
+	});
+});
+
 router.get('/report/users', function(req, res) {
 	var i;
 	var db = req.db;

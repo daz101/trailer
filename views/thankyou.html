@@ -14,15 +14,37 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/intro-global.js"></script>
 <script type="text/javascript">
+
 $(function() {
+
+/**
+ * POST update the known items.
+ */
+ var = hit[]; 
+function postHit(hit) {
+	return $.ajax({
+		type: 'POST',
+		url: '/api/update/hitNo',
+		data: {
+			userid: userid,
+			hit: <%- JSON.stringify(data.hashId) %>
+		},
+		dataType: 'json',
+		error: function(err) {
+			console.log(err.responseText);
+		}
+	});
+}
 
 $(window).on( "load", function(){
 					if (typeof postEvent === "function") {
 						postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded"});
 					}
-					
-					console.log(<%- JSON.stringify(data.hashId) %>); 
+					postHit(); 
+					/*console.log(<%- JSON.stringify(data.hashId) %>);*/ 
 				})
+				
+				
 
 });
 </script>  
