@@ -268,6 +268,7 @@ function createNewUser(req, res, users, userid) {
 			recommended_choices: [],
 			ratings: [],
 			known: [],
+			hitNo: null,
 			feedback: null,
 			firstanswers: null,
 			secondanswers: null

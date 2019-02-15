@@ -20,14 +20,14 @@ $(function() {
 /**
  * POST update the known items.
  */
- var = hit[]; 
-function postHit(hit) {
+ var = hitNo[]; 
+function postHit(hitNO) {
 	return $.ajax({
 		type: 'POST',
 		url: '/api/update/hitNo',
 		data: {
 			userid: userid,
-			hit: <%- JSON.stringify(data.hashId) %>
+			hitNo: <%- JSON.stringify(data.hashId) %>
 		},
 		dataType: 'json',
 		error: function(err) {
@@ -40,7 +40,7 @@ $(window).on( "load", function(){
 					if (typeof postEvent === "function") {
 						postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded"});
 					}
-					postHit(); 
+					postHit(hitNo); 
 					/*console.log(<%- JSON.stringify(data.hashId) %>);*/ 
 				})
 				

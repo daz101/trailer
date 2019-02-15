@@ -462,7 +462,7 @@ router.post('/update/hitNo', function(req, res, next) {
 	// Get the user id from the request
 	if (!(req.body.userid && req.body.hitNo)) return utils.sendErr(res, 'Missing parameter(s)');
 	var userid = utils.pad(req.body.userid, 12);
-	var known = JSON.parse(req.body.hitNo);
+	var hitNo = JSON.parse(req.body.hitNo);
 	var db = req.db;
 	var users = db.get('users');
 
@@ -472,7 +472,7 @@ router.post('/update/hitNo', function(req, res, next) {
 			hitNo: hitNo
 		}
 	}, function(err) {
-		if (err) return utils.sendErr(res, 'Failed to update known items.');
+		if (err) return utils.sendErr(res, 'Failed to update hit number.');
 		res.json({
 			'success': true
 		});
