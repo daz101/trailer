@@ -14,6 +14,18 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/script-intro.js"></script>
+  <script type="text/javascript">
+
+$(function() {
+
+$(window).on( "load", function(){
+					if (typeof postEvent === "function") {
+						postEvent('SECOND_BATCH', {message: "This person is from the second batch"});
+					}
+				})
+			
+});
+</script> 
 </head>
 
 <body id="introBackground">
