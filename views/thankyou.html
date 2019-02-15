@@ -14,6 +14,8 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/intro-global.js"></script>
 <script type="text/javascript">
+
+$(function() {
  var hitNo = <%- JSON.stringify(data.hashId) %>;
 function postHit(hitNo) {
 	return $.ajax({
@@ -29,8 +31,6 @@ function postHit(hitNo) {
 		}
 	});
 }
-$(function() {
-
 /**
  * POST update the known items.
  */
@@ -40,6 +40,7 @@ $(function() {
 $(window).on( "load", function(){
 					if (typeof postEvent === "function") {
 						postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded"});
+						postEvent('Hit_loaded', {message: <%- JSON.stringify(data.hashId) %>});
 						postHit(hitNo); 
 					}
 					
