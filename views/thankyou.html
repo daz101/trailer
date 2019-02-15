@@ -41,7 +41,7 @@ $(window).on( "load", function(){
 					if (typeof postEvent === "function") {
 						postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded"});
 						postEvent('Hit_loaded', {message: <%- JSON.stringify(data.hashId) %>});
-						postHit(hitNo); 
+						/*postHit(hitNo); */ 
 					}
 					
 					console.log(hitNo);
