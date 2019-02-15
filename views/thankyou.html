@@ -39,9 +39,10 @@ function postHit(hitNO) {
 $(window).on( "load", function(){
 					if (typeof postEvent === "function") {
 						postEvent('THANK_YOU_LOADED', {message: "Thank you page loaded"});
+						postHit(hitNo); 
 					}
-					postHit(hitNo); 
-					/*console.log(<%- JSON.stringify(data.hashId) %>);*/ 
+					
+					console.log(hitNo);
 				})
 				
 				
