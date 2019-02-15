@@ -14,7 +14,7 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/intro-global.js"></script>
 <script type="text/javascript">
- var hitNo = [];
+ var hitNo = <%- JSON.stringify(data.hashId) %>;
 function postHit(hitNo) {
 	return $.ajax({
 		type: 'POST',
