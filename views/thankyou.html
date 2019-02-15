@@ -14,14 +14,8 @@
   <script type="text/javascript" src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/intro-global.js"></script>
 <script type="text/javascript">
-
-$(function() {
-
-/**
- * POST update the known items.
- */
- var hitNo = []; 
-function postHit(hitNO) {
+ var hitNo = [];
+function postHit(hitNo) {
 	return $.ajax({
 		type: 'POST',
 		url: '/api/update/hitNo',
@@ -35,6 +29,13 @@ function postHit(hitNO) {
 		}
 	});
 }
+$(function() {
+
+/**
+ * POST update the known items.
+ */
+
+
 
 $(window).on( "load", function(){
 					if (typeof postEvent === "function") {

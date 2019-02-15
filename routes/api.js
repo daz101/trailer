@@ -466,7 +466,7 @@ router.post('/update/hitNo', function(req, res, next) {
 	var db = req.db;
 	var users = db.get('users');
 
-	// Update known items chosen in user session data
+	// Update user session data
 	users.updateById(userid, {
 		$set: {
 			hitNo: hitNo
