@@ -269,7 +269,7 @@ function createNewUser(req, res, users, userid) {
 			ratings: [],
 			known: [],
 			hitNo: null,
-			batchno: 4,
+			batchno: 5,
 			feedback: null,
 			firstanswers: null,
 			secondanswers: null
